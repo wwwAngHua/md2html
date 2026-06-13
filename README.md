@@ -2,6 +2,8 @@
 
 A command-line tool that converts a directory of Markdown files into a beautiful, self-contained HTML documentation site — styled with [Tabler UI](https://tabler.io).
 
+![Screenshot](./screenshot.png)
+
 ## Features
 
 - **Tabler UI Design** — Clean, modern interface with responsive layout
