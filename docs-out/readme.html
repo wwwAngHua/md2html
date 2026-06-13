@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+  <head>    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>md2html</title>
+    
+    <meta name="description" content="A command-line tool that converts a directory of Markdown files into a beautiful, self-contained HTML documentation site — styled with Tabler UI." />
+    <meta property="og:title" content="md2html" />
+    <meta property="og:description" content="A command-line tool that converts a directory of Markdown files into a beautiful, self-contained HTML documentation site — styled with Tabler UI." />
+    <meta property="og:type" content="article" />
+    <link href="./css/tabler.min.css" rel="stylesheet" />
+    <link href="./css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="./css/tabler-socials.min.css" rel="stylesheet" />
+    <link href="./css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="./css/tabler-vendors.min.css" rel="stylesheet" />
+    <link href="./css/tabler-marketing.min.css" rel="stylesheet" />
+    <link href="./css/tabler-themes.min.css" rel="stylesheet" />
+    <style>      @import url("https://rsms.me/inter/inter.css");
+
+      .markdown :not(pre) > code {
+        background-color: #f0f0f0;
+        color: #d63384;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.875em;
+      }
+
+      .markdown pre {
+        border-radius: 8px;
+        padding: 16px;
+        overflow-x: auto;
+        margin: 1rem 0;
+        background-color: #272822;
+      }
+
+      .markdown pre code {
+        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", Consolas, monospace;
+        font-size: 0.875em;
+        line-height: 1.6;
+        background: none !important;
+        padding: 0;
+      }
+
+      .markdown pre[style] {
+        background-color: #272822 !important;
+      }
+
+      .breadcrumb {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .breadcrumb-item {
+        font-size: 0.875rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item + .breadcrumb-item::before {
+        content: "/";
+        margin: 0 0.5rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item a {
+        color: var(--tblr-muted, #656d77);
+        text-decoration: none;
+      }
+      .breadcrumb-item a:hover {
+        color: var(--tblr-primary, #206bc4);
+        text-decoration: underline;
+      }
+      .breadcrumb-item.active {
+        color: var(--tblr-body-color, #1e293b);
+      }
+
+       
+      .sidebar-toggle {
+        display: none;
+      }
+      @media (max-width: 575.98px) {
+        .sidebar-toggle {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+        .sidebar-collapse {
+          margin-bottom: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="page-wrapper">
+        <div class="page-header d-print-none" aria-label="Page header">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <h2 class="page-title">md2html</h2>
+                
+              </div>
+              
+              <div class="col-auto ms-auto d-sm-none">
+                <button class="btn btn-icon sidebar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-expanded="false" aria-controls="sidebar-menu" aria-label="Toggle menu">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="row g-5">
+              
+              <div class="col-sm-2">
+                <div class="collapse d-sm-block sidebar-collapse" id="sidebar-menu">
+                  <div class="sticky-top">
+                    <nav class="nav nav-vertical nav-pills" id="pills">
+                      
+                      <a class="nav-link nav-link-level-1" href="#md2html">md2html</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#features">Features</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#quick-start">Quick Start</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#installation">Installation</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#from-source">From Source</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#go-install">Go Install</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#usage">Usage</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#flags">Flags</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#examples">Examples</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#directory-structure">Directory Structure</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#how-it-works">How It Works</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#page-title-logic">Page Title Logic</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#favicon">Favicon</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#seo">SEO</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#language">Language</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#tech-stack">Tech Stack</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#license">License</a>
+                      
+                    </nav>
+                  </div>
+                </div>
+              </div>
+              
+              <div
+                class="col-sm"
+                data-bs-spy="scroll"
+                data-bs-target="#pills"
+                data-bs-offset="0"
+              >
+                <div class="card card-lg">
+                  <div class="card-body markdown">
+                    <h1 id="md2html">md2html</h1>
+<p>A command-line tool that converts a directory of Markdown files into a beautiful, self-contained HTML documentation site — styled with <a href="https://tabler.io">Tabler UI</a>.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li><strong>Tabler UI Design</strong> — Clean, modern interface with responsive layout</li>
+<li><strong>Sidebar Navigation</strong> — Auto-generated from document headings with Bootstrap Scroll Spy</li>
+<li><strong>Breadcrumb Trail</strong> — Always know your location in deeply nested documentation</li>
+<li><strong>Syntax Highlighting</strong> — Code blocks rendered with the Monokai dark theme via <a href="https://github.com/alecthomas/chroma">Chroma</a></li>
+<li><strong>Custom Site Title</strong> — Add your project name as a page title suffix (<code>Page - Site Name</code>)</li>
+<li><strong>Multi-Language</strong> — Configurable <code>lang</code> attribute via <code>-lang</code> flag</li>
+<li><strong>SEO Ready</strong> — Auto-generated meta description and Open Graph tags from content</li>
+<li><strong>Mobile Responsive</strong> — Collapsible sidebar on small screens with hamburger toggle</li>
+<li><strong>Favicon Support</strong> — Drop a <code>favicon.svg</code> in your docs directory for automatic branding</li>
+<li><strong>Zero Dependencies at Runtime</strong> — Generates pure HTML/CSS/JS files, no build tools needed</li>
+<li><strong>Directory Structure Preserved</strong> — Input directory layout is mirrored exactly in the output</li>
+</ul>
+<h2 id="quick-start">Quick Start</h2>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e"># Clone and build</span>
+</span></span><span style="display:flex;"><span>git clone https://github.com/wwwanghua/md2html.git
+</span></span><span style="display:flex;"><span>cd md2html/gen
+</span></span><span style="display:flex;"><span>go build -o md2html .
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Generate documentation</span>
+</span></span><span style="display:flex;"><span>./md2html -in ../docs -out ../dist -title <span style="color:#e6db74">&#34;My Project&#34;</span>
+</span></span></code></pre><p>Open <code>dist/index.html</code> in your browser.</p>
+<h2 id="installation">Installation</h2>
+<h3 id="from-source">From Source</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>git clone https://github.com/wwwanghua/md2html.git
+</span></span><span style="display:flex;"><span>cd md2html/gen
+</span></span><span style="display:flex;"><span>go build -o md2html .
+</span></span></code></pre><p>Requires <strong>Go 1.21+</strong>.</p>
+<h3 id="go-install">Go Install</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>go install github.com/wwwanghua/md2html/gen@latest
+</span></span></code></pre><h2 id="usage">Usage</h2>
+<pre><code>md2html -in &lt;markdown-dir&gt; [-out &lt;output-dir&gt;] [-assets &lt;assets-dir&gt;] [-title &lt;site-name&gt;] [-lang &lt;lang-code&gt;]
+</code></pre>
+<h3 id="flags">Flags</h3>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-in</code></td>
+<td><em>(required)</em></td>
+<td>Input directory containing markdown files</td>
+</tr>
+<tr>
+<td><code>-out</code></td>
+<td><code>./out</code></td>
+<td>Output directory for generated HTML</td>
+</tr>
+<tr>
+<td><code>-assets</code></td>
+<td>current dir</td>
+<td>Directory containing <code>css/</code> and <code>js/</code> Tabler assets</td>
+</tr>
+<tr>
+<td><code>-title</code></td>
+<td><em>(empty)</em></td>
+<td>Site name used as page title suffix</td>
+</tr>
+<tr>
+<td><code>-lang</code></td>
+<td><code>zh-CN</code></td>
+<td>HTML <code>lang</code> attribute for generated pages</td>
+</tr>
+</tbody>
+</table>
+<h3 id="examples">Examples</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e"># Basic usage</span>
+</span></span><span style="display:flex;"><span>./md2html -in ../docs
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Custom output directory</span>
+</span></span><span style="display:flex;"><span>./md2html -in ../docs -out ../dist
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># With site title</span>
+</span></span><span style="display:flex;"><span>./md2html -in ../docs -out ../dist -title <span style="color:#e6db74">&#34;t1yOS Developer Docs&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Custom assets location</span>
+</span></span><span style="display:flex;"><span>./md2html -in ../docs -out ../dist -assets ./tabler-dist
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># English documentation</span>
+</span></span><span style="display:flex;"><span>./md2html -in ../docs -out ../dist -lang en
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Japanese documentation with site title</span>
+</span></span><span style="display:flex;"><span>./md2html -in ../docs -out ../dist -title <span style="color:#e6db74">&#34;My Project&#34;</span> -lang ja
+</span></span></code></pre><h2 id="directory-structure">Directory Structure</h2>
+<pre><code>my-docs/                        out/
+├── index.md        -&gt;          ├── index.html
+├── readme.md       -&gt;          ├── readme.html
+├── favicon.svg     -&gt;          ├── favicon.svg
+├── quick-start/                ├── quick-start/
+│   └── index.md    -&gt;          │   └── index.html
+└── guide/                      ├── guide/
+    ├── index.md    -&gt;          │   ├── index.html
+    └── advanced.md -&gt;          │   └── advanced.html
+                                ├── css/    (Tabler CSS)
+                                └── js/     (Tabler JS)
+</code></pre>
+<h2 id="how-it-works">How It Works</h2>
+<ol>
+<li>Scans the input directory recursively for <code>.md</code> files</li>
+<li>Detects and copies any <code>favicon.*</code> file from the input root</li>
+<li>Converts each Markdown file to HTML using <a href="https://github.com/yuin/goldmark">Goldmark</a></li>
+<li>Extracts headings to build sidebar navigation and breadcrumbs</li>
+<li>Wraps the HTML content in a Tabler UI page template</li>
+<li>Copies minified Tabler CSS/JS assets to the output directory</li>
+<li>Auto-generates an index page if no <code>index.md</code> exists at the root</li>
+</ol>
+<h2 id="page-title-logic">Page Title Logic</h2>
+<ul>
+<li>Pages use the first <code>h1</code> heading as the title</li>
+<li>If no <code>h1</code> exists, falls back to the filename</li>
+<li>When <code>-title</code> is set, sub-pages display as <code>&quot;Page Title - Site Name&quot;</code></li>
+</ul>
+<h2 id="favicon">Favicon</h2>
+<p>Place a <code>favicon.svg</code>, <code>favicon.ico</code>, or <code>favicon.png</code> file in the root of your documentation input directory. md2html automatically detects it, copies it to the output, and links it in every page.</p>
+<h2 id="seo">SEO</h2>
+<p>Every generated page includes:</p>
+<ul>
+<li><strong>Meta description</strong> — Auto-extracted from the first paragraph of your content (~160 chars)</li>
+<li><strong>Open Graph tags</strong> — <code>og:title</code>, <code>og:description</code>, <code>og:type</code> for social media previews</li>
+<li><strong>Semantic HTML</strong> — Proper heading hierarchy, <code>&lt;nav&gt;</code> elements, breadcrumb structured data</li>
+<li><strong>Language attribute</strong> — <code>&lt;html lang=&quot;...&quot;&gt;</code> configured via <code>-lang</code> flag</li>
+</ul>
+<p>No extra configuration required — descriptions are derived from your actual content.</p>
+<h2 id="language">Language</h2>
+<p>Use the <code>-lang</code> flag to set the HTML <code>lang</code> attribute:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>./md2html -in ../docs -out ../dist -lang en   <span style="color:#75715e"># English</span>
+</span></span><span style="display:flex;"><span>./md2html -in ../docs -out ../dist -lang ja   <span style="color:#75715e"># Japanese</span>
+</span></span></code></pre><p>Defaults to <code>zh-CN</code>. Accepts any <a href="https://tools.ietf.org/html/bcp47">BCP 47 language tag</a>.</p>
+<h2 id="tech-stack">Tech Stack</h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Library</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Markdown Parser</td>
+<td><a href="https://github.com/yuin/goldmark">Goldmark</a></td>
+</tr>
+<tr>
+<td>Syntax Highlighting</td>
+<td><a href="https://github.com/alecthomas/chroma">Chroma</a> (Monokai theme)</td>
+</tr>
+<tr>
+<td>UI Framework</td>
+<td><a href="https://tabler.io">Tabler</a> (Bootstrap-based)</td>
+</tr>
+<tr>
+<td>Template Engine</td>
+<td>Go <code>html/template</code></td>
+</tr>
+<tr>
+<td>Language</td>
+<td>Go</td>
+</tr>
+</tbody>
+</table>
+<h2 id="license">License</h2>
+<p>MIT</p>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    <script src="./js/tabler.min.js" defer></script>
+  </body>
+</html>

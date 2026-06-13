@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+  <head>    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Advanced Guide</title>
+    
+    <meta name="description" content="This guide covers advanced customization and features of md2html." />
+    <meta property="og:title" content="Advanced Guide" />
+    <meta property="og:description" content="This guide covers advanced customization and features of md2html." />
+    <meta property="og:type" content="article" />
+    <link href="../css/tabler.min.css" rel="stylesheet" />
+    <link href="../css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="../css/tabler-socials.min.css" rel="stylesheet" />
+    <link href="../css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="../css/tabler-vendors.min.css" rel="stylesheet" />
+    <link href="../css/tabler-marketing.min.css" rel="stylesheet" />
+    <link href="../css/tabler-themes.min.css" rel="stylesheet" />
+    <style>      @import url("https://rsms.me/inter/inter.css");
+
+      .markdown :not(pre) > code {
+        background-color: #f0f0f0;
+        color: #d63384;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.875em;
+      }
+
+      .markdown pre {
+        border-radius: 8px;
+        padding: 16px;
+        overflow-x: auto;
+        margin: 1rem 0;
+        background-color: #272822;
+      }
+
+      .markdown pre code {
+        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", Consolas, monospace;
+        font-size: 0.875em;
+        line-height: 1.6;
+        background: none !important;
+        padding: 0;
+      }
+
+      .markdown pre[style] {
+        background-color: #272822 !important;
+      }
+
+      .breadcrumb {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .breadcrumb-item {
+        font-size: 0.875rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item + .breadcrumb-item::before {
+        content: "/";
+        margin: 0 0.5rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item a {
+        color: var(--tblr-muted, #656d77);
+        text-decoration: none;
+      }
+      .breadcrumb-item a:hover {
+        color: var(--tblr-primary, #206bc4);
+        text-decoration: underline;
+      }
+      .breadcrumb-item.active {
+        color: var(--tblr-body-color, #1e293b);
+      }
+
+       
+      .sidebar-toggle {
+        display: none;
+      }
+      @media (max-width: 575.98px) {
+        .sidebar-toggle {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+        .sidebar-collapse {
+          margin-bottom: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="page-wrapper">
+        <div class="page-header d-print-none" aria-label="Page header">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <h2 class="page-title">Advanced Guide</h2>
+                
+                <ol class="breadcrumb" aria-label="breadcrumb">
+                  
+                  
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item"><a href="index.html">Guide</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item active" aria-current="page">Advanced Guide</li>
+                  
+                  
+                </ol>
+                
+              </div>
+              
+              <div class="col-auto ms-auto d-sm-none">
+                <button class="btn btn-icon sidebar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-expanded="false" aria-controls="sidebar-menu" aria-label="Toggle menu">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="row g-5">
+              
+              <div class="col-sm-2">
+                <div class="collapse d-sm-block sidebar-collapse" id="sidebar-menu">
+                  <div class="sticky-top">
+                    <nav class="nav nav-vertical nav-pills" id="pills">
+                      
+                      <a class="nav-link nav-link-level-1" href="#advanced-guide">Advanced Guide</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#custom-templates">Custom Templates</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#template-variables">Template Variables</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#code-syntax-highlighting">Code Syntax Highlighting</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#javascript">JavaScript</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#python">Python</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#css">CSS</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#navigation-customization">Navigation Customization</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#heading-levels">Heading Levels</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#breadcrumb-navigation">Breadcrumb Navigation</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#favicon">Favicon</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#language">Language</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#seo">SEO</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#mobile-responsiveness">Mobile Responsiveness</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#performance-tips">Performance Tips</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#troubleshooting">Troubleshooting</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#common-issues">Common Issues</a>
+                      
+                    </nav>
+                  </div>
+                </div>
+              </div>
+              
+              <div
+                class="col-sm"
+                data-bs-spy="scroll"
+                data-bs-target="#pills"
+                data-bs-offset="0"
+              >
+                <div class="card card-lg">
+                  <div class="card-body markdown">
+                    <h1 id="advanced-guide">Advanced Guide</h1>
+<p>This guide covers advanced customization and features of md2html.</p>
+<h2 id="custom-templates">Custom Templates</h2>
+<p>You can customize the HTML template by modifying the <code>template.go</code> file in the source.</p>
+<h3 id="template-variables">Template Variables</h3>
+<p>The following variables are available in the <code>PageData</code> struct:</p>
+<ol>
+<li><code>Title</code> — Page title (from first h1 or filename)</li>
+<li><code>SiteTitle</code> — Site name set via <code>-title</code> flag</li>
+<li><code>Lang</code> — HTML language code set via <code>-lang</code> flag (default <code>zh-CN</code>)</li>
+<li><code>Description</code> — Meta description auto-extracted from the first paragraph</li>
+<li><code>NavItems</code> — Sidebar navigation items extracted from headings</li>
+<li><code>Breadcrumbs</code> — Breadcrumb trail for current page position</li>
+<li><code>FaviconPath</code> — Path to the favicon file</li>
+<li><code>Content</code> — Converted HTML content</li>
+<li><code>AssetPrefix</code> — Relative path prefix for CSS/JS assets</li>
+</ol>
+<h2 id="code-syntax-highlighting">Code Syntax Highlighting</h2>
+<p>md2html uses <a href="https://github.com/yuin/goldmark">Goldmark</a> with the <a href="https://github.com/alecthomas/chroma">Chroma</a> syntax highlighter and the Monokai dark theme.</p>
+<h3 id="javascript">JavaScript</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">greet</span>(<span style="color:#a6e22e">name</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#e6db74">`Hello, </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">name</span><span style="color:#e6db74">}</span><span style="color:#e6db74">!`</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">greet</span>(<span style="color:#e6db74">&#34;World&#34;</span>));
+</span></span></code></pre><h3 id="python">Python</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fibonacci</span>(n):
+</span></span><span style="display:flex;"><span>    a, b <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(n):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">yield</span> a
+</span></span><span style="display:flex;"><span>        a, b <span style="color:#f92672">=</span> b, a <span style="color:#f92672">+</span> b
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(list(fibonacci(<span style="color:#ae81ff">10</span>)))
+</span></span></code></pre><h3 id="css">CSS</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>.<span style="color:#a6e22e">markdown</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">font-size</span>: <span style="color:#ae81ff">16</span><span style="color:#66d9ef">px</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">line-height</span>: <span style="color:#ae81ff">1.6</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">color</span>: <span style="color:#a6e22e">var</span>(<span style="color:#f92672">--</span>tblr<span style="color:#f92672">-</span>body<span style="color:#f92672">-</span><span style="color:#66d9ef">color</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h2 id="navigation-customization">Navigation Customization</h2>
+<h3 id="heading-levels">Heading Levels</h3>
+<p>The sidebar navigation supports headings from <code>h1</code> to <code>h6</code>:</p>
+<ul>
+<li><strong>h1</strong> — Main page title (used as page header)</li>
+<li><strong>h2</strong> — Major sections</li>
+<li><strong>h3</strong> — Sub-sections</li>
+<li><strong>h4-h6</strong> — Detail levels</li>
+</ul>
+<h3 id="breadcrumb-navigation">Breadcrumb Navigation</h3>
+<p>md2html automatically generates breadcrumb navigation for nested pages:</p>
+<pre><code>Home / Guide / Advanced Guide
+</code></pre>
+<h2 id="favicon">Favicon</h2>
+<p>Place a <code>favicon.svg</code>, <code>favicon.ico</code>, or <code>favicon.png</code> file in the root of your documentation directory. md2html will automatically detect and include it in all generated pages.</p>
+<p>Supported formats: <code>.svg</code>, <code>.ico</code>, <code>.png</code>, <code>.jpg</code>, <code>.jpeg</code></p>
+<h2 id="language">Language</h2>
+<p>Use the <code>-lang</code> flag to set the HTML <code>lang</code> attribute for all generated pages. This is important for accessibility, search engines, and proper font rendering.</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e"># English documentation</span>
+</span></span><span style="display:flex;"><span>./md2html -in ../docs -out ../dist -lang en
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Japanese</span>
+</span></span><span style="display:flex;"><span>./md2html -in ../docs -out ../dist -lang ja
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Default (if not specified)</span>
+</span></span><span style="display:flex;"><span>./md2html -in ../docs -out ../dist  <span style="color:#75715e"># lang=&#34;zh-CN&#34;</span>
+</span></span></code></pre><p>The <code>lang</code> value is placed directly into the <code>&lt;html lang=&quot;...&quot;&gt;</code> tag, so any valid <a href="https://tools.ietf.org/html/bcp47">BCP 47 language tag</a> is accepted (e.g. <code>en</code>, <code>en-US</code>, <code>zh-CN</code>, <code>ja</code>, <code>ko</code>, <code>fr</code>).</p>
+<h2 id="seo">SEO</h2>
+<p>md2html automatically generates essential SEO meta tags for every page:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>&lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;description&#34;</span> <span style="color:#a6e22e">content</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;First paragraph text...&#34;</span> /&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">property</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;og:title&#34;</span> <span style="color:#a6e22e">content</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Page Title&#34;</span> /&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">property</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;og:description&#34;</span> <span style="color:#a6e22e">content</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;First paragraph text...&#34;</span> /&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">property</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;og:type&#34;</span> <span style="color:#a6e22e">content</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;article&#34;</span> /&gt;
+</span></span></code></pre><p>The meta description is auto-extracted from the first paragraph of your markdown content (truncated to ~160 characters). This means every page gets a unique, content-relevant description for search engines and social media previews without any extra configuration.</p>
+<h2 id="mobile-responsiveness">Mobile Responsiveness</h2>
+<p>The sidebar navigation automatically collapses on small screens. A hamburger menu button appears in the page header on mobile devices, allowing users to toggle the navigation. On desktop screens, the sidebar is always visible as a sticky column.</p>
+<h2 id="performance-tips">Performance Tips</h2>
+<ul>
+<li>Use <code>.min.css</code> and <code>.min.js</code> for production — md2html copies only minified assets by default</li>
+<li>Keep images in the <code>static/</code> directory</li>
+<li>Avoid deeply nested directories for faster processing</li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="common-issues">Common Issues</h3>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Missing CSS</td>
+<td>Ensure <code>css/</code> directory is present in the assets location</td>
+</tr>
+<tr>
+<td>No navigation</td>
+<td>Add headings (<code>#</code>, <code>##</code>, etc.) to your markdown files</td>
+</tr>
+<tr>
+<td>Build fails</td>
+<td>Check Go version (<code>go version</code>)</td>
+</tr>
+<tr>
+<td>Favicon not showing</td>
+<td>Place favicon in the root of your input directory</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>For more help, refer to the <a href="https://github.com/wwwanghua/md2html">md2html repository</a>.</p>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    <script src="../js/tabler.min.js" defer></script>
+  </body>
+</html>

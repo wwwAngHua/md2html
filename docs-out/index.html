@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+  <head>    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>md2html</title>
+    
+    <meta name="description" content="Welcome to md2html — a command-line tool that converts a directory of Markdown files into a beautiful, Tabler UI styled static HTML documentation site." />
+    <meta property="og:title" content="md2html" />
+    <meta property="og:description" content="Welcome to md2html — a command-line tool that converts a directory of Markdown files into a beautiful, Tabler UI styled static HTML documentation site." />
+    <meta property="og:type" content="article" />
+    <link href="./css/tabler.min.css" rel="stylesheet" />
+    <link href="./css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="./css/tabler-socials.min.css" rel="stylesheet" />
+    <link href="./css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="./css/tabler-vendors.min.css" rel="stylesheet" />
+    <link href="./css/tabler-marketing.min.css" rel="stylesheet" />
+    <link href="./css/tabler-themes.min.css" rel="stylesheet" />
+    <style>      @import url("https://rsms.me/inter/inter.css");
+
+      .markdown :not(pre) > code {
+        background-color: #f0f0f0;
+        color: #d63384;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.875em;
+      }
+
+      .markdown pre {
+        border-radius: 8px;
+        padding: 16px;
+        overflow-x: auto;
+        margin: 1rem 0;
+        background-color: #272822;
+      }
+
+      .markdown pre code {
+        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", Consolas, monospace;
+        font-size: 0.875em;
+        line-height: 1.6;
+        background: none !important;
+        padding: 0;
+      }
+
+      .markdown pre[style] {
+        background-color: #272822 !important;
+      }
+
+      .breadcrumb {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .breadcrumb-item {
+        font-size: 0.875rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item + .breadcrumb-item::before {
+        content: "/";
+        margin: 0 0.5rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item a {
+        color: var(--tblr-muted, #656d77);
+        text-decoration: none;
+      }
+      .breadcrumb-item a:hover {
+        color: var(--tblr-primary, #206bc4);
+        text-decoration: underline;
+      }
+      .breadcrumb-item.active {
+        color: var(--tblr-body-color, #1e293b);
+      }
+
+       
+      .sidebar-toggle {
+        display: none;
+      }
+      @media (max-width: 575.98px) {
+        .sidebar-toggle {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+        .sidebar-collapse {
+          margin-bottom: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="page-wrapper">
+        <div class="page-header d-print-none" aria-label="Page header">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <h2 class="page-title">md2html</h2>
+                
+              </div>
+              
+              <div class="col-auto ms-auto d-sm-none">
+                <button class="btn btn-icon sidebar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-expanded="false" aria-controls="sidebar-menu" aria-label="Toggle menu">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="row g-5">
+              
+              <div class="col-sm-2">
+                <div class="collapse d-sm-block sidebar-collapse" id="sidebar-menu">
+                  <div class="sticky-top">
+                    <nav class="nav nav-vertical nav-pills" id="pills">
+                      
+                      <a class="nav-link nav-link-level-1" href="#md2html">md2html</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#features">Features</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#how-it-works">How It Works</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#getting-started">Getting Started</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#code-example">Code Example</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#configuration">Configuration</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#notes">Notes</a>
+                      
+                    </nav>
+                  </div>
+                </div>
+              </div>
+              
+              <div
+                class="col-sm"
+                data-bs-spy="scroll"
+                data-bs-target="#pills"
+                data-bs-offset="0"
+              >
+                <div class="card card-lg">
+                  <div class="card-body markdown">
+                    <h1 id="md2html">md2html</h1>
+<p>Welcome to <strong>md2html</strong> — a command-line tool that converts a directory of Markdown files into a beautiful, Tabler UI styled static HTML documentation site.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li><strong>Tabler UI</strong> — Clean, modern interface based on the <a href="https://tabler.io">Tabler</a> design system</li>
+<li><strong>Sidebar Navigation</strong> — Auto-generated from your document headings with Scroll Spy support</li>
+<li><strong>Syntax Highlighting</strong> — Code blocks are highlighted using the Monokai dark theme</li>
+<li><strong>Breadcrumb Navigation</strong> — Always know where you are in deeply nested documentation</li>
+<li><strong>Custom Site Title</strong> — Add your project name as a page title suffix</li>
+<li><strong>Multi-Language</strong> — Set the HTML <code>lang</code> attribute for accessibility and SEO</li>
+<li><strong>SEO Ready</strong> — Auto-generated meta description and Open Graph tags for better search visibility</li>
+<li><strong>Mobile Friendly</strong> — Collapsible sidebar on small screens, responsive Tabler layout</li>
+<li><strong>Favicon Support</strong> — Drop a <code>favicon.svg</code> in your docs directory for automatic branding</li>
+<li><strong>Static Output</strong> — Generates pure HTML files with zero JavaScript build tools</li>
+</ul>
+<h2 id="how-it-works">How It Works</h2>
+<ol>
+<li>Point <code>md2html</code> to your Markdown directory</li>
+<li>It scans all <code>.md</code> files recursively</li>
+<li>Each file is converted to a standalone HTML page</li>
+<li>CSS and JS assets are copied to the output directory</li>
+</ol>
+<h2 id="getting-started">Getting Started</h2>
+<p>See the <a href="./quick-start/index.html">Quick Start Guide</a> for installation and usage instructions.</p>
+<h2 id="code-example">Code Example</h2>
+<p>Here is a simple Go example with syntax highlighting:</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Hello, md2html!&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h2 id="configuration">Configuration</h2>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-in</code></td>
+<td><em>(required)</em></td>
+<td>Input directory with markdown files</td>
+</tr>
+<tr>
+<td><code>-out</code></td>
+<td><code>./out</code></td>
+<td>Output directory for HTML</td>
+</tr>
+<tr>
+<td><code>-assets</code></td>
+<td>current dir</td>
+<td>Path to Tabler css/js assets</td>
+</tr>
+<tr>
+<td><code>-title</code></td>
+<td><em>(empty)</em></td>
+<td>Site name as page title suffix</td>
+</tr>
+<tr>
+<td><code>-lang</code></td>
+<td><code>zh-CN</code></td>
+<td>HTML language code</td>
+</tr>
+</tbody>
+</table>
+<h2 id="notes">Notes</h2>
+<blockquote>
+<p><strong>Tip:</strong> Use <code>index.md</code> as the filename for directory index pages. The generator automatically maps them to <code>index.html</code>.</p>
+</blockquote>
+<hr />
+<p>Built with <a href="https://github.com/wwwanghua/md2html">md2html</a> — a Markdown documentation generator powered by <a href="https://github.com/yuin/goldmark">Goldmark</a> and <a href="https://tabler.io">Tabler UI</a>.</p>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    <script src="./js/tabler.min.js" defer></script>
+  </body>
+</html>
