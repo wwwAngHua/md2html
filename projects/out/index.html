@@ -6,11 +6,11 @@
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>t1yOS 开发文档</title>
+    <title>t1yOS 是什么？ - t1yOS 开发文档</title>
     <link rel="icon" href="./favicon.svg" />
-    
-    <meta property="og:title" content="t1yOS 开发文档" />
-    
+    <meta name="description" content="t1yOS 是一个 Serverless 云操作系统，集 AI、文件系统、云函数、云数据库、定时任务于一体。告别传统云服务器，使用 JavaScript 编写云函数，像使用操作系统一样管理云端资源。让开发者专注于创造，而非基础设施。" />
+    <meta property="og:title" content="t1yOS 是什么？ - t1yOS 开发文档" />
+    <meta property="og:description" content="t1yOS 是一个 Serverless 云操作系统，集 AI、文件系统、云函数、云数据库、定时任务于一体。告别传统云服务器，使用 JavaScript 编写云函数，像使用操作系统一样管理云端资源。让开发者专注于创造，而非基础设施。" />
     <meta property="og:type" content="article" />
     <link href="./css/tabler.min.css" rel="stylesheet" />
     <link href="./css/tabler-flags.min.css" rel="stylesheet" />
@@ -100,7 +100,7 @@
           <div class="container-xl">
             <div class="row g-2 align-items-center">
               <div class="col">
-                <h2 class="page-title">t1yOS 开发文档</h2>
+                <h2 class="page-title">t1yOS 是什么？</h2>
                 
               </div>
               
@@ -122,7 +122,15 @@
                   <div class="sticky-top">
                     <nav class="nav nav-vertical nav-pills" id="pills">
                       
-                      <a class="nav-link nav-link-level-1" href="#t1yos-%e5%bc%80%e5%8f%91%e6%96%87%e6%a1%a3">t1yOS 开发文档</a>
+                      <a class="nav-link nav-link-level-1" href="#t1yos-%e6%98%af%e4%bb%80%e4%b9%88">t1yOS 是什么？</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#t1yos-%e6%9c%89%e4%bb%80%e4%b9%88">t1yOS 有什么？</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e8%b0%81%e9%80%82%e5%90%88%e4%bd%bf%e7%94%a8-t1yos">谁适合使用 t1yOS？</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e8%81%94%e7%b3%bb%e6%88%91%e4%bb%ac">联系我们</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e7%a4%be%e7%be%a4">社群</a>
                       
                     </nav>
                   </div>
@@ -137,7 +145,66 @@
               >
                 <div class="card card-lg">
                   <div class="card-body markdown">
-                    <h1 id="t1yos-开发文档">t1yOS 开发文档</h1>
+                    <h1 id="t1yos-是什么">t1yOS 是什么？</h1>
+<p>t1yOS 是一个 <code>Serverless</code> 云操作系统，集 AI、文件系统、云函数、云数据库、定时任务于一体。告别传统云服务器，使用 <code>JavaScript</code> 编写云函数，像使用操作系统一样管理云端资源。让开发者专注于创造，而非基础设施。</p>
+<h1 id="t1yos-有什么">t1yOS 有什么？</h1>
+<ul>
+<li>云函数</li>
+<li>云数据库</li>
+<li>文件系统</li>
+<li>网站托管</li>
+<li>定时任务</li>
+<li>环境变量</li>
+<li>Meta 元数据</li>
+<li>WebIDE，在线编写代码</li>
+<li>完整的云操作系统能力</li>
+<li>企业级端到端全动态加解密</li>
+<li>原生 AI 能力支持，直接让 AI 接管平台 90+ 能力</li>
+</ul>
+<p>用户可直接使用平台 <code>RESTful API</code> 或 <code>SDK</code> 操作云数据库或调用云函数实现各类功能；同时也支持定时任务定时触发云函数完成复杂任务；除此之外云函数还可以完成绝大部分服务端功能的开发，例如：<code>JWT</code> 认证、文件操作、数据库操作、网络请求、支付、<code>MCP Server</code> 开发等。</p>
+<blockquote>
+<p>值得一提的是，t1yOS 云函数采用纯 <code>Go</code> 语言完全自研开发，底层基于 <code>Go</code> 语言中最快的 <code>fasthttp</code> 框架，并提供类似 <code>express.js</code> 框架的设计，内存级云函数，启动时间做到纳秒~微秒级，如果你是 <code>node</code> 开发者，那么一定会喜欢上 t1yOS 云函数。</p>
+</blockquote>
+<h1 id="谁适合使用-t1yos">谁适合使用 t1yOS？</h1>
+<p>1.前端开发者 + <code>t1yOS</code> = 全栈开发者，前端秒变全栈</p>
+<ul>
+<li>云函数采用类似 <code>express.js</code> 的设计，<code>node</code> 开发者快速上手</li>
+<li>t1yOS 使用自研极其简单的 <code>JavaScript</code> 云函数开发，前后端代码无缝切换，无门槛快速上手</li>
+<li>t1yOS 提供了静态网站托管功能，可将前端构建的网页直接同步部署，无需购买、配置云服务器和 Nginx、域名等</li>
+</ul>
+<!-- raw HTML omitted -->
+<p>2.后端开发者，无需繁琐的服务端开发、部署、运维</p>
+<ul>
+<li>无需购买、配置云服务器和 Nginx、域名、证书等</li>
+<li>随时随地编辑、发布云函数</li>
+<li>快速开发，告别开发、编译打包部署的繁杂体验</li>
+</ul>
+<!-- raw HTML omitted -->
+<p>3.独立开发者、创业团队，节约成本，快速开始，专注业务</p>
+<ul>
+<li>快速开发产品，快速验证市场</li>
+<li>快速推出最小可用产品（MVP），快速进行产品、市场验证</li>
+<li>一个人 + <code>t1yOS</code> = 团队</li>
+</ul>
+<!-- raw HTML omitted -->
+<p>4.Vibe Coding 开发者</p>
+<ul>
+<li>无需了解后端开发知识</li>
+<li>无需后端开发，减少 AI tokens 消耗</li>
+<li>使用 AI 快速开发产品，并且无需购买云服务器、域名等</li>
+</ul>
+<h1 id="联系我们">联系我们</h1>
+<ul>
+<li>客服（技术）QQ：422584084</li>
+<li>客服（技术）微信：kingstudy-vip</li>
+<li>客服（技术）邮箱：wwwanghua@outlook.com</li>
+</ul>
+<h1 id="社群">社群</h1>
+<ul>
+<li>QQ 交流群 1：671186603</li>
+<li>QQ 交流群 2：292846194</li>
+<li>GitHub 组织：<!-- raw HTML omitted --><a href="https://github.com/t1yOS">https://github.com/t1yOS</a><!-- raw HTML omitted --></li>
+</ul>
 
                   </div>
                 </div>
