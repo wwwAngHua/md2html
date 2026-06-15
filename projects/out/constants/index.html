@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>常量 - t1yOS 开发文档</title>
+    <link rel="icon" href="../favicon.svg" />
+    <meta name="description" content="云函数常量包括 HTTP 方法、常用 MIME 类型、HTTP 状态码、HTTP 头，很大一部分来自 Go 语言 net/http 标准库中，在云函数中，你也只需要导入 http 包即可使用，例如：" />
+    <meta property="og:title" content="常量 - t1yOS 开发文档" />
+    <meta property="og:description" content="云函数常量包括 HTTP 方法、常用 MIME 类型、HTTP 状态码、HTTP 头，很大一部分来自 Go 语言 net/http 标准库中，在云函数中，你也只需要导入 http 包即可使用，例如：" />
+    <meta property="og:type" content="article" />
+    <link href="../css/tabler.min.css" rel="stylesheet" />
+    <link href="../css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="../css/tabler-socials.min.css" rel="stylesheet" />
+    <link href="../css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="../css/tabler-vendors.min.css" rel="stylesheet" />
+    <link href="../css/tabler-marketing.min.css" rel="stylesheet" />
+    <link href="../css/tabler-themes.min.css" rel="stylesheet" />
+    <style>      @import url("https://rsms.me/inter/inter.css");
+
+      .markdown :not(pre) > code {
+        background-color: #f0f0f0;
+        color: #d63384;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.875em;
+      }
+
+      .markdown pre {
+        border-radius: 8px;
+        padding: 16px;
+        overflow-x: auto;
+        margin: 1rem 0;
+        background-color: #272822;
+      }
+
+      .markdown pre code {
+        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", Consolas, monospace;
+        font-size: 0.875em;
+        line-height: 1.6;
+        background: none !important;
+        padding: 0;
+      }
+
+      .markdown pre[style] {
+        background-color: #272822 !important;
+      }
+
+      .breadcrumb {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .breadcrumb-item {
+        font-size: 0.875rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item + .breadcrumb-item::before {
+        content: "/";
+        margin: 0 0.5rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item a {
+        color: var(--tblr-muted, #656d77);
+        text-decoration: none;
+      }
+      .breadcrumb-item a:hover {
+        color: var(--tblr-primary, #206bc4);
+        text-decoration: underline;
+      }
+      .breadcrumb-item.active {
+        color: var(--tblr-body-color, #1e293b);
+      }
+
+       
+      .sidebar-toggle {
+        display: none;
+      }
+      @media (max-width: 575.98px) {
+        .sidebar-toggle {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+        .sidebar-collapse {
+          margin-bottom: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="page-wrapper">
+        <div class="page-header d-print-none" aria-label="Page header">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <h2 class="page-title">常量</h2>
+                
+                <ol class="breadcrumb" aria-label="breadcrumb">
+                  
+                  
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item"><a href="index.html">Constants</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item active" aria-current="page">常量</li>
+                  
+                  
+                </ol>
+                
+              </div>
+              
+              <div class="col-auto ms-auto d-sm-none">
+                <button class="btn btn-icon sidebar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-expanded="false" aria-controls="sidebar-menu" aria-label="Toggle menu">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="row g-5">
+              
+              <div class="col-sm-2">
+                <div class="collapse d-sm-block sidebar-collapse" id="sidebar-menu">
+                  <div class="sticky-top">
+                    <nav class="nav nav-vertical nav-pills" id="pills">
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e5%b8%b8%e9%87%8f">常量</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#http-%e6%96%b9%e6%b3%95">HTTP 方法</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e5%b8%b8%e7%94%a8-mime-%e7%b1%bb%e5%9e%8b">常用 MIME 类型</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#http-%e7%8a%b6%e6%80%81%e7%a0%81-%e9%95%9c%e5%83%8f-go-net-http-%e5%8c%85">HTTP 状态码（镜像 Go net/http 包）</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#http-%e5%a4%b4-%e9%95%9c%e5%83%8f-go-net-http-%e5%8c%85">HTTP 头（镜像 Go net/http 包）</a>
+                      
+                    </nav>
+                  </div>
+                </div>
+              </div>
+              
+              <div
+                class="col-sm"
+                data-bs-spy="scroll"
+                data-bs-target="#pills"
+                data-bs-offset="0"
+              >
+                <div class="card card-lg">
+                  <div class="card-body markdown">
+                    <h1 id="常量">常量</h1>
+<p>云函数常量包括 HTTP 方法、常用 MIME 类型、HTTP 状态码、HTTP 头，很大一部分来自 <code>Go</code> 语言 <code>net/http</code> 标准库中，在云函数中，你也只需要导入 <code>http</code> 包即可使用，例如：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;http&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">method</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">method</span>()
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">method</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">MethodGet</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ip</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HeaderXForwardedFor</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">sendStatus</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>) <span style="color:#75715e">// HTTP 200 OK
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">`你的 IP 地址是：</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">ip</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p>除此之外，<code>http</code> 包中还有 <code>http.statusText</code> 函数，可以将 <code>HTTP</code> 状态码（如 <code>200</code>、<code>404</code>）转换为标准 <code>HTTP</code> 状态描述文本（如 &quot;<code>OK</code>&quot;、&quot;<code>Not Found</code>&quot;），例如：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;http&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">statusText</span>(<span style="color:#ae81ff">500</span>) <span style="color:#75715e">// Internal Server Error
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre><p><strong>newError：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;http&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">newError</span>(<span style="color:#ae81ff">782</span>, <span style="color:#e6db74">&#39;Custom error message&#39;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h2 id="http-方法">HTTP 方法</h2>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MethodGet</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;GET&#39;</span> <span style="color:#75715e">// RFC 7231, 4.3.1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MethodHead</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;HEAD&#39;</span> <span style="color:#75715e">// RFC 7231, 4.3.2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MethodPost</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;POST&#39;</span> <span style="color:#75715e">// RFC 7231, 4.3.3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MethodPut</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;PUT&#39;</span> <span style="color:#75715e">// RFC 7231, 4.3.4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MethodPatch</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;PATCH&#39;</span> <span style="color:#75715e">// RFC 5789
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MethodDelete</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;DELETE&#39;</span> <span style="color:#75715e">// RFC 7231, 4.3.5
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MethodConnect</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;CONNECT&#39;</span> <span style="color:#75715e">// RFC 7231, 4.3.6
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MethodOptions</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;OPTIONS&#39;</span> <span style="color:#75715e">// RFC 7231, 4.3.7
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MethodTrace</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;TRACE&#39;</span> <span style="color:#75715e">// RFC 7231, 4.3.8
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MethodUse</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;USE&#39;</span>
+</span></span></code></pre><h2 id="常用-mime-类型">常用 MIME 类型</h2>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MIMETextXML</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;text/xml&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MIMETextHTML</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;text/html&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MIMETextPlain</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;text/plain&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MIMETextJavaScript</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;text/javascript&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MIMETextCSS</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;text/css&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MIMEApplicationXML</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;application/xml&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MIMEApplicationJSON</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;application/json&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MIMEApplicationCBOR</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;application/cbor&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MIMEApplicationForm</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;application/x-www-form-urlencoded&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MIMEOctetStream</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;application/octet-stream&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MIMEMultipartForm</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;multipart/form-data&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MIMETextXMLCharsetUTF8</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;text/xml; charset=utf-8&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MIMETextHTMLCharsetUTF8</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;text/html; charset=utf-8&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MIMETextPlainCharsetUTF8</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;text/plain; charset=utf-8&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MIMETextJavaScriptCharsetUTF8</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;text/javascript; charset=utf-8&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MIMETextCSSCharsetUTF8</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;text/css; charset=utf-8&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MIMEApplicationXMLCharsetUTF8</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;application/xml; charset=utf-8&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MIMEApplicationJSONCharsetUTF8</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;application/json; charset=utf-8&#39;</span>
+</span></span></code></pre><h2 id="http-状态码-镜像-go-net-http-包">HTTP 状态码（<code>镜像 Go net/http 包</code>）</h2>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusContinue</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span> <span style="color:#75715e">// RFC 7231, 6.2.1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusSwitchingProtocols</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">101</span> <span style="color:#75715e">// RFC 7231, 6.2.2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusProcessing</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">102</span> <span style="color:#75715e">// RFC 2518, 10.1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusEarlyHints</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">103</span> <span style="color:#75715e">// RFC 8297
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusOK</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">200</span> <span style="color:#75715e">// RFC 7231, 6.3.1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusCreated</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">201</span> <span style="color:#75715e">// RFC 7231, 6.3.2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusAccepted</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">202</span> <span style="color:#75715e">// RFC 7231, 6.3.3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusNonAuthoritativeInformation</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">203</span> <span style="color:#75715e">// RFC 7231, 6.3.4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusNoContent</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">204</span> <span style="color:#75715e">// RFC 7231, 6.3.5
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusResetContent</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">205</span> <span style="color:#75715e">// RFC 7231, 6.3.6
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusPartialContent</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">206</span> <span style="color:#75715e">// RFC 7233, 4.1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusMultiStatus</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">207</span> <span style="color:#75715e">// RFC 4918, 11.1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusAlreadyReported</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">208</span> <span style="color:#75715e">// RFC 5842, 7.1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusIMUsed</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">226</span> <span style="color:#75715e">// RFC 3229, 10.4.1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusMultipleChoices</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">300</span> <span style="color:#75715e">// RFC 7231, 6.4.1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusMovedPermanently</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">301</span> <span style="color:#75715e">// RFC 7231, 6.4.2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusFound</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">302</span> <span style="color:#75715e">// RFC 7231, 6.4.3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusSeeOther</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">303</span> <span style="color:#75715e">// RFC 7231, 6.4.4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusNotModified</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">304</span> <span style="color:#75715e">// RFC 7232, 4.1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusUseProxy</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">305</span> <span style="color:#75715e">// RFC 7231, 6.4.5
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusSwitchProxy</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">306</span> <span style="color:#75715e">// RFC 9110, 15.4.7 (Unused)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusTemporaryRedirect</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">307</span> <span style="color:#75715e">// RFC 7231, 6.4.7
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusPermanentRedirect</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">308</span> <span style="color:#75715e">// RFC 7538, 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusBadRequest</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">400</span> <span style="color:#75715e">// RFC 7231, 6.5.1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusUnauthorized</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">401</span> <span style="color:#75715e">// RFC 7235, 3.1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusPaymentRequired</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">402</span> <span style="color:#75715e">// RFC 7231, 6.5.2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusForbidden</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">403</span> <span style="color:#75715e">// RFC 7231, 6.5.3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusNotFound</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">404</span> <span style="color:#75715e">// RFC 7231, 6.5.4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusMethodNotAllowed</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">405</span> <span style="color:#75715e">// RFC 7231, 6.5.5
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusNotAcceptable</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">406</span> <span style="color:#75715e">// RFC 7231, 6.5.6
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusProxyAuthRequired</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">407</span> <span style="color:#75715e">// RFC 7235, 3.2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusRequestTimeout</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">408</span> <span style="color:#75715e">// RFC 7231, 6.5.7
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusConflict</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">409</span> <span style="color:#75715e">// RFC 7231, 6.5.8
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusGone</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">410</span> <span style="color:#75715e">// RFC 7231, 6.5.9
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusLengthRequired</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">411</span> <span style="color:#75715e">// RFC 7231, 6.5.10
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusPreconditionFailed</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">412</span> <span style="color:#75715e">// RFC 7232, 4.2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusRequestEntityTooLarge</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">413</span> <span style="color:#75715e">// RFC 7231, 6.5.11
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusRequestURITooLong</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">414</span> <span style="color:#75715e">// RFC 7231, 6.5.12
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusUnsupportedMediaType</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">415</span> <span style="color:#75715e">// RFC 7231, 6.5.13
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusRequestedRangeNotSatisfiable</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">416</span> <span style="color:#75715e">// RFC 7233, 4.4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusExpectationFailed</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">417</span> <span style="color:#75715e">// RFC 7231, 6.5.14
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusTeapot</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">418</span> <span style="color:#75715e">// RFC 7168, 2.3.3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusMisdirectedRequest</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">421</span> <span style="color:#75715e">// RFC 7540, 9.1.2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusUnprocessableEntity</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">422</span> <span style="color:#75715e">// RFC 4918, 11.2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusLocked</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">423</span> <span style="color:#75715e">// RFC 4918, 11.3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusFailedDependency</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">424</span> <span style="color:#75715e">// RFC 4918, 11.4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusTooEarly</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">425</span> <span style="color:#75715e">// RFC 8470, 5.2.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusUpgradeRequired</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">426</span> <span style="color:#75715e">// RFC 7231, 6.5.15
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusPreconditionRequired</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">428</span> <span style="color:#75715e">// RFC 6585, 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusTooManyRequests</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">429</span> <span style="color:#75715e">// RFC 6585, 4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusRequestHeaderFieldsTooLarge</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">431</span> <span style="color:#75715e">// RFC 6585, 5
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusUnavailableForLegalReasons</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">451</span> <span style="color:#75715e">// RFC 7725, 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusInternalServerError</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">500</span> <span style="color:#75715e">// RFC 7231, 6.6.1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusNotImplemented</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">501</span> <span style="color:#75715e">// RFC 7231, 6.6.2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusBadGateway</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">502</span> <span style="color:#75715e">// RFC 7231, 6.6.3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusServiceUnavailable</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">503</span> <span style="color:#75715e">// RFC 7231, 6.6.4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusGatewayTimeout</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">504</span> <span style="color:#75715e">// RFC 7231, 6.6.5
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusHTTPVersionNotSupported</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">505</span> <span style="color:#75715e">// RFC 7231, 6.6.6
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusVariantAlsoNegotiates</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">506</span> <span style="color:#75715e">// RFC 2295, 8.1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusInsufficientStorage</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">507</span> <span style="color:#75715e">// RFC 4918, 11.5
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusLoopDetected</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">508</span> <span style="color:#75715e">// RFC 5842, 7.2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusNotExtended</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">510</span> <span style="color:#75715e">// RFC 2774, 7
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StatusNetworkAuthenticationRequired</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">511</span> <span style="color:#75715e">// RFC 6585, 6
+</span></span></span></code></pre><h2 id="http-头-镜像-go-net-http-包">HTTP 头（<code>镜像 Go net/http 包</code>）</h2>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAuthorization</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Authorization&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderProxyAuthenticate</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Proxy-Authenticate&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderProxyAuthorization</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Proxy-Authorization&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderWWWAuthenticate</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;WWW-Authenticate&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAge</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Age&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderCacheControl</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Cache-Control&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderClearSiteData</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Clear-Site-Data&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderExpires</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Expires&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderPragma</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Pragma&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderWarning</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Warning&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAcceptCH</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Accept-CH&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAcceptCHLifetime</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Accept-CH-Lifetime&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderContentDPR</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Content-DPR&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderDPR</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;DPR&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderEarlyData</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Early-Data&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderSaveData</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Save-Data&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderViewportWidth</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Viewport-Width&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderWidth</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Width&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderETag</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;ETag&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderIfMatch</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;If-Match&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderIfModifiedSince</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;If-Modified-Since&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderIfNoneMatch</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;If-None-Match&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderIfUnmodifiedSince</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;If-Unmodified-Since&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderLastModified</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Last-Modified&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderVary</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Vary&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderConnection</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Connection&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderKeepAlive</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Keep-Alive&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAccept</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Accept&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAcceptCharset</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Accept-Charset&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAcceptEncoding</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Accept-Encoding&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAcceptLanguage</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Accept-Language&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderCookie</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Cookie&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderExpect</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Expect&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderMaxForwards</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Max-Forwards&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderSetCookie</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Set-Cookie&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAccessControlAllowCredentials</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Access-Control-Allow-Credentials&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAccessControlAllowHeaders</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Access-Control-Allow-Headers&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAccessControlAllowMethods</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Access-Control-Allow-Methods&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAccessControlAllowOrigin</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Access-Control-Allow-Origin&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAccessControlExposeHeaders</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Access-Control-Expose-Headers&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAccessControlMaxAge</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Access-Control-Max-Age&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAccessControlRequestHeaders</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Access-Control-Request-Headers&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAccessControlRequestMethod</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Access-Control-Request-Method&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderOrigin</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Origin&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderTimingAllowOrigin</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Timing-Allow-Origin&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderXPermittedCrossDomainPolicies</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;X-Permitted-Cross-Domain-Policies&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderDNT</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;DNT&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderTk</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Tk&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderContentDisposition</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Content-Disposition&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderContentEncoding</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Content-Encoding&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderContentLanguage</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Content-Language&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderContentLength</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Content-Length&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderContentLocation</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Content-Location&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderContentType</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Content-Type&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderForwarded</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Forwarded&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderVia</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Via&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderXForwardedFor</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;X-Forwarded-For&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderXForwardedHost</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;X-Forwarded-Host&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderXForwardedProto</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;X-Forwarded-Proto&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderXForwardedProtocol</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;X-Forwarded-Protocol&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderXForwardedSsl</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;X-Forwarded-Ssl&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderXUrlScheme</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;X-Url-Scheme&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderLocation</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Location&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderFrom</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;From&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderHost</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Host&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderReferer</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Referer&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderReferrerPolicy</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Referrer-Policy&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderUserAgent</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;User-Agent&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAllow</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Allow&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderServer</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Server&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAcceptRanges</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Accept-Ranges&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderContentRange</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Content-Range&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderIfRange</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;If-Range&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderRange</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Range&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderContentSecurityPolicy</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Content-Security-Policy&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderContentSecurityPolicyReportOnly</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Content-Security-Policy-Report-Only&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderCrossOriginResourcePolicy</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Cross-Origin-Resource-Policy&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderExpectCT</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Expect-CT&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderFeaturePolicy</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Feature-Policy&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderPublicKeyPins</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Public-Key-Pins&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderPublicKeyPinsReportOnly</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Public-Key-Pins-Report-Only&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderStrictTransportSecurity</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Strict-Transport-Security&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderUpgradeInsecureRequests</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Upgrade-Insecure-Requests&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderXContentTypeOptions</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;X-Content-Type-Options&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderXDownloadOptions</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;X-Download-Options&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderXFrameOptions</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;X-Frame-Options&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderXPoweredBy</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;X-Powered-By&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderXXSSProtection</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;X-XSS-Protection&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderLastEventID</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Last-Event-ID&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderNEL</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;NEL&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderPingFrom</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Ping-From&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderPingTo</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Ping-To&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderReportTo</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Report-To&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderTE</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;TE&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderTrailer</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Trailer&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderTransferEncoding</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Transfer-Encoding&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderSecWebSocketAccept</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Sec-WebSocket-Accept&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderSecWebSocketExtensions</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Sec-WebSocket-Extensions&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderSecWebSocketKey</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Sec-WebSocket-Key&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderSecWebSocketProtocol</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Sec-WebSocket-Protocol&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderSecWebSocketVersion</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Sec-WebSocket-Version&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAcceptPatch</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Accept-Patch&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAcceptPushPolicy</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Accept-Push-Policy&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAcceptSignature</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Accept-Signature&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAltSvc</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Alt-Svc&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderDate</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Date&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderIndex</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Index&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderLargeAllocation</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Large-Allocation&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderLink</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Link&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderPushPolicy</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Push-Policy&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderRetryAfter</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Retry-After&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderServerTiming</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Server-Timing&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderSignature</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Signature&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderSignedHeaders</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Signed-Headers&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderSourceMap</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;SourceMap&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderUpgrade</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Upgrade&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderXDNSPrefetchControl</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;X-DNS-Prefetch-Control&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderXPingback</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;X-Pingback&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderXRequestID</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;X-Request-ID&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderXRequestedWith</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;X-Requested-With&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderXRobotsTag</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;X-Robots-Tag&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderXUACompatible</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;X-UA-Compatible&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAccessControlAllowPrivateNetwork</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Access-Control-Allow-Private-Network&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HeaderAccessControlRequestPrivateNetwork</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Access-Control-Request-Private-Network&#39;</span>
+</span></span></code></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    <script src="../js/tabler.min.js" defer></script>
+  </body>
+</html>

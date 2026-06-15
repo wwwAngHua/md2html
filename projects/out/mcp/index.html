@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>MCP Server - t1yOS 开发文档</title>
+    <link rel="icon" href="../favicon.svg" />
+    <meta name="description" content="使用 t1yOS MCP Server 可以将你在 t1yOS 平台上创建的应用功能全部暴露给 Claude Code、Codex、Cursor、Windsurf、VS Code（GitHub Copilot）、Zed 等主流 AI 编程工具。" />
+    <meta property="og:title" content="MCP Server - t1yOS 开发文档" />
+    <meta property="og:description" content="使用 t1yOS MCP Server 可以将你在 t1yOS 平台上创建的应用功能全部暴露给 Claude Code、Codex、Cursor、Windsurf、VS Code（GitHub Copilot）、Zed 等主流 AI 编程工具。" />
+    <meta property="og:type" content="article" />
+    <link href="../css/tabler.min.css" rel="stylesheet" />
+    <link href="../css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="../css/tabler-socials.min.css" rel="stylesheet" />
+    <link href="../css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="../css/tabler-vendors.min.css" rel="stylesheet" />
+    <link href="../css/tabler-marketing.min.css" rel="stylesheet" />
+    <link href="../css/tabler-themes.min.css" rel="stylesheet" />
+    <style>      @import url("https://rsms.me/inter/inter.css");
+
+      .markdown :not(pre) > code {
+        background-color: #f0f0f0;
+        color: #d63384;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.875em;
+      }
+
+      .markdown pre {
+        border-radius: 8px;
+        padding: 16px;
+        overflow-x: auto;
+        margin: 1rem 0;
+        background-color: #272822;
+      }
+
+      .markdown pre code {
+        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", Consolas, monospace;
+        font-size: 0.875em;
+        line-height: 1.6;
+        background: none !important;
+        padding: 0;
+      }
+
+      .markdown pre[style] {
+        background-color: #272822 !important;
+      }
+
+      .breadcrumb {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .breadcrumb-item {
+        font-size: 0.875rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item + .breadcrumb-item::before {
+        content: "/";
+        margin: 0 0.5rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item a {
+        color: var(--tblr-muted, #656d77);
+        text-decoration: none;
+      }
+      .breadcrumb-item a:hover {
+        color: var(--tblr-primary, #206bc4);
+        text-decoration: underline;
+      }
+      .breadcrumb-item.active {
+        color: var(--tblr-body-color, #1e293b);
+      }
+
+       
+      .sidebar-toggle {
+        display: none;
+      }
+      @media (max-width: 575.98px) {
+        .sidebar-toggle {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+        .sidebar-collapse {
+          margin-bottom: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="page-wrapper">
+        <div class="page-header d-print-none" aria-label="Page header">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <h2 class="page-title">MCP Server</h2>
+                
+                <ol class="breadcrumb" aria-label="breadcrumb">
+                  
+                  
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item"><a href="index.html">Mcp</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item active" aria-current="page">MCP Server</li>
+                  
+                  
+                </ol>
+                
+              </div>
+              
+              <div class="col-auto ms-auto d-sm-none">
+                <button class="btn btn-icon sidebar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-expanded="false" aria-controls="sidebar-menu" aria-label="Toggle menu">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="row g-5">
+              
+              <div class="col-sm-2">
+                <div class="collapse d-sm-block sidebar-collapse" id="sidebar-menu">
+                  <div class="sticky-top">
+                    <nav class="nav nav-vertical nav-pills" id="pills">
+                      
+                      <a class="nav-link nav-link-level-1" href="#mcp-server">MCP Server</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c">准备工作</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#mcp-server-%e5%9c%b0%e5%9d%80">MCP Server 地址</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#claude-code-%e5%91%bd%e4%bb%a4%e8%a1%8c">Claude Code（命令行）</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#cursor">Cursor</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#windsurf-codeium">Windsurf（Codeium）</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#vs-code-github-copilot">VS Code（GitHub Copilot）</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#gemini-cli">Gemini CLI</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#continue-dev">Continue.dev</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#zed">Zed</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e5%b8%b8%e8%a7%81%e9%97%ae%e9%a2%98">常见问题</a>
+                      
+                    </nav>
+                  </div>
+                </div>
+              </div>
+              
+              <div
+                class="col-sm"
+                data-bs-spy="scroll"
+                data-bs-target="#pills"
+                data-bs-offset="0"
+              >
+                <div class="card card-lg">
+                  <div class="card-body markdown">
+                    <h1 id="mcp-server">MCP Server</h1>
+<p>使用 <code>t1yOS MCP Server</code> 可以将你在 <code>t1yOS</code> 平台上创建的应用功能全部暴露给 <code>Claude Code</code>、<code>Codex</code>、<code>Cursor</code>、<code>Windsurf</code>、<code>VS Code（GitHub Copilot）</code>、<code>Zed</code> 等主流 <code>AI</code> 编程工具。</p>
+<h2 id="准备工作">准备工作</h2>
+<p>开始前，你需要前往<a href="https://console.t1y.net/">控制台（console.t1y.net）</a>中的<code>个人信息</code>页面中获取你账号的 <code>Access Token</code> 并创建一个应用，随后前往应用<code>云操作系统页面</code>中的<code>设置 App</code> 中获取 <code>AppID</code>、<code>API Key</code>、<code>Secret Key</code> 等密钥信息。</p>
+<h2 id="mcp-server-地址">MCP Server 地址</h2>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>https://ai.t1y.net/mcp
+</span></span></code></pre><p>想要调用 <code>t1yOS MCP Server</code> 非常简单，只需要使用 <code>HTTP</code> 类型接入即可，地址填写 <code>t1yOS MCP Server</code> 的地址，请求头中附带你在准备工作中准备的 4 个密钥即可，任何 <code>AI</code> 工具都是通用的思想。</p>
+<p><strong>请求头例如：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;X-T1Y-Application-ID&#34;</span>: <span style="color:#e6db74">&#34;${T1Y_APP_ID}&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;X-T1Y-API-Key&#34;</span>: <span style="color:#e6db74">&#34;${T1Y_API_KEY}&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;X-T1Y-Secret-Key&#34;</span>: <span style="color:#e6db74">&#34;${T1Y_SECRET_KEY}&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;X-T1Y-Access-Token&#34;</span>: <span style="color:#e6db74">&#34;${T1Y_ACCESS_TOKEN}&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p>建议使用环境变量存储，切勿硬编码或提交到代码仓库。</p>
+<h2 id="claude-code-命令行">Claude Code（命令行）</h2>
+<p><strong>配置文件位置</strong>：项目根目录 <code>.mcp.json</code>，或全局 <code>~/.claude/.mcp.json</code></p>
+<p><strong>方式一：编辑配置文件（推荐）</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;mcpServers&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;t1yOS&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;http&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;url&#34;</span>: <span style="color:#e6db74">&#34;https://ai.t1y.net/mcp&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;headers&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;X-T1Y-Application-ID&#34;</span>: <span style="color:#e6db74">&#34;${T1Y_APP_ID}&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;X-T1Y-API-Key&#34;</span>: <span style="color:#e6db74">&#34;${T1Y_API_KEY}&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;X-T1Y-Secret-Key&#34;</span>: <span style="color:#e6db74">&#34;${T1Y_SECRET_KEY}&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;X-T1Y-Access-Token&#34;</span>: <span style="color:#e6db74">&#34;${T1Y_ACCESS_TOKEN}&#34;</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p><strong>方式二：命令行添加</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>claude mcp add-json t1yOS <span style="color:#e6db74">&#39;{
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &#34;type&#34;: &#34;http&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &#34;url&#34;: &#34;https://ai.t1y.net/mcp&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &#34;headers&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;X-T1Y-Application-ID&#34;: &#34;${T1Y_APP_ID}&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;X-T1Y-API-Key&#34;: &#34;${T1Y_API_KEY}&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;X-T1Y-Secret-Key&#34;: &#34;${T1Y_SECRET_KEY}&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;X-T1Y-Access-Token&#34;: &#34;${T1Y_ACCESS_TOKEN}&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  }
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">}&#39;</span>
+</span></span></code></pre><p><strong>设置环境变量</strong>（在 Shell 配置文件 <code>~/.zshrc</code> 或 <code>~/.bashrc</code> 中添加）：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>export T1Y_APP_ID<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;your_app_id&#34;</span>
+</span></span><span style="display:flex;"><span>export T1Y_API_KEY<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;your_api_key&#34;</span>
+</span></span><span style="display:flex;"><span>export T1Y_SECRET_KEY<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;your_secret_key&#34;</span>
+</span></span><span style="display:flex;"><span>export T1Y_ACCESS_TOKEN<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;your_access_token&#34;</span>
+</span></span></code></pre><p><strong>验证连接</strong>：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>claude mcp list        <span style="color:#75715e"># 查看已添加的 MCP Server</span>
+</span></span><span style="display:flex;"><span>/mcp                   <span style="color:#75715e"># 在 Claude Code 会话中查看工具状态</span>
+</span></span></code></pre><h2 id="cursor">Cursor</h2>
+<p><strong>配置文件位置</strong>：</p>
+<ul>
+<li>项目级（推荐）：项目根目录 <code>.cursor/mcp.json</code></li>
+<li>全局：<code>~/.cursor/mcp.json</code></li>
+</ul>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;mcpServers&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;t1yOS&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;http&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;url&#34;</span>: <span style="color:#e6db74">&#34;https://ai.t1y.net/mcp&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;headers&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;X-T1Y-Application-ID&#34;</span>: <span style="color:#e6db74">&#34;${env:T1Y_APP_ID}&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;X-T1Y-API-Key&#34;</span>: <span style="color:#e6db74">&#34;${env:T1Y_API_KEY}&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;X-T1Y-Secret-Key&#34;</span>: <span style="color:#e6db74">&#34;${env:T1Y_SECRET_KEY}&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;X-T1Y-Access-Token&#34;</span>: <span style="color:#e6db74">&#34;${env:T1Y_ACCESS_TOKEN}&#34;</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p><strong>也可通过 UI 添加</strong>：</p>
+<ol>
+<li>打开 Cursor Settings（<code>Cmd/Ctrl + ,</code>）</li>
+<li>进入 <strong>Features → MCP</strong>（或 <strong>Tools &amp; MCP</strong>）</li>
+<li>点击 <strong>+ Add New MCP Server</strong></li>
+<li>填写 Server URL 及 Headers</li>
+</ol>
+<blockquote>
+<p>Cursor 使用 <code>${env:VAR}</code> 语法引用环境变量（注意与其他工具的 <code>${VAR}</code> 语法区别）。</p>
+</blockquote>
+<h2 id="windsurf-codeium">Windsurf（Codeium）</h2>
+<p><strong>配置文件位置</strong>：<code>~/.codeium/windsurf/mcp_config.json</code></p>
+<blockquote>
+<p><strong>注意</strong>：Windsurf 使用 <code>serverUrl</code>（而非 <code>url</code>）字段，并需显式声明 <code>type: &quot;streamable-http&quot;</code>。</p>
+</blockquote>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;mcpServers&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;t1yOS&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;streamable-http&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;serverUrl&#34;</span>: <span style="color:#e6db74">&#34;https://ai.t1y.net/mcp&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;headers&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;X-T1Y-Application-ID&#34;</span>: <span style="color:#e6db74">&#34;${T1Y_APP_ID}&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;X-T1Y-API-Key&#34;</span>: <span style="color:#e6db74">&#34;${T1Y_API_KEY}&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;X-T1Y-Secret-Key&#34;</span>: <span style="color:#e6db74">&#34;${T1Y_SECRET_KEY}&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;X-T1Y-Access-Token&#34;</span>: <span style="color:#e6db74">&#34;${T1Y_ACCESS_TOKEN}&#34;</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p><strong>也可通过 UI 配置</strong>：Settings → AI → External Tools</p>
+<h2 id="vs-code-github-copilot">VS Code（GitHub Copilot）</h2>
+<p><strong>配置文件位置</strong>：</p>
+<ul>
+<li>用户级：通过命令面板 <code>MCP: Open User Configuration</code> 打开</li>
+<li>项目级：<code>.vscode/mcp.json</code></li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：VS Code 使用 <code>&quot;servers&quot;</code> 作为根键（其他工具使用 <code>&quot;mcpServers&quot;</code>），且需在 settings 中启用 MCP。</p>
+</blockquote>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;servers&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;t1yOS&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;http&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;url&#34;</span>: <span style="color:#e6db74">&#34;https://ai.t1y.net/mcp&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;headers&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;X-T1Y-Application-ID&#34;</span>: <span style="color:#e6db74">&#34;${input:T1Y_APP_ID}&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;X-T1Y-API-Key&#34;</span>: <span style="color:#e6db74">&#34;${input:T1Y_API_KEY}&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;X-T1Y-Secret-Key&#34;</span>: <span style="color:#e6db74">&#34;${input:T1Y_SECRET_KEY}&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;X-T1Y-Access-Token&#34;</span>: <span style="color:#e6db74">&#34;${input:T1Y_ACCESS_TOKEN}&#34;</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p><strong>启用 MCP 支持</strong>（在 <code>settings.json</code> 中添加）：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;chat.mcp.enabled&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h2 id="gemini-cli">Gemini CLI</h2>
+<p><strong>配置文件位置</strong>：<code>~/.gemini/settings.json</code></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;mcpServers&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;t1yOS&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;http&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;url&#34;</span>: <span style="color:#e6db74">&#34;https://ai.t1y.net/mcp&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;headers&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;X-T1Y-Application-ID&#34;</span>: <span style="color:#e6db74">&#34;${T1Y_APP_ID}&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;X-T1Y-API-Key&#34;</span>: <span style="color:#e6db74">&#34;${T1Y_API_KEY}&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;X-T1Y-Secret-Key&#34;</span>: <span style="color:#e6db74">&#34;${T1Y_SECRET_KEY}&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;X-T1Y-Access-Token&#34;</span>: <span style="color:#e6db74">&#34;${T1Y_ACCESS_TOKEN}&#34;</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h2 id="continue-dev">Continue.dev</h2>
+<p><strong>配置文件位置</strong>：<code>~/.continue/config.json</code></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;mcpServers&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;t1yOS&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;transport&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;streamableHttp&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;url&#34;</span>: <span style="color:#e6db74">&#34;https://ai.t1y.net/mcp&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;requestOptions&#34;</span>: {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;headers&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;X-T1Y-Application-ID&#34;</span>: <span style="color:#e6db74">&#34;${T1Y_APP_ID}&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;X-T1Y-API-Key&#34;</span>: <span style="color:#e6db74">&#34;${T1Y_API_KEY}&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;X-T1Y-Secret-Key&#34;</span>: <span style="color:#e6db74">&#34;${T1Y_SECRET_KEY}&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;X-T1Y-Access-Token&#34;</span>: <span style="color:#e6db74">&#34;${T1Y_ACCESS_TOKEN}&#34;</span>
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h2 id="zed">Zed</h2>
+<p><strong>配置文件位置</strong>：<code>~/.config/zed/settings.json</code></p>
+<blockquote>
+<p><strong>注意</strong>：Zed 使用 <code>context_servers</code> 作为根键。当前版本对自定义请求头支持有限，推荐使用 <code>mcp-remote</code> 代理方式接入。</p>
+</blockquote>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;context_servers&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;t1yOS&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;command&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;npx&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;args&#34;</span>: [
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;-y&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;mcp-remote@latest&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;https://ai.t1y.net/mcp&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;--header&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;X-T1Y-Application-ID:${T1Y_APP_ID}&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;--header&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;X-T1Y-API-Key:${T1Y_API_KEY}&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;--header&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;X-T1Y-Secret-Key:${T1Y_SECRET_KEY}&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;--header&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;X-T1Y-Access-Token:${T1Y_ACCESS_TOKEN}&#34;</span>
+</span></span><span style="display:flex;"><span>        ],
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;env&#34;</span>: {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;T1Y_APP_ID&#34;</span>: <span style="color:#e6db74">&#34;your_app_id&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;T1Y_API_KEY&#34;</span>: <span style="color:#e6db74">&#34;your_api_key&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;T1Y_SECRET_KEY&#34;</span>: <span style="color:#e6db74">&#34;your_secret_key&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;T1Y_ACCESS_TOKEN&#34;</span>: <span style="color:#e6db74">&#34;your_access_token&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h2 id="常见问题">常见问题</h2>
+<p><strong>Q：连接失败，提示 401/403？</strong><br />
+A：请检查四个认证 Header 是否全部传入，确认凭证未过期。</p>
+<p><strong>Q：工具列表为空？</strong><br />
+A：重启客户端后再试。部分工具（如 Cursor）在添加 Server 后需重载窗口（<code>Cmd/Ctrl + Shift + P → Reload Window</code>）。</p>
+<p><strong>Q：配置文件修改后无效？</strong><br />
+A：确认 JSON 格式正确（缺少逗号或括号会导致静默失败）。可用 <code>cat config.json | python3 -m json.tool</code> 验证语法。</p>
+<p><strong>Q：Windsurf 连接报错？</strong><br />
+A：确认使用了 <code>serverUrl</code> 字段（不是 <code>url</code>），并且添加了 <code>&quot;type&quot;: &quot;streamable-http&quot;</code>。</p>
+<p><strong>Q：VS Code 找不到 MCP 配置选项？</strong><br />
+A：请确认 VS Code 版本 &gt;= 1.102，并在 <code>settings.json</code> 中启用 <code>&quot;chat.mcp.enabled&quot;: true</code>。</p>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    <script src="../js/tabler.min.js" defer></script>
+  </body>
+</html>

@@ -128,6 +128,12 @@
                       
                       <a class="nav-link nav-link-level-1" href="#%e8%b0%81%e9%80%82%e5%90%88%e4%bd%bf%e7%94%a8-t1yos">谁适合使用 t1yOS？</a>
                       
+                      <a class="nav-link nav-link-level-1" href="#%e4%ba%91%e5%87%bd%e6%95%b0">云函数</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e4%ba%91%e6%95%b0%e6%8d%ae%e5%ba%93">云数据库</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#mcp-server">MCP Server</a>
+                      
                       <a class="nav-link nav-link-level-1" href="#%e8%81%94%e7%b3%bb%e6%88%91%e4%bb%ac">联系我们</a>
                       
                       <a class="nav-link nav-link-level-1" href="#%e7%a4%be%e7%be%a4">社群</a>
@@ -163,7 +169,7 @@
 </ul>
 <p>用户可直接使用平台 <code>RESTful API</code> 或 <code>SDK</code> 操作云数据库或调用云函数实现各类功能；同时也支持定时任务定时触发云函数完成复杂任务；除此之外云函数还可以完成绝大部分服务端功能的开发，例如：<code>JWT</code> 认证、文件操作、数据库操作、网络请求、支付、<code>MCP Server</code> 开发等。</p>
 <blockquote>
-<p>值得一提的是，t1yOS 云函数采用纯 <code>Go</code> 语言完全自研开发，底层基于 <code>Go</code> 语言中最快的 <code>fasthttp</code> 框架，并提供类似 <code>express.js</code> 框架的设计，内存级云函数，启动时间做到纳秒~微秒级，如果你是 <code>node</code> 开发者，那么一定会喜欢上 t1yOS 云函数。</p>
+<p>值得一提的是，t1yOS 云函数采用纯 <code>Go</code> 语言完全自研开发，底层基于 <code>Go</code> 语言中最快的 <code>fasthttp</code> 框架，并提供类似 <code>express.js</code> 框架的设计，内存级云函数，无启动时间，如果你是 <code>node</code> 开发者，那么一定会喜欢上 t1yOS 云函数。</p>
 </blockquote>
 <h1 id="谁适合使用-t1yos">谁适合使用 t1yOS？</h1>
 <p>1.前端开发者 + <code>t1yOS</code> = 全栈开发者，前端秒变全栈</p>
@@ -177,7 +183,7 @@
 <ul>
 <li>无需购买、配置云服务器和 Nginx、域名、证书等</li>
 <li>随时随地编辑、发布云函数</li>
-<li>快速开发，告别开发、编译打包部署的繁杂体验</li>
+<li>快速开发，告别开发过程中的编译、打包、部署的繁杂体验</li>
 </ul>
 <!-- raw HTML omitted -->
 <p>3.独立开发者、创业团队，节约成本，快速开始，专注业务</p>
@@ -193,6 +199,36 @@
 <li>无需后端开发，减少 AI tokens 消耗</li>
 <li>使用 AI 快速开发产品，并且无需购买云服务器、域名等</li>
 </ul>
+<h1 id="云函数">云函数</h1>
+<p>t1yOS 云函数采用纯 <code>Go</code> 语言完全自研开发，底层基于 <code>Go</code> 语言中最快的 <code>fasthttp</code> 框架，并提供类似 <code>express.js</code> 框架的设计，内存级云函数，无启动时间。具有毫秒级发布、原生支持高并发、性能优异等特点。</p>
+<p>t1yOS 云函数具有以下能力：</p>
+<ul>
+<li>处理 HTTP 请求</li>
+<li>操作数据库</li>
+<li>操作文件系统</li>
+<li>调用第三方服务</li>
+<li>发送网络请求</li>
+<li>定时任务等</li>
+</ul>
+<p>如需参阅云函数相关文档，请前往：<a href="./cloud-function/quick-start/index.html">快速开始</a></p>
+<h1 id="云数据库">云数据库</h1>
+<p>t1yOS 云数据库采用 <code>NoSQL</code> 数据库，并且平台自研了一套 <code>SQL</code> 转 <code>BSON</code> 的系统，不仅仅可以使用原生的 <code>BSON</code> 操作云数据库，还能使用 <code>SQL</code> 替代一些低频快速的使用场景，非常的方便；并且平台有完整的<code>索引支持</code>、支持<code>云函数</code>操作云数据库、<code>RESTfult API</code> 操作云数据库。同时支持<code>权限管理</code>，更精细化的管理各数据库表。</p>
+<p>t1yOS 云数据库具有以下能力：</p>
+<ul>
+<li>完整的云操作系统可视化管理客户端 App</li>
+<li>云函数操作云数据库</li>
+<li>精细化的权限管理</li>
+<li>数据库自动映射为 RESTfult API 供客户端操作</li>
+<li>完整的索引支持</li>
+<li>无需编写接口即可直接对云数据库进行增删改查操作</li>
+</ul>
+<p>如需参阅云数据库相关文档，请前往：<a href="./database/index.html">云数据库文档</a></p>
+<h1 id="mcp-server">MCP Server</h1>
+<p>使用 <code>t1yOS MCP Server</code> 可以让 <code>AI</code> 大模型接管 <code>t1yOS</code> 平台 <code>90+</code> 功能，彻底解放双手，如：帮助你管理云数据库、管理文件系统文件、管理定时任务、管理环境变量等等。</p>
+<blockquote>
+<p>例如：帮我查询 <code>users</code> 集合中 <code>name</code> 字段为王华的数据、帮我检查应用健康状态、帮我看看 <code>/.private/a.txt</code> 中都有什么内容、帮我在 <code>logs</code> 集合中新建一个 1 天过期自动删除的索引、帮我...</p>
+</blockquote>
+<p>如需参阅 <code>MCP Server</code> 相关文档，请前往：<a href="./mcp/index.html">MCP Server</a></p>
 <h1 id="联系我们">联系我们</h1>
 <ul>
 <li>客服（技术）QQ：422584084</li>
@@ -203,7 +239,7 @@
 <ul>
 <li>QQ 交流群 1：671186603</li>
 <li>QQ 交流群 2：292846194</li>
-<li>GitHub 组织：<!-- raw HTML omitted --><a href="https://github.com/t1yOS">https://github.com/t1yOS</a><!-- raw HTML omitted --></li>
+<li>GitHub 组织：<a href="https://github.com/t1yOS">https://github.com/t1yOS</a></li>
 </ul>
 
                   </div>

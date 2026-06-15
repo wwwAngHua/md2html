@@ -1,0 +1,855 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>t1yOS 云函数 - t1yOS 开发文档</title>
+    <link rel="icon" href="../../favicon.svg" />
+    <meta name="description" content="使用 t1yOS 云函数之前，你需要先前往：console.t1y.net 创建一个应用，并打开该应用，随后在云操作系统页面中打开“文件 App“，并在“文件 App“ 中打开“云函数（.functions）“文件夹，在空白区域右键“新建云函数“，取名“index“，再次右键“在代码编辑器中打开“，再次点击右上角..." />
+    <meta property="og:title" content="t1yOS 云函数 - t1yOS 开发文档" />
+    <meta property="og:description" content="使用 t1yOS 云函数之前，你需要先前往：console.t1y.net 创建一个应用，并打开该应用，随后在云操作系统页面中打开“文件 App“，并在“文件 App“ 中打开“云函数（.functions）“文件夹，在空白区域右键“新建云函数“，取名“index“，再次右键“在代码编辑器中打开“，再次点击右上角..." />
+    <meta property="og:type" content="article" />
+    <link href="../../css/tabler.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-socials.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-vendors.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-marketing.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-themes.min.css" rel="stylesheet" />
+    <style>      @import url("https://rsms.me/inter/inter.css");
+
+      .markdown :not(pre) > code {
+        background-color: #f0f0f0;
+        color: #d63384;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.875em;
+      }
+
+      .markdown pre {
+        border-radius: 8px;
+        padding: 16px;
+        overflow-x: auto;
+        margin: 1rem 0;
+        background-color: #272822;
+      }
+
+      .markdown pre code {
+        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", Consolas, monospace;
+        font-size: 0.875em;
+        line-height: 1.6;
+        background: none !important;
+        padding: 0;
+      }
+
+      .markdown pre[style] {
+        background-color: #272822 !important;
+      }
+
+      .breadcrumb {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .breadcrumb-item {
+        font-size: 0.875rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item + .breadcrumb-item::before {
+        content: "/";
+        margin: 0 0.5rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item a {
+        color: var(--tblr-muted, #656d77);
+        text-decoration: none;
+      }
+      .breadcrumb-item a:hover {
+        color: var(--tblr-primary, #206bc4);
+        text-decoration: underline;
+      }
+      .breadcrumb-item.active {
+        color: var(--tblr-body-color, #1e293b);
+      }
+
+       
+      .sidebar-toggle {
+        display: none;
+      }
+      @media (max-width: 575.98px) {
+        .sidebar-toggle {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+        .sidebar-collapse {
+          margin-bottom: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="page-wrapper">
+        <div class="page-header d-print-none" aria-label="Page header">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <h2 class="page-title">t1yOS 云函数</h2>
+                
+                <ol class="breadcrumb" aria-label="breadcrumb">
+                  
+                  
+                  <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item"><a href="../index.html">Cloud Function</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item"><a href="index.html">Quick Start</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item active" aria-current="page">t1yOS 云函数</li>
+                  
+                  
+                </ol>
+                
+              </div>
+              
+              <div class="col-auto ms-auto d-sm-none">
+                <button class="btn btn-icon sidebar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-expanded="false" aria-controls="sidebar-menu" aria-label="Toggle menu">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="row g-5">
+              
+              <div class="col-sm-2">
+                <div class="collapse d-sm-block sidebar-collapse" id="sidebar-menu">
+                  <div class="sticky-top">
+                    <nav class="nav nav-vertical nav-pills" id="pills">
+                      
+                      <a class="nav-link nav-link-level-1" href="#t1yos-%e4%ba%91%e5%87%bd%e6%95%b0">t1yOS 云函数</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e6%96%87%e4%bb%b6%e7%b3%bb%e7%bb%9f%e7%bb%93%e6%9e%84">文件系统结构</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#hello-world">Hello, World!</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#getgreeting">getGreeting!</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e6%89%93%e5%8d%b0%e6%97%a5%e5%bf%97">打印日志</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e8%87%aa%e5%ae%9a%e4%b9%89%e6%a8%a1%e5%9d%97">自定义模块</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e8%8e%b7%e5%8f%96%e8%ba%ab%e4%bb%bd%e6%a0%87%e8%af%86">获取身份标识</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e8%8e%b7%e5%8f%96%e5%ae%a2%e6%88%b7%e7%ab%af-ip">获取客户端 IP</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e8%8e%b7%e5%8f%96%e8%af%b7%e6%b1%82%e6%96%b9%e6%b3%95">获取请求方法</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e8%8e%b7%e5%8f%96%e8%af%b7%e6%b1%82%e5%a4%b4">获取请求头</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e8%ae%be%e7%bd%ae%e5%93%8d%e5%ba%94%e5%a4%b4">设置响应头</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e8%8e%b7%e5%8f%96%e6%9f%a5%e8%af%a2%e5%8f%82%e6%95%b0">获取查询参数</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e8%8e%b7%e5%8f%96%e8%a1%a8%e5%8d%95%e6%95%b0%e6%8d%ae">获取表单数据</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e8%8e%b7%e5%8f%96%e8%af%b7%e6%b1%82%e4%bd%93">获取请求体</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e9%87%8d%e5%ae%9a%e5%90%91">重定向</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e6%a8%a1%e6%9d%bf%e6%b8%b2%e6%9f%93">模板渲染</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e8%af%b7%e6%b1%82%e7%ba%a7%e5%ad%98%e5%82%a8">请求级存储</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#cookie">Cookie</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e4%b8%8a%e4%bc%a0%e6%96%87%e4%bb%b6">上传文件</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e4%b8%8b%e8%bd%bd%e6%96%87%e4%bb%b6">下载文件</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e5%8f%91%e9%80%81%e6%96%87%e4%bb%b6">发送文件</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#xml">XML</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#jsonp">JSONP</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e8%87%aa%e5%ae%9a%e4%b9%89%e7%8a%b6%e6%80%81%e7%a0%81">自定义状态码</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#jwt-%e8%ba%ab%e4%bb%bd%e9%aa%8c%e8%af%81">JWT 身份验证</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e5%8f%91%e9%80%81%e7%bd%91%e7%bb%9c%e8%af%b7%e6%b1%82">发送网络请求</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f">环境变量</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e6%96%87%e4%bb%b6%e6%93%8d%e4%bd%9c">文件操作</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e5%bc%80%e5%90%af%e5%ae%89%e5%85%a8%e6%a8%a1%e5%bc%8f">开启安全模式</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e9%aa%8c%e8%af%81%e8%af%b7%e6%b1%82%e7%ad%be%e5%90%8d">验证请求签名</a>
+                      
+                    </nav>
+                  </div>
+                </div>
+              </div>
+              
+              <div
+                class="col-sm"
+                data-bs-spy="scroll"
+                data-bs-target="#pills"
+                data-bs-offset="0"
+              >
+                <div class="card card-lg">
+                  <div class="card-body markdown">
+                    <h1 id="t1yos-云函数">t1yOS 云函数</h1>
+<p>使用 t1yOS 云函数之前，你需要先前往：<a href="https://console.t1y.net/">console.t1y.net</a> 创建一个应用，并打开该应用，随后在<code>云操作系统页面</code>中打开“<code>文件 App</code>“，并在“<code>文件 App</code>“ 中打开“<code>云函数（.functions）</code>“文件夹，在空白区域右键“<code>新建云函数</code>“，取名“<code>index</code>“，再次右键“<code>在代码编辑器中打开</code>“，再次点击右上角<code>绿色的运行按钮</code>，即可看到云函数执行结果。</p>
+<p>当前文档仅仅只是云函数的一些常用用法，对于日常开发已足够，云函数还有非常非常多的功能，请参阅：<a href="../advanced/index.html">云函数高阶文档</a></p>
+<h1 id="文件系统结构">文件系统结构</h1>
+<p>每个应用都有一个独立的文件系统，文件系统相当于一个 Web 服务器（类似 Nginx+PHP），可对外提供静态资源以及云函数访问。所有的云函数都必须放到<code>云函数（.functions）</code>目录下，支持二级目录，文件拓展名必须为 <code>.jsc</code>。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>├── /（根目录）
+</span></span><span style="display:flex;"><span>│   └── .functions（云函数目录）
+</span></span><span style="display:flex;"><span>│   		└── apps（App Center 中安装的云函数应用）
+</span></span><span style="display:flex;"><span>│   				└── helloworld（示列应用）
+</span></span><span style="display:flex;"><span>│   └── .private（私有目录）
+</span></span><span style="display:flex;"><span>├── index.html
+</span></span></code></pre><p>注意：所有的 <code>.</code> 开头的文件或文件夹对外都是禁止访问的，敏感文件可使用隐藏文件命名或放到 <code>.private</code> 目录下，如：微信、支付宝等密钥文件。</p>
+<h1 id="hello-world">Hello, World!</h1>
+<p>云函数支持 <code>GET</code>、<code>POST</code>、<code>PUT</code>、<code>PATCH</code>、<code>DELETE</code> 等请求方式，当请求到达云函数时，会触发执行 <code>onRequest</code> 函数，支持返回任意类型的数据。如 <code>Object</code>、<code>String</code>、<code>Number</code>、<code>Boolean</code> 等，当然云函数还支持自定义状态码、返回文件、<code>JSON</code>、<code>JSONP</code>、<code>CBOR</code>、<code>msgPack</code>、<code>XML</code>、重定向、渲染网页等。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;Hello, World!&#39;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p>注意：云函数必须放到<code>云函数（.functions）</code>文件夹内，才能生效；并且支持二级目录，与普通 <code>Web</code> 服务器无异，但云函数性能非常强。</p>
+<h1 id="getgreeting">getGreeting!</h1>
+<p>新创建的云函数默认是一个获取问候语的云函数，代码如下所示：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;http&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;this is a console message.&#39;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">code</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#e6db74">`Hello </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">query</span>(<span style="color:#e6db74">&#39;name&#39;</span>, <span style="color:#e6db74">&#39;WangHua&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">, </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">getGreeting</span>()<span style="color:#e6db74">}</span><span style="color:#e6db74">!`</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getGreeting</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">hour</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">getHours</span>()
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">hour</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">hour</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">12</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;Good morning&#39;</span>
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">hour</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">12</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">hour</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">18</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;Good afternoon&#39;</span>
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">hour</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">18</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">hour</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">23</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;Good evening&#39;</span>
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;Good night&#39;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求云函数访问链接：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc?name<span style="color:#f92672">=</span>Zhangsan
+</span></span><span style="display:flex;"><span>响应 <span style="color:#ae81ff">200</span> OK：
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  code: 200,
+</span></span><span style="display:flex;"><span>  message: <span style="color:#e6db74">&#34;Hello Zhangsan, Good morning!&#34;</span>,
+</span></span><span style="display:flex;"><span>  data: null
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre><p>当你请求该云函数时，将执行 <code>onRequest</code> 入口函数，可以获得 <code>JSON</code> 对象问候响应，你还可以在<code>云操作系统页面</code>中的<code>日志 App</code>中看到 <code>this is a console message.</code> 日志输出。</p>
+<h1 id="打印日志">打印日志</h1>
+<p>你可以使用 <code>console</code> 中的 <code>log</code>、<code>info</code>、<code>debug</code>、<code>warn</code>、<code>error</code> 打印不同级别的日志，这些日志都能够在<code>云操作系统页面</code>中的<code>日志 App</code> 中看到。例如：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;this is a console message.&#39;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">info</span>(<span style="color:#e6db74">&#39;this is a console message.&#39;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">debug</span>(<span style="color:#e6db74">&#39;this is a console message.&#39;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">warn</span>(<span style="color:#e6db74">&#39;this is a console message.&#39;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;this is a console message.&#39;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h1 id="自定义模块">自定义模块</h1>
+<p><strong>文件：<code>/.functions/pkg/response.jsc</code></strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fail</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">code</span>, <span style="color:#a6e22e">message</span>, <span style="color:#a6e22e">data</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> { <span style="color:#a6e22e">code</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">code</span>, <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">message</span>, <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">data</span> }
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">message</span>, <span style="color:#a6e22e">data</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> { <span style="color:#a6e22e">code</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">message</span>, <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">data</span> }
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p><strong>文件：<code>index.jsc</code></strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;http&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">resp</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;/pkg/response.jsc&#39;</span>) <span style="color:#75715e">// 导入云函数模块无需 /.functions/pkg/response.jsc 这样的完整路径，导入 json 文件必须使用完整路径
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">success</span>(<span style="color:#e6db74">&#39;ok&#39;</span>, <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;code&#34;</span>: 200, <span style="color:#e6db74">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;ok&#34;</span>, <span style="color:#e6db74">&#34;data&#34;</span>: null<span style="color:#f92672">}</span>
+</span></span></code></pre><p><strong>导入 <code>JSON</code> 文件</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;/.private/data.json&#39;</span>) <span style="color:#75715e">// 导入有效的 JSON 文件，系统会自动转换为 Object 类型
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">name</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h1 id="获取身份标识">获取身份标识</h1>
+<p>使用 <code>ctx.userAgent</code> 函数，你可以获取客户端的身份标识信息，如设备类型等。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">userAgent</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：Mozilla/5.0 <span style="color:#f92672">(</span>Macintosh; Intel Mac OS X 10_15_7<span style="color:#f92672">)</span> AppleWebKit/537.36 <span style="color:#f92672">(</span>KHTML, like Gecko<span style="color:#f92672">)</span> Chrome/149.0.0.0 Safari/537.36
+</span></span></code></pre><h1 id="获取客户端-ip">获取客户端 IP</h1>
+<p>使用 <code>ctx.ip</code> 函数可以获取客户端请求的 <code>IP</code> 地址：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">ip</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p>使用 <code>ctx.ips()</code> 函数，可以获取 <code>X-Forwarded-For</code> 请求头中指定的 <code>IP</code> 地址数组。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">ips</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h1 id="获取请求方法">获取请求方法</h1>
+<p>t1yOS 云函数支持 <code>GET</code>、<code>POST</code>、<code>PUT</code>、<code>PATCH</code>、<code>DELETE</code> 等请求方法，因此可使用 <code>method</code> 函数获取。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">method</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>GET 请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：GET
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>POST 请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：POST
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>...
+</span></span></code></pre><p><strong>例子：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">method</span>() <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;GET&#39;</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;Hello&#39;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;仅允许使用 GET 请求&#39;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>GET 请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：Hello
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>POST 请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：仅允许使用 GET 请求
+</span></span></code></pre><h1 id="获取请求头">获取请求头</h1>
+<p>使用 <code>ctx.get</code> 函数获取请求头，该函数支持默认值（可选），当前获取的请求头不存在时返回默认值。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#e6db74">`你的 IP 地址是：</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;x-forwarded-for&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p><strong>默认值：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#e6db74">`你的 IP 地址是：</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;x-forwarded-for&#39;</span>, <span style="color:#e6db74">&#39;127.0.0.1&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p>除此之外，你还能使用 <code>ctx.getReqHeaders</code> 函数获取全部请求头，该函数返回一个 <code>Object</code> 对象：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">headers</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">getReqHeaders</span>()
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#e6db74">`你的 IP 地址是：</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">headers</span>[<span style="color:#e6db74">&#39;X-Forwarded-For&#39;</span>][<span style="color:#ae81ff">0</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p>最后你还能使用 <code>ctx.hasHeader</code> 函数判断一个请求头是否存在。</p>
+<h1 id="设置响应头">设置响应头</h1>
+<p>使用 <code>ctx.set</code> 函数可以将响应头设置为指定的 key 和 value。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">set</span>(<span style="color:#e6db74">&#39;Content-Type&#39;</span>, <span style="color:#e6db74">&#39;text/plain&#39;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;Hello, World!&#39;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h1 id="获取查询参数">获取查询参数</h1>
+<p>获取查询参数所谓的意思就是在请求链接 <code>?</code> 后的 <code>key-value</code> 值，如：<code>https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc?name=Zhangsan&amp;age=33&amp;xxx=xxx</code></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">query</span>(<span style="color:#e6db74">&#39;name&#39;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc?name<span style="color:#f92672">=</span>Zhangsan
+</span></span><span style="display:flex;"><span>响应：Zhangsan
+</span></span></code></pre><p>使用 <code>ctx.query</code> 即可获取，该函数支持默认值（可选），如果 <code>name</code> 值不存在时，则返回默认值。</p>
+<p><strong>默认值：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">query</span>(<span style="color:#e6db74">&#39;name&#39;</span>, <span style="color:#e6db74">&#39;WangHua&#39;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：WangHua
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc?name<span style="color:#f92672">=</span>Zhangsan
+</span></span><span style="display:flex;"><span>响应：Zhangsan
+</span></span></code></pre><p>除此之外你还能使用 <code>ctx.queries</code> 函数获取全部查询参数，该函数返回一个 <code>Object</code> 对象：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">queries</span>().<span style="color:#a6e22e">name</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h1 id="获取表单数据">获取表单数据</h1>
+<p>使用 <code>ctx.formValue</code> 函数可获取 <code>POST</code> 表单中的数据。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">formValue</span>(<span style="color:#e6db74">&#39;name&#39;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p><strong>默认值（可选）：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">formValue</span>(<span style="color:#e6db74">&#39;name&#39;</span>, <span style="color:#e6db74">&#39;WangHua&#39;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p>同样，你也可以使用 <code>ctx.isForm</code> 函数判断是不是表单。</p>
+<h1 id="获取请求体">获取请求体</h1>
+<p>除了 <code>GET</code> 请求外，<code>POST</code>、<code>PUT</code>、<code>PATCH</code>、<code>DELETE</code> 都可以使用 <code>ctx.body()</code> 函数获取请求体中的内容。如果请求体中是有效的 <code>JSON</code> 对象，那么在云函数中会自动转换为 <code>Object</code> 类型。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">method</span>() <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;GET&#39;</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">body</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">name</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>Body：<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;WangHua&#34;</span>, <span style="color:#e6db74">&#34;age&#34;</span>: 23<span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>响应：WangHua
+</span></span></code></pre><p><strong>例子：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">method</span>() <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;GET&#39;</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">body</span>()
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>Body：你好！
+</span></span><span style="display:flex;"><span>响应：你好！
+</span></span></code></pre><p>除此之外，你还可以使用 <code>ctx.hasBody</code> 函数判断存不存在请求体，如：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">method</span>() <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;GET&#39;</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">hasBody</span>()) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">body</span>()
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;请求体不能为空&#39;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>Body：null
+</span></span><span style="display:flex;"><span>响应：请求体不能为空
+</span></span></code></pre><p>另外，你还能使用 <code>ctx.isJSON</code> 函数判断当前请求 <code>Content-Type</code> 是不是 <code>application/json</code>。</p>
+<h1 id="重定向">重定向</h1>
+<p>使用 <code>ctx.redirect</code> 函数可以将云函数重定向至指定 <code>url</code>：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#ae81ff">302</span>, <span style="color:#e6db74">&#39;https://baidu.com/&#39;</span>) <span style="color:#75715e">// 临时重定向
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p><strong>临时重定向（使用 HTTP 状态码常量）</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;http&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusFound</span>, <span style="color:#e6db74">&#39;https://baidu.com/&#39;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p><strong>永久重定向（使用 HTTP 状态码常量）</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;http&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusMovedPermanently</span>, <span style="color:#e6db74">&#39;https://baidu.com/&#39;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h1 id="模板渲染">模板渲染</h1>
+<p>使用 <code>ctx.render</code> 函数可以将模板渲染为网页。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">render</span>(<span style="color:#e6db74">&#39;/.templates/index.tmpl&#39;</span>, {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Title</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;My Website&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">User</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">ID</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1001</span>, <span style="color:#a6e22e">Name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;WangHua&#39;</span>, <span style="color:#a6e22e">Age</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">23</span> },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Version</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;1.0&#39;</span>,
+</span></span><span style="display:flex;"><span>  })
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>/.templates/index.tmpl
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">html</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">head</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">title</span>&gt;{{ .Title }}&lt;/<span style="color:#f92672">title</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">head</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">h1</span>&gt;{{ .User.Name }}&lt;/<span style="color:#f92672">h1</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">p</span>&gt;ID: {{ .User.ID }}&lt;/<span style="color:#f92672">p</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">p</span>&gt;Age: {{ .User.Age }}&lt;/<span style="color:#f92672">p</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">p</span>&gt;Version: {{ .Version }}&lt;/<span style="color:#f92672">p</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">html</span>&gt;
+</span></span></code></pre><h1 id="请求级存储">请求级存储</h1>
+<p>你可以使用 <code>ctx.locals</code> 存储和获取当前请求生命周期中的一些值，该存储仅在当前请求生命周期内有效。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 存储
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">locals</span>(<span style="color:#e6db74">&#39;uid&#39;</span>, <span style="color:#ae81ff">123456</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">locals</span>(<span style="color:#e6db74">&#39;name&#39;</span>, <span style="color:#e6db74">&#39;WangHua&#39;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">locals</span>(<span style="color:#e6db74">&#39;age&#39;</span>, <span style="color:#ae81ff">23</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">locals</span>(<span style="color:#e6db74">&#39;is_active&#39;</span>, <span style="color:#66d9ef">true</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 获取
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">locals</span>(<span style="color:#e6db74">&#39;uid&#39;</span>) <span style="color:#75715e">// 返回 123456
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">locals</span>(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#75715e">// 返回 WangHua
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">locals</span>(<span style="color:#e6db74">&#39;age&#39;</span>) <span style="color:#75715e">// 返回 23
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">locals</span>(<span style="color:#e6db74">&#39;is_active&#39;</span>) <span style="color:#75715e">// 返回 true
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h1 id="cookie">Cookie</h1>
+<p>使用 <code>ctx.cookie</code> 函数可以设置一个 <code>Cookie</code>：</p>
+<p><strong>可接受的参数：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/** Cookie 的名称 */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span>: <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/** Cookie 的值 */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">value</span>: <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/** 允许接收该 Cookie 的 URL 路径 */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">path</span>: <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/** 允许接收该 Cookie 的域名 */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">domain</span>: <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/** Cookie 最大有效期（单位：秒） */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">max_age</span>: <span style="color:#66d9ef">number</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/** Cookie 过期时间 */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">expires</span>: <span style="color:#66d9ef">Date</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/** 是否仅通过 HTTPS 传输（安全连接） */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">secure</span>: <span style="color:#66d9ef">boolean</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/** 是否仅允许 HTTP 访问（JS 无法读取） */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">http_only</span>: <span style="color:#66d9ef">boolean</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/** 控制是否允许跨站请求携带 Cookie */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">same_site</span>: <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/** 是否启用分区 Cookie 存储 */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">partitioned</span>: <span style="color:#66d9ef">boolean</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/** 是否为会话 Cookie（关闭浏览器即失效） */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">session_only</span>: <span style="color:#66d9ef">boolean</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p><strong>例子：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">cookie</span>({ <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;john&#39;</span>, <span style="color:#a6e22e">value</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;doe&#39;</span>, <span style="color:#a6e22e">expires</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date(Date.<span style="color:#a6e22e">now</span>() <span style="color:#f92672">+</span> <span style="color:#ae81ff">24</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>) })
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p>使用 <code>ctx.cookies</code> 函数可以获取指定 <code>Cookie</code>，该函数支持默认值（可选）：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 通过 Key 获取 Cookie：
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">cookies</span>(<span style="color:#e6db74">&#39;name&#39;</span>) <span style="color:#75715e">// &#39;john&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">cookies</span>(<span style="color:#e6db74">&#39;empty&#39;</span>, <span style="color:#e6db74">&#39;doe&#39;</span>) <span style="color:#75715e">// &#39;doe&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p>使用 <code>ctx.clearCookie</code> 函数可以清空客户端 <code>Cookie</code> 或指定 <code>Cookie</code>（可选），使 <code>Cookie</code> 过期。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">ClearCookie</span>() <span style="color:#75715e">// 清除所有 Cookie
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">ClearCookie</span>(<span style="color:#e6db74">&#39;user&#39;</span>) <span style="color:#75715e">// 按名称使特定 Cookie 过期
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">ClearCookie</span>(<span style="color:#e6db74">&#39;token&#39;</span>, <span style="color:#e6db74">&#39;session&#39;</span>, <span style="color:#e6db74">&#39;track_id&#39;</span>, <span style="color:#e6db74">&#39;version&#39;</span>) <span style="color:#75715e">// 按名称使多个 Cookie 过期
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h1 id="上传文件">上传文件</h1>
+<p>使用 <code>ctx.formFileInfo</code> 可获取上传的文件信息，使用 <code>ctx.saveFile</code> 可保存文件至文件系统。注意：<code>ctx.formFileInfo</code> 返回的是一个 <code>Object</code> 对象，包含 <code>filename</code>、<code>size</code>、<code>header</code>。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fileInfo</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">formFileInfo</span>(<span style="color:#e6db74">&#39;file&#39;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">saveFile</span>(<span style="color:#e6db74">&#39;file&#39;</span>, <span style="color:#e6db74">`/.private/uploads/</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">fileInfo</span>.<span style="color:#a6e22e">filename</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;上传成功&#39;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h1 id="下载文件">下载文件</h1>
+<p>使用 <code>ctx.download</code> 函数可以让浏览器访问时自动触发下载。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">download</span>(<span style="color:#e6db74">&#39;/.private/uploads/w.png&#39;</span>) <span style="color:#75715e">// 下载私有目录中的文件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h1 id="发送文件">发送文件</h1>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">sendFile</span>(<span style="color:#e6db74">&#39;/.private/uploads/w.png&#39;</span>) <span style="color:#75715e">// 发送私有目录中的文件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h1 id="xml">XML</h1>
+<p>使用 <code>ctx.XML</code> 函数可以响应 <code>XML</code> 数据。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> { <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;WangHua&#39;</span>, <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">23</span> }
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">XML</span>(<span style="color:#a6e22e">data</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h1 id="jsonp">JSONP</h1>
+<p>JSONP（JSON with Padding）是一种跨域请求数据的早期解决方案，你可以使用 <code>ctx.jsonp</code> 函数发送数据。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> { <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;WangHua&#39;</span>, <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">23</span> }
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">jsonp</span>(<span style="color:#a6e22e">data</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>响应：callback<span style="color:#f92672">({</span><span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;WangHua&#34;</span>, <span style="color:#e6db74">&#34;age&#34;</span>: 23<span style="color:#f92672">})</span>;
+</span></span></code></pre><p><strong>自定义 callback：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> { <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;WangHua&#39;</span>, <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">23</span> }
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">jsonp</span>(<span style="color:#a6e22e">data</span>, <span style="color:#e6db74">&#39;customFunc&#39;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>响应：customFunc<span style="color:#f92672">({</span><span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;WangHua&#34;</span>, <span style="color:#e6db74">&#34;age&#34;</span>: 23<span style="color:#f92672">})</span>;
+</span></span></code></pre><h1 id="自定义状态码">自定义状态码</h1>
+<p>使用 <code>ctx.sendStatus</code> 函数可以发送自定义的状态码（响应码）。除了使用数字之外，你还可以使用云函数 <code>http</code> 包中已经定义的常量。具体定义请参考：<a href="../../constants/index.html">常量定义文档</a>。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">sendStatus</span>(<span style="color:#ae81ff">200</span>) <span style="color:#75715e">// HTTP 200 OK
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p><strong>使用常量：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;http&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">sendStatus</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusInternalServerError</span>) <span style="color:#75715e">// 服务器内部错误
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h1 id="jwt-身份验证">JWT 身份验证</h1>
+<p><strong>生成 JWT Token：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#a6e22e">jwt</span>.<span style="color:#a6e22e">generateToken</span>(<span style="color:#a6e22e">userId</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>, <span style="color:#a6e22e">roles</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">object</span>, <span style="color:#a6e22e">expiresAt</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">number</span>) <span style="color:#75715e">// number 单位：分钟
+</span></span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">jwt</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;jwt&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MINUTES_7_DAYS</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">24</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#75715e">// 7 天有效期
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">token</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">jwt</span>.<span style="color:#a6e22e">generateToken</span>(<span style="color:#e6db74">&#39;uid123&#39;</span>, [<span style="color:#e6db74">&#39;user&#39;</span>, <span style="color:#e6db74">&#39;super_admin&#39;</span>], <span style="color:#a6e22e">MINUTES_7_DAYS</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">token</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p><strong>验证 JWT Token：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;http&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">jwt</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;jwt&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">payload</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">jwt</span>.<span style="color:#a6e22e">verifyToken</span>() <span style="color:#75715e">// 只需调用即可，系统会自动进行判断是否有效
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">payload</span>.<span style="color:#a6e22e">userId</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;uid123&#39;</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">sendStatus</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusUnauthorized</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> { <span style="color:#a6e22e">code</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusUnauthorized</span>, <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;权限不足&#39;</span>, <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span> }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">payload</span>.<span style="color:#a6e22e">roles</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#e6db74">&#39;super_admin&#39;</span>)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">sendStatus</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusUnauthorized</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> { <span style="color:#a6e22e">code</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusUnauthorized</span>, <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;权限不足&#39;</span>, <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span> }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#e6db74">`Hello, </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">payload</span>.<span style="color:#a6e22e">userId</span><span style="color:#e6db74">}</span><span style="color:#e6db74">!`</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h1 id="发送网络请求">发送网络请求</h1>
+<p>云函数可以使用 <code>http</code> 包中的 <code>send</code> 函数发送网络请求。如果响应内容是有效的 <code>JSON</code> 对象，那么会自动转换为 <code>Object</code> 类型。</p>
+<p><strong>函数签名：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>, <span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>, <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">object</span>, <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>)
+</span></span></code></pre><p><strong>函数返回：</strong></p>
+<p>调用该函数会返回一个 Object 对象，包含以下内容：</p>
+<ul>
+<li>status</li>
+<li>statusCode</li>
+<li>proto</li>
+<li>protoMajor</li>
+<li>protoMinor</li>
+<li>headers</li>
+<li>body</li>
+<li>contentLength</li>
+</ul>
+<p><strong>不带请求头和请求体例子（响应是有效 JSON 对象）</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;http&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">resp</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#39;GET&#39;</span>, <span style="color:#e6db74">&#39;https://myapp.t1y.net/timestamp&#39;</span>, {}, <span style="color:#e6db74">&#39;&#39;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">statusCode</span> <span style="color:#f92672">!=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;请求成功，但状态码不是 HTTP 200 OK&#39;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">unix</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p><strong>带请求头和请求体例子（响应是有效 JSON 对象）</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;http&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">reqBody</span> <span style="color:#f92672">=</span> { <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;WangHua&#39;</span>, <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;23&#39;</span> }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">resp</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">send</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;POST&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;https://myapp.t1y.net/timestamp&#39;</span>,
+</span></span><span style="display:flex;"><span>    { <span style="color:#a6e22e">Authorization</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Bearer &lt;JWT_TOKEN&gt;&#39;</span> },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">reqBody</span>)
+</span></span><span style="display:flex;"><span>  )
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">statusCode</span> <span style="color:#f92672">!=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;请求成功，但状态码不是 HTTP 200 OK&#39;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">unix</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h1 id="环境变量">环境变量</h1>
+<p>使用 <code>os</code> 包可以操作环境变量。</p>
+<p><strong>获取环境变量：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">os</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;os&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">getEnv</span>(<span style="color:#e6db74">&#39;API_KEY&#39;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p><strong>设置环境变量：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">os</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;os&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">setEnv</span>(<span style="color:#e6db74">&#39;API_KEY&#39;</span>, <span style="color:#e6db74">&#39;sk-xxx&#39;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p><strong>取消（删除）环境变量：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">os</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;os&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">unSetEnv</span>(<span style="color:#e6db74">&#39;API_KEY&#39;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h1 id="文件操作">文件操作</h1>
+<p>使用 <code>os</code> 包可以操作文件系统中的文件。</p>
+<p><strong>读取文件：</strong></p>
+<ul>
+<li>支持 <code>utf-8</code>、<code>gb18030</code>、<code>gbk</code> 三种编码格式</li>
+</ul>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">os</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;os&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">content</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">readFile</span>(<span style="color:#e6db74">&#39;/.private/a.txt&#39;</span>, <span style="color:#e6db74">&#39;utf-8&#39;</span>, {})
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">content</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p>带 <code>checksum</code> 校验读取：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">os</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;os&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">opts</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">verify_checksum</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>, <span style="color:#75715e">// 是否启用校验
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">expected_checksum</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;5d41402abc4b2a76b9719d911017c592&#39;</span>, <span style="color:#75715e">// 期望 md5（用于一致性验证）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">content</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">readFile</span>(<span style="color:#e6db74">&#39;/.private/a.txt&#39;</span>, <span style="color:#e6db74">&#39;utf-8&#39;</span>, <span style="color:#a6e22e">opts</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">content</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p><strong>写入文件：</strong></p>
+<ul>
+<li><code>opts</code> 结构：</li>
+</ul>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">atomic</span><span style="color:#f92672">?:</span> <span style="color:#66d9ef">boolean</span>, <span style="color:#75715e">// 是否原子写（默认 true）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">sync</span><span style="color:#f92672">?:</span> <span style="color:#66d9ef">boolean</span>, <span style="color:#75715e">// 是否 fsync 落盘
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">return_checksum</span><span style="color:#f92672">?:</span> <span style="color:#66d9ef">boolean</span> <span style="color:#75715e">// 是否返回 md5
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre><ul>
+<li>函数返回结构：</li>
+</ul>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">bytes_written</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">number</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">checksum</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p>普通写入文件：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">os</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;os&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">res</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">writeFile</span>(<span style="color:#e6db74">&#39;/.private/hello.txt&#39;</span>, <span style="color:#e6db74">&#39;hello world&#39;</span>, {})
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p>原子写入（推荐）：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">os</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;os&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">res</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">writeFile</span>(<span style="color:#e6db74">&#39;/.private/user.json&#39;</span>, <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({ <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;WangHua&#39;</span> }), {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">atomic</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>  })
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p>强制落盘：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">os</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;os&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">res</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">writeFile</span>(<span style="color:#e6db74">&#39;/.private/log.txt&#39;</span>, <span style="color:#e6db74">&#39;critical log&#39;</span>, {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">sync</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>  })
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p>获取 <code>checksum</code>：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">os</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;os&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">res</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">writeFile</span>(<span style="color:#e6db74">&#39;/.private/a.txt&#39;</span>, <span style="color:#e6db74">&#39;content&#39;</span>, {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">return_checksum</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>  })
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">checksum</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h1 id="开启安全模式">开启安全模式</h1>
+<p>在<code>云操作系统页面</code>中的<code>设置 App</code> 中可以开启<code>安全模式</code>，开启<code>安全模式</code>后<code>请求和响应</code>都需要采用 <code>AES</code> 加密算法进行动态加密，有效防止中间人抓包攻击和重放攻击。开启后有如下特点：</p>
+<ul>
+<li>请求和响应的全链路 <code>AES</code> 动态加密，杜绝中间人窃听。</li>
+</ul>
+<p>注意：<code>设置 App</code> 中有没有开启安全模式都不会对云函数造成影响（只会对 RESTful API 生效），云函数需手动调用 <code>ctx.enableSafeMode</code> 该函数显式开启，例如：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">enableSafeMode</span>() <span style="color:#75715e">// 手动调用时，该云函数的所有请求和响应内容都会加密（请求体需遵循规则进行加密处理，响应体则会自动加密）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h1 id="验证请求签名">验证请求签名</h1>
+<p>调用 <code>ctx.sign</code> 函数可以对当前的请求进行签名验证，如果签名不正确可以拒绝，该函数和 <code>ctx.enableSafeMode()</code> 函数搭配可以获得最好的效果，但需按需选择。调用该函数验证签名有如下特点：</p>
+<ul>
+<li>采用 <code>HMAC</code> 加密算法对每个请求进行签名，确保请求来源可信、内容完整未被篡改。</li>
+<li>请求签名仅在 <code>10</code> 秒内有效，超时自动拒绝，有效防御重放攻击。</li>
+</ul>
+<p>注意：云函数需手动调用 <code>ctx.sign</code> 函数验证签名，而 <code>RESTful API</code> 则是默认开启且不可关闭，确保请求来源可信、内容完整未被篡改。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">sign</span>()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;签名验证失败&#39;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;你好！&#39;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p>请求签名和安全模式下的 AES 动态加解密规则见：<a href="../../sign/index.html">签名文档</a></p>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    <script src="../../js/tabler.min.js" defer></script>
+  </body>
+</html>
