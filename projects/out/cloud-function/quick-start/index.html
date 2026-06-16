@@ -200,6 +200,8 @@
                       
                       <a class="nav-link nav-link-level-1" href="#%e6%96%87%e4%bb%b6%e6%93%8d%e4%bd%9c">文件操作</a>
                       
+                      <a class="nav-link nav-link-level-1" href="#%e5%b8%b8%e7%94%a8%e5%8a%a0%e8%a7%a3%e5%af%86%e5%87%bd%e6%95%b0">常用加解密函数</a>
+                      
                       <a class="nav-link nav-link-level-1" href="#%e5%bc%80%e5%90%af%e5%ae%89%e5%85%a8%e6%a8%a1%e5%bc%8f">开启安全模式</a>
                       
                       <a class="nav-link nav-link-level-1" href="#%e9%aa%8c%e8%af%81%e8%af%b7%e6%b1%82%e7%ad%be%e5%90%8d">验证请求签名</a>
@@ -821,7 +823,9 @@
 </span></span><span style="display:flex;"><span>  })
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">checksum</span>
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre><h1 id="开启安全模式">开启安全模式</h1>
+</span></span></code></pre><h1 id="常用加解密函数">常用加解密函数</h1>
+<p>云函数可以使用 <code>crypto</code> 包中提供的常用加解密函数完成诸如：<code>md5</code>、<code>sha1</code>、<code>sha256</code>、<code>hmac_sha256</code>、<code>hmac_sha512</code>、<code>base64</code>、<code>bcrypt</code>、<code>argon2id</code>、<code>aes</code> 等加解密场景下的使用。具体内容请参考：<a href="../crypto/index.html">常用加解密函数文档</a></p>
+<h1 id="开启安全模式">开启安全模式</h1>
 <p>在<code>云操作系统页面</code>中的<code>设置 App</code> 中可以开启<code>安全模式</code>，开启<code>安全模式</code>后<code>请求和响应</code>都需要采用 <code>AES</code> 加密算法进行动态加密，有效防止中间人抓包攻击和重放攻击。开启后有如下特点：</p>
 <ul>
 <li>请求和响应的全链路 <code>AES</code> 动态加密，杜绝中间人窃听。</li>

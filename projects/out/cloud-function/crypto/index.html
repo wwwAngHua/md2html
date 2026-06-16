@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>常用加解密函数 - t1yOS 开发文档</title>
+    <link rel="icon" href="../../favicon.svg" />
+    <meta name="description" content="云函数可以使用 crypto 包中提供的常用加解密函数完成诸如：md5、sha1、sha256、hmac_sha256、hmac_sha512、base64、bcrypt、argon2id、aes 等加解密场景下的使用。" />
+    <meta property="og:title" content="常用加解密函数 - t1yOS 开发文档" />
+    <meta property="og:description" content="云函数可以使用 crypto 包中提供的常用加解密函数完成诸如：md5、sha1、sha256、hmac_sha256、hmac_sha512、base64、bcrypt、argon2id、aes 等加解密场景下的使用。" />
+    <meta property="og:type" content="article" />
+    <link href="../../css/tabler.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-socials.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-vendors.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-marketing.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-themes.min.css" rel="stylesheet" />
+    <style>      @import url("https://rsms.me/inter/inter.css");
+
+      .markdown :not(pre) > code {
+        background-color: #f0f0f0;
+        color: #d63384;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.875em;
+      }
+
+      .markdown pre {
+        border-radius: 8px;
+        padding: 16px;
+        overflow-x: auto;
+        margin: 1rem 0;
+        background-color: #272822;
+      }
+
+      .markdown pre code {
+        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", Consolas, monospace;
+        font-size: 0.875em;
+        line-height: 1.6;
+        background: none !important;
+        padding: 0;
+      }
+
+      .markdown pre[style] {
+        background-color: #272822 !important;
+      }
+
+      .breadcrumb {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .breadcrumb-item {
+        font-size: 0.875rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item + .breadcrumb-item::before {
+        content: "/";
+        margin: 0 0.5rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item a {
+        color: var(--tblr-muted, #656d77);
+        text-decoration: none;
+      }
+      .breadcrumb-item a:hover {
+        color: var(--tblr-primary, #206bc4);
+        text-decoration: underline;
+      }
+      .breadcrumb-item.active {
+        color: var(--tblr-body-color, #1e293b);
+      }
+
+       
+      .sidebar-toggle {
+        display: none;
+      }
+      @media (max-width: 575.98px) {
+        .sidebar-toggle {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+        .sidebar-collapse {
+          margin-bottom: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="page-wrapper">
+        <div class="page-header d-print-none" aria-label="Page header">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <h2 class="page-title">常用加解密函数</h2>
+                
+                <ol class="breadcrumb" aria-label="breadcrumb">
+                  
+                  
+                  <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item"><a href="../index.html">Cloud Function</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item"><a href="index.html">Crypto</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item active" aria-current="page">常用加解密函数</li>
+                  
+                  
+                </ol>
+                
+              </div>
+              
+              <div class="col-auto ms-auto d-sm-none">
+                <button class="btn btn-icon sidebar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-expanded="false" aria-controls="sidebar-menu" aria-label="Toggle menu">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="row g-5">
+              
+              <div class="col-sm-2">
+                <div class="collapse d-sm-block sidebar-collapse" id="sidebar-menu">
+                  <div class="sticky-top">
+                    <nav class="nav nav-vertical nav-pills" id="pills">
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e5%b8%b8%e7%94%a8%e5%8a%a0%e8%a7%a3%e5%af%86%e5%87%bd%e6%95%b0">常用加解密函数</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e5%93%88%e5%b8%8c%e5%87%bd%e6%95%b0">哈希函数</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#md5">md5</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#sha1">sha1</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#sha256">sha256</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#sha512">sha512</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#sha3-256">sha3_256</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#sha3-512">sha3_512</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#blake2b-256">blake2b_256</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#blake2b-512">blake2b_512</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#hmac-%e6%b6%88%e6%81%af%e8%ae%a4%e8%af%81">HMAC 消息认证</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#hmac-sha256">hmac_sha256</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#hmac-sha512">hmac_sha512</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e7%bc%96%e7%a0%81%e5%87%bd%e6%95%b0">编码函数</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#base64-encode-base64-decode">base64_encode / base64_decode</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#base58-encode-base58-decode">base58_encode / base58_decode</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#hex-encode-hex-decode">hex_encode / hex_decode</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e5%af%86%e7%a0%81%e5%93%88%e5%b8%8c">密码哈希</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#bcrypt-hash-bcrypt-compare">bcrypt_hash / bcrypt_compare</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#argon2id-hash-argon2id-compare">argon2id_hash / argon2id_compare</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#aes-gcm-%e5%af%b9%e7%a7%b0%e5%8a%a0%e5%af%86">AES-GCM 对称加密</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#aes-gcm-encrypt">aes_gcm_encrypt</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#aes-gcm-decrypt">aes_gcm_decrypt</a>
+                      
+                      <a class="nav-link nav-link-level-1" href="#uuid">UUID</a>
+                      
+                    </nav>
+                  </div>
+                </div>
+              </div>
+              
+              <div
+                class="col-sm"
+                data-bs-spy="scroll"
+                data-bs-target="#pills"
+                data-bs-offset="0"
+              >
+                <div class="card card-lg">
+                  <div class="card-body markdown">
+                    <h1 id="常用加解密函数">常用加解密函数</h1>
+<p>云函数可以使用 <code>crypto</code> 包中提供的常用加解密函数完成诸如：<code>md5</code>、<code>sha1</code>、<code>sha256</code>、<code>hmac_sha256</code>、<code>hmac_sha512</code>、<code>base64</code>、<code>bcrypt</code>、<code>argon2id</code>、<code>aes</code> 等加解密场景下的使用。</p>
+<p>引入 <code>crypto</code> 模块：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span></code></pre><h1 id="哈希函数">哈希函数</h1>
+<p>云函数内置了多种常用哈希算法，所有哈希函数均接收一个字符串参数，返回十六进制编码的哈希值。</p>
+<h1 id="md5">md5</h1>
+<p>使用 <code>md5</code> 函数计算字符串的 MD5 哈希值。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">md5</span>(<span style="color:#e6db74">&#39;hello&#39;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：5d41402abc4b2a76b9719d911017c592
+</span></span></code></pre><h1 id="sha1">sha1</h1>
+<p>使用 <code>sha1</code> 函数计算字符串的 SHA1 哈希值。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">sha1</span>(<span style="color:#e6db74">&#39;hello&#39;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d
+</span></span></code></pre><h1 id="sha256">sha256</h1>
+<p>使用 <code>sha256</code> 函数计算字符串的 SHA256 哈希值。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">sha256</span>(<span style="color:#e6db74">&#39;hello&#39;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
+</span></span></code></pre><h1 id="sha512">sha512</h1>
+<p>使用 <code>sha512</code> 函数计算字符串的 SHA512 哈希值。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">sha512</span>(<span style="color:#e6db74">&#39;hello&#39;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：9b71d224bd62f3785d96d46ad3ea3d73319bfbc2890caadae2dff72519673ca72323c3d99ba5c11d7c7acc6e14b8c5da0c4663475c2e5c3adef46f73bcdec043
+</span></span></code></pre><h1 id="sha3-256">sha3_256</h1>
+<p>使用 <code>sha3_256</code> 函数计算字符串的 SHA3-256 哈希值。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">sha3_256</span>(<span style="color:#e6db74">&#39;hello&#39;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：3338be694f50c5f338814986cdf0686453a888b84f424d792af4b9202398f392
+</span></span></code></pre><h1 id="sha3-512">sha3_512</h1>
+<p>使用 <code>sha3_512</code> 函数计算字符串的 SHA3-512 哈希值。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">sha3_512</span>(<span style="color:#e6db74">&#39;hello&#39;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：75d527c368f2efe848ecf6b073a36767800805e6eef2b44db2be20f3f28c5e95c2d12a26d09e4c3d6d6b9a2f4c0a5c8e2f4b6d8a0c2e4f6a8b0d2e4f6a8b0c2d
+</span></span></code></pre><h1 id="blake2b-256">blake2b_256</h1>
+<p>使用 <code>blake2b_256</code> 函数计算字符串的 BLAKE2b-256 哈希值。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">blake2b_256</span>(<span style="color:#e6db74">&#39;hello&#39;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：e4cfa85d87b4b0e4a5a3c6b0c5a3c6b0c5a3c6b0c5a3c6b0c5a3c6b0c5a3c6b0
+</span></span></code></pre><h1 id="blake2b-512">blake2b_512</h1>
+<p>使用 <code>blake2b_512</code> 函数计算字符串的 BLAKE2b-512 哈希值。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">blake2b_512</span>(<span style="color:#e6db74">&#39;hello&#39;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：e4cfa85d87b4b0e4a5a3c6b0c5a3c6b0c5a3c6b0c5a3c6b0c5a3c6b0c5a3c6b0c5a3c6b0c5a3c6b0c5a3c6b0c5a3c6b0c5a3c6b0c5a3c6b0c5a3c6b0c5a3c6b0
+</span></span></code></pre><h1 id="hmac-消息认证">HMAC 消息认证</h1>
+<p>云函数内置了 HMAC-SHA256 和 HMAC-SHA512 两种消息认证码算法，用于验证消息的完整性和真实性。两个函数均接收两个字符串参数：<code>key</code>（密钥）和 <code>data</code>（数据）。</p>
+<h1 id="hmac-sha256">hmac_sha256</h1>
+<p>使用 <code>hmac_sha256</code> 函数计算 HMAC-SHA256 消息认证码。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">key</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;my-secret-key&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;hello&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">hmac_sha256</span>(<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">data</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：88aab3ede8e3e45b78bedf4884e4ca62a52741f7aa2e4b9f1c2c3d4e5f6a7b8c
+</span></span></code></pre><h1 id="hmac-sha512">hmac_sha512</h1>
+<p>使用 <code>hmac_sha512</code> 函数计算 HMAC-SHA512 消息认证码。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">key</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;my-secret-key&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;hello&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">hmac_sha512</span>(<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">data</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2
+</span></span></code></pre><h1 id="编码函数">编码函数</h1>
+<p>云函数内置了 Base64、Base58 和 Hex 三种常用编码格式的编解码函数。</p>
+<h1 id="base64-encode-base64-decode">base64_encode / base64_decode</h1>
+<p>使用 <code>base64_encode</code> 将字符串编码为 Base64 格式，使用 <code>base64_decode</code> 将 Base64 字符串解码。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">original</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Hello, World!&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">encoded</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">base64_encode</span>(<span style="color:#a6e22e">original</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">decoded</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">base64_decode</span>(<span style="color:#a6e22e">encoded</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">original</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">original</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">encoded</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">encoded</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">decoded</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">decoded</span>,
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;original&#34;</span>: <span style="color:#e6db74">&#34;Hello, World!&#34;</span>, <span style="color:#e6db74">&#34;encoded&#34;</span>: <span style="color:#e6db74">&#34;SGVsbG8sIFdvcmxkIQ==&#34;</span>, <span style="color:#e6db74">&#34;decoded&#34;</span>: <span style="color:#e6db74">&#34;Hello, World!&#34;</span><span style="color:#f92672">}</span>
+</span></span></code></pre><p>注意：<code>base64_decode</code> 在遇到格式不正确的 Base64 字符串时会抛出错误。</p>
+<h1 id="base58-encode-base58-decode">base58_encode / base58_decode</h1>
+<p>Base58 编码去除了容易混淆的字符（如 <code>0</code>、<code>O</code>、<code>I</code>、<code>l</code>），常用于比特币地址等场景。使用 <code>base58_encode</code> 将字符串编码为 Base58 格式，使用 <code>base58_decode</code> 将 Base58 字符串解码。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">original</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Hello, World!&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">encoded</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">base58_encode</span>(<span style="color:#a6e22e">original</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">decoded</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">base58_decode</span>(<span style="color:#a6e22e">encoded</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">original</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">original</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">encoded</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">encoded</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">decoded</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">decoded</span>,
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;original&#34;</span>: <span style="color:#e6db74">&#34;Hello, World!&#34;</span>, <span style="color:#e6db74">&#34;encoded&#34;</span>: <span style="color:#e6db74">&#34;72k1xXWG59wUsYv7h2&#34;</span>, <span style="color:#e6db74">&#34;decoded&#34;</span>: <span style="color:#e6db74">&#34;Hello, World!&#34;</span><span style="color:#f92672">}</span>
+</span></span></code></pre><h1 id="hex-encode-hex-decode">hex_encode / hex_decode</h1>
+<p>使用 <code>hex_encode</code> 将字符串编码为十六进制格式，使用 <code>hex_decode</code> 将十六进制字符串解码。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">original</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Hello, World!&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">encoded</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">hex_encode</span>(<span style="color:#a6e22e">original</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">decoded</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">hex_decode</span>(<span style="color:#a6e22e">encoded</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">original</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">original</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">encoded</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">encoded</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">decoded</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">decoded</span>,
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;original&#34;</span>: <span style="color:#e6db74">&#34;Hello, World!&#34;</span>, <span style="color:#e6db74">&#34;encoded&#34;</span>: <span style="color:#e6db74">&#34;48656c6c6f2c20576f726c6421&#34;</span>, <span style="color:#e6db74">&#34;decoded&#34;</span>: <span style="color:#e6db74">&#34;Hello, World!&#34;</span><span style="color:#f92672">}</span>
+</span></span></code></pre><p>注意：<code>hex_decode</code> 在遇到格式不正确的 Hex 字符串时会抛出错误。</p>
+<h1 id="密码哈希">密码哈希</h1>
+<p>云函数内置了 <code>bcrypt</code> 和 <code>argon2id</code> 两种安全的密码哈希算法，适用于用户密码的存储与验证场景。密码哈希是单向不可逆的，需通过对应的 compare 函数进行密码验证。</p>
+<h1 id="bcrypt-hash-bcrypt-compare">bcrypt_hash / bcrypt_compare</h1>
+<p>使用 <code>bcrypt_hash</code> 对密码进行哈希加密，返回 bcrypt 哈希字符串。使用 <code>bcrypt_compare</code> 将明文密码与 bcrypt 哈希值进行比对，返回 <code>true</code> 或 <code>false</code>。</p>
+<p><strong>函数签名：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">bcrypt_hash</span>(<span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>) <span style="color:#75715e">// 返回 bcrypt 哈希字符串
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">bcrypt_compare</span>(<span style="color:#a6e22e">hash</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>, <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>) <span style="color:#75715e">// 返回 boolean
+</span></span></span></code></pre><p><strong>生成哈希：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;myPassword123&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">hash</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">bcrypt_hash</span>(<span style="color:#a6e22e">password</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">hash</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy
+</span></span></code></pre><p><strong>验证密码：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;myPassword123&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">hash</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">bcrypt_hash</span>(<span style="color:#a6e22e">password</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isMatch</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">bcrypt_compare</span>(<span style="color:#a6e22e">hash</span>, <span style="color:#a6e22e">password</span>) <span style="color:#75715e">// true
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isWrong</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">bcrypt_compare</span>(<span style="color:#a6e22e">hash</span>, <span style="color:#e6db74">&#39;wrongPassword&#39;</span>) <span style="color:#75715e">// false
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">correct_password</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">isMatch</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">wrong_password</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">isWrong</span>,
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;correct_password&#34;</span>: true, <span style="color:#e6db74">&#34;wrong_password&#34;</span>: false<span style="color:#f92672">}</span>
+</span></span></code></pre><h1 id="argon2id-hash-argon2id-compare">argon2id_hash / argon2id_compare</h1>
+<p>Argon2id 是更现代、更安全的密码哈希算法，曾获得密码哈希竞赛（PHC）冠军。使用 <code>argon2id_hash</code> 对密码进行哈希加密，使用 <code>argon2id_compare</code> 进行密码验证。</p>
+<p><strong>函数签名：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">argon2id_hash</span>(<span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>) <span style="color:#75715e">// 返回 argon2id 哈希字符串
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">argon2id_compare</span>(<span style="color:#a6e22e">hash</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>, <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>) <span style="color:#75715e">// 返回 boolean
+</span></span></span></code></pre><p><strong>生成哈希：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;myPassword123&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">hash</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">argon2id_hash</span>(<span style="color:#a6e22e">password</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">hash</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：$argon2id$v<span style="color:#f92672">=</span>19$m<span style="color:#f92672">=</span>65536,t<span style="color:#f92672">=</span>3,p<span style="color:#f92672">=</span>4$c29tZXNhbHQ$RdescudvJCsgt3ub+b+dWRkJTzz7Bcf9XiR4/G/HQww
+</span></span></code></pre><p><strong>验证密码：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;myPassword123&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">hash</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">argon2id_hash</span>(<span style="color:#a6e22e">password</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isMatch</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">argon2id_compare</span>(<span style="color:#a6e22e">hash</span>, <span style="color:#a6e22e">password</span>) <span style="color:#75715e">// true
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isWrong</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">argon2id_compare</span>(<span style="color:#a6e22e">hash</span>, <span style="color:#e6db74">&#39;wrongPassword&#39;</span>) <span style="color:#75715e">// false
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">correct_password</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">isMatch</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">wrong_password</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">isWrong</span>,
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;correct_password&#34;</span>: true, <span style="color:#e6db74">&#34;wrong_password&#34;</span>: false<span style="color:#f92672">}</span>
+</span></span></code></pre><h1 id="aes-gcm-对称加密">AES-GCM 对称加密</h1>
+<p>云函数内置了 AES-256-GCM 对称加密算法，支持数据加密和解密。AES-GCM 是一种认证加密模式，同时提供机密性和完整性保护，能够有效防止数据被篡改。加密后的结果是一个 <code>JSON</code> 字符串，包含 <code>n</code>（Nonce）、<code>j</code>（密文数据）、<code>t</code>（认证标签）三个 Base64 编码的字段。</p>
+<p><strong>重要约定：</strong></p>
+<ul>
+<li>密钥（<code>key</code>）必须为 <strong>32 字节</strong>（AES-256），否则会抛出错误</li>
+<li>加密结果是一个 <code>JSON</code> 字符串，可安全存储或传输</li>
+<li>解密时必须使用与加密时完全相同的密钥，否则解密失败</li>
+</ul>
+<p><strong>函数签名：</strong></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">aes_gcm_encrypt</span>(<span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>, <span style="color:#a6e22e">key</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>) <span style="color:#75715e">// 返回 JSON 字符串（加密结果）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">aes_gcm_decrypt</span>(<span style="color:#a6e22e">payload</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>, <span style="color:#a6e22e">key</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>) <span style="color:#75715e">// 返回原始明文字符串
+</span></span></span></code></pre><h1 id="aes-gcm-encrypt">aes_gcm_encrypt</h1>
+<p>使用 <code>aes_gcm_encrypt</code> 函数对数据进行 AES-256-GCM 加密。每次加密都会生成随机 Nonce，因此相同数据和密钥每次加密结果不同。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Hello, World!&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">key</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;12345678901234567890123456789012&#39;</span> <span style="color:#75715e">// 必须是 32 字节
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">encrypted</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">aes_gcm_encrypt</span>(<span style="color:#a6e22e">data</span>, <span style="color:#a6e22e">key</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">encrypted</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;n&#34;</span>:<span style="color:#e6db74">&#34;AbcDeFgHiJkLmNoP&#34;</span>,<span style="color:#e6db74">&#34;j&#34;</span>:<span style="color:#e6db74">&#34;PqRsTuVwXyZ...&#34;</span>,<span style="color:#e6db74">&#34;t&#34;</span>:<span style="color:#e6db74">&#34;1234567890abcdef...&#34;</span><span style="color:#f92672">}</span>
+</span></span></code></pre><h1 id="aes-gcm-decrypt">aes_gcm_decrypt</h1>
+<p>使用 <code>aes_gcm_decrypt</code> 函数对 AES-256-GCM 加密结果进行解密。解密时会自动验证认证标签，如果数据被篡改或密钥不正确，将抛出错误。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Hello, World!&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">key</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;12345678901234567890123456789012&#39;</span> <span style="color:#75715e">// 必须是 32 字节
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">encrypted</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">aes_gcm_encrypt</span>(<span style="color:#a6e22e">data</span>, <span style="color:#a6e22e">key</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">decrypted</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">aes_gcm_decrypt</span>(<span style="color:#a6e22e">encrypted</span>, <span style="color:#a6e22e">key</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">original</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">data</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">encrypted</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">encrypted</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">decrypted</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">decrypted</span>,
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;original&#34;</span>: <span style="color:#e6db74">&#34;Hello, World!&#34;</span>, <span style="color:#e6db74">&#34;encrypted&#34;</span>: <span style="color:#e6db74">&#34;{\&#34;n\&#34;:\&#34;...\&#34;,\&#34;j\&#34;:\&#34;...\&#34;,\&#34;t\&#34;:\&#34;...\&#34;}&#34;</span>, <span style="color:#e6db74">&#34;decrypted&#34;</span>: <span style="color:#e6db74">&#34;Hello, World!&#34;</span><span style="color:#f92672">}</span>
+</span></span></code></pre><p><strong>错误处理示例：</strong></p>
+<p>当密钥长度不为 32 字节时，加密和解密均会抛出错误：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 密钥长度不足 32 字节，将抛出错误
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">aes_gcm_encrypt</span>(<span style="color:#e6db74">&#39;data&#39;</span>, <span style="color:#e6db74">&#39;short-key&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;加密失败：&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">message</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p>当解密时密钥不匹配或数据被篡改，也会抛出错误：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">key1</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;12345678901234567890123456789012&#39;</span> <span style="color:#75715e">// 正确的 32 字节密钥
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">key2</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;abcdefghijklmnopqrstuvwxyz123456&#39;</span> <span style="color:#75715e">// 不同的 32 字节密钥
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">encrypted</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">aes_gcm_encrypt</span>(<span style="color:#e6db74">&#39;敏感数据&#39;</span>, <span style="color:#a6e22e">key1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 使用错误的密钥解密，将抛出错误
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">decrypted</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">aes_gcm_decrypt</span>(<span style="color:#a6e22e">encrypted</span>, <span style="color:#a6e22e">key2</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">decrypted</span>
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;解密失败：&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">message</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：解密失败：gcm open failed: cipher: message authentication failed
+</span></span></code></pre><h1 id="uuid">UUID</h1>
+<p>使用 <code>uuid</code> 函数生成一个全局唯一标识符（UUID v4）。该函数无需传入任何参数。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">uuid</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>请求：https://myapp.t1y.net/&lt;YourAppID&gt;/index.jsc
+</span></span><span style="display:flex;"><span>响应：550e8400-e29b-41d4-a716-446655440000
+</span></span></code></pre><p><strong>实际应用场景：</strong></p>
+<p>配合数据库操作，为每条记录生成唯一主键：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">db</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;db&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">user</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">_id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">uuid</span>(),
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;WangHua&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">23</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">created_at</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>(),
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">collection</span>(<span style="color:#e6db74">&#39;users&#39;</span>).<span style="color:#a6e22e">insertOne</span>(<span style="color:#a6e22e">user</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">user</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    <script src="../../js/tabler.min.js" defer></script>
+  </body>
+</html>
