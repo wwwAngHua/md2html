@@ -8,9 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>t1yOS 云函数 - t1yOS 开发文档</title>
     <link rel="icon" href="../../favicon.svg" />
-    <meta name="description" content="使用 t1yOS 云函数之前，你需要先前往：console.t1y.net 创建一个应用，并打开该应用，随后在云操作系统页面中打开“文件 App“，并在“文件 App“ 中打开“云函数（.functions）“文件夹，在空白区域右键“新建云函数“，取名“index“，再次右键“在代码编辑器中打开“，再次点击右上角..." />
+    <meta name="description" content="使用 t1yOS 云函数之前，你需要先前往：控制台（console.t1y.net）创建一个应用，并打开该应用，随后在云操作系统页面中打开“文件 App“，并在“文件 App“ 中打开“云函数（.functions）“文件夹，在空白区域右键“新建云函数“，取名“index“，再次右键“在代码编辑器中打开“，再次点..." />
     <meta property="og:title" content="t1yOS 云函数 - t1yOS 开发文档" />
-    <meta property="og:description" content="使用 t1yOS 云函数之前，你需要先前往：console.t1y.net 创建一个应用，并打开该应用，随后在云操作系统页面中打开“文件 App“，并在“文件 App“ 中打开“云函数（.functions）“文件夹，在空白区域右键“新建云函数“，取名“index“，再次右键“在代码编辑器中打开“，再次点击右上角..." />
+    <meta property="og:description" content="使用 t1yOS 云函数之前，你需要先前往：控制台（console.t1y.net）创建一个应用，并打开该应用，随后在云操作系统页面中打开“文件 App“，并在“文件 App“ 中打开“云函数（.functions）“文件夹，在空白区域右键“新建云函数“，取名“index“，再次右键“在代码编辑器中打开“，再次点..." />
     <meta property="og:type" content="article" />
     <link href="../../css/tabler.min.css" rel="stylesheet" />
     <link href="../../css/tabler-flags.min.css" rel="stylesheet" />
@@ -144,6 +144,8 @@
                       
                       <a class="nav-link nav-link-level-1" href="#t1yos-%e4%ba%91%e5%87%bd%e6%95%b0">t1yOS 云函数</a>
                       
+                      <a class="nav-link nav-link-level-1" href="#%e5%bf%ab%e9%80%9f%e5%bc%80%e5%a7%8b">快速开始</a>
+                      
                       <a class="nav-link nav-link-level-1" href="#%e6%96%87%e4%bb%b6%e7%b3%bb%e7%bb%9f%e7%bb%93%e6%9e%84">文件系统结构</a>
                       
                       <a class="nav-link nav-link-level-1" href="#hello-world">Hello, World!</a>
@@ -216,9 +218,14 @@
                 <div class="card card-lg">
                   <div class="card-body markdown">
                     <h1 id="t1yos-云函数">t1yOS 云函数</h1>
-<p>使用 t1yOS 云函数之前，你需要先前往：<a href="https://console.t1y.net/">console.t1y.net</a> 创建一个应用，并打开该应用，随后在<code>云操作系统页面</code>中打开“<code>文件 App</code>“，并在“<code>文件 App</code>“ 中打开“<code>云函数（.functions）</code>“文件夹，在空白区域右键“<code>新建云函数</code>“，取名“<code>index</code>“，再次右键“<code>在代码编辑器中打开</code>“，再次点击右上角<code>绿色的运行按钮</code>，即可看到云函数执行结果。</p>
+<p>使用 t1yOS 云函数之前，你需要先前往：<a href="https://console.t1y.net/">控制台（console.t1y.net）</a>创建一个应用，并打开该应用，随后在<code>云操作系统页面</code>中打开“<code>文件 App</code>“，并在“<code>文件 App</code>“ 中打开“<code>云函数（.functions）</code>“文件夹，在空白区域右键“<code>新建云函数</code>“，取名“<code>index</code>“，再次右键“<code>在代码编辑器中打开</code>“，再次点击右上角<code>绿色的运行按钮</code>，即可看到云函数执行结果。</p>
 <p>当前文档仅仅只是云函数的一些常用用法，对于日常开发已足够，云函数还有非常非常多的功能，请参阅：<a href="../advanced/index.html">云函数高阶文档</a></p>
-<h1 id="文件系统结构">文件系统结构</h1>
+<h1 id="快速开始">快速开始</h1>
+<p>在云函数中引入 <code>context</code> 模块，即可操作 <code>HTTP</code> 请求响应上下文：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span></code></pre><p>使用 <code>http</code> 模块可以使用云函数已定义常量，如：请求方法、状态码等，详情参阅：<a href="../../constants/index.html">常量定义文档</a></p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;http&#39;</span>)
+</span></span></code></pre><h1 id="文件系统结构">文件系统结构</h1>
 <p>每个应用都有一个独立的文件系统，文件系统相当于一个 Web 服务器（类似 Nginx+PHP），可对外提供静态资源以及云函数访问。所有的云函数都必须放到<code>云函数（.functions）</code>目录下，支持二级目录，文件拓展名必须为 <code>.jsc</code>。</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>├── /（根目录）
 </span></span><span style="display:flex;"><span>│   └── .functions（云函数目录）

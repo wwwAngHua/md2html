@@ -5,6 +5,7 @@
 云函数常用用法，满足日常开发，见文档：[快速开始](./quick-start/index.html)
 
 - t1yOS 云函数
+- 快速开始
 - 文件系统结构
 - Hello, World!
 - getGreeting!
