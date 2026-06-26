@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>t1yOS SDK for Kotlin/Android - t1yOS 开发文档</title>
+    <link rel="icon" href="../../favicon.svg" />
+    <meta name="description" content="在 build.gradle.kts 中添加：" />
+    <meta property="og:title" content="t1yOS SDK for Kotlin/Android - t1yOS 开发文档" />
+    <meta property="og:description" content="在 build.gradle.kts 中添加：" />
+    <meta property="og:type" content="article" />
+    <link href="../../css/tabler.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-socials.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-vendors.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-marketing.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-themes.min.css" rel="stylesheet" />
+    <style>      @import url("https://rsms.me/inter/inter.css");
+
+      .markdown :not(pre) > code {
+        background-color: #f0f0f0;
+        color: #d63384;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.875em;
+      }
+
+      .markdown pre {
+        border-radius: 8px;
+        padding: 16px;
+        overflow-x: auto;
+        margin: 1rem 0;
+        background-color: #272822;
+      }
+
+      .markdown pre code {
+        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", Consolas, monospace;
+        font-size: 0.875em;
+        line-height: 1.6;
+        background: none !important;
+        padding: 0;
+      }
+
+      .markdown pre[style] {
+        background-color: #272822 !important;
+      }
+
+      .breadcrumb {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .breadcrumb-item {
+        font-size: 0.875rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item + .breadcrumb-item::before {
+        content: "/";
+        margin: 0 0.5rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item a {
+        color: var(--tblr-muted, #656d77);
+        text-decoration: none;
+      }
+      .breadcrumb-item a:hover {
+        color: var(--tblr-primary, #206bc4);
+        text-decoration: underline;
+      }
+      .breadcrumb-item.active {
+        color: var(--tblr-body-color, #1e293b);
+      }
+
+       
+      .sidebar-toggle {
+        display: none;
+      }
+      @media (max-width: 575.98px) {
+        .sidebar-toggle {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+        .sidebar-collapse {
+          margin-bottom: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="page-wrapper">
+        <div class="page-header d-print-none" aria-label="Page header">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <h2 class="page-title">t1yOS SDK for Kotlin/Android</h2>
+                
+                <ol class="breadcrumb" aria-label="breadcrumb">
+                  
+                  
+                  <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item"><a href="../index.html">Sdks</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item"><a href="index.html">Android</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item active" aria-current="page">t1yOS SDK for Kotlin/Android</li>
+                  
+                  
+                </ol>
+                
+              </div>
+              
+              <div class="col-auto ms-auto d-sm-none">
+                <button class="btn btn-icon sidebar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-expanded="false" aria-controls="sidebar-menu" aria-label="Toggle menu">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="row g-5">
+              
+              <div class="col-sm-2">
+                <div class="collapse d-sm-block sidebar-collapse" id="sidebar-menu">
+                  <div class="sticky-top">
+                    <nav class="nav nav-vertical nav-pills" id="pills">
+                      
+                      <a class="nav-link nav-link-level-1" href="#t1yos-sdk-for-kotlin-android">t1yOS SDK for Kotlin/Android</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e7%89%b9%e6%80%a7">特性</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e7%8e%af%e5%a2%83%e8%a6%81%e6%b1%82">环境要求</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e5%ae%89%e8%a3%85">安装</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e5%bf%ab%e9%80%9f%e5%bc%80%e5%a7%8b">快速开始</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e6%95%b0%e6%8d%ae%e5%ba%93%e6%93%8d%e4%bd%9c">数据库操作</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e5%8d%95%e6%9d%a1%e6%93%8d%e4%bd%9c">单条操作</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e6%9d%a1%e4%bb%b6%e6%93%8d%e4%bd%9c">条件操作</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e6%89%b9%e9%87%8f%e6%93%8d%e4%bd%9c">批量操作</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e9%ab%98%e7%ba%a7%e6%9f%a5%e8%af%a2">高级查询</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e8%a1%a8%e7%ae%a1%e7%90%86">表管理</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e7%89%b9%e6%ae%8a%e7%b1%bb%e5%9e%8b">特殊类型</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e5%85%83%e6%95%b0%e6%8d%ae">元数据</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e4%ba%91%e5%87%bd%e6%95%b0">云函数</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e5%ae%89%e5%85%a8%e6%9c%ba%e5%88%b6">安全机制</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e8%ae%a4%e8%af%81%e8%af%b7%e6%b1%82%e5%a4%b4">认证请求头</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e7%ad%be%e5%90%8d%e7%ae%97%e6%b3%95">签名算法</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e5%ae%89%e5%85%a8%e6%a8%a1%e5%bc%8f-aes-256-gcm">安全模式（AES-256-GCM）</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e9%94%99%e8%af%af%e5%a4%84%e7%90%86">错误处理</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e5%93%8d%e5%ba%94%e6%a0%bc%e5%bc%8f">响应格式</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#api-%e5%8f%82%e8%80%83">API 参考</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#t1yclient">T1YClient</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#t1collection">T1Collection</a>
+                      
+                    </nav>
+                  </div>
+                </div>
+              </div>
+              
+              <div
+                class="col-sm"
+                data-bs-spy="scroll"
+                data-bs-target="#pills"
+                data-bs-offset="0"
+              >
+                <div class="card card-lg">
+                  <div class="card-body markdown">
+                    <h1 id="t1yos-sdk-for-kotlin-android">t1yOS SDK for Kotlin/Android</h1>
+<h2 id="特性">特性</h2>
+<ul>
+<li><strong>云数据库</strong> — 完整 CRUD、聚合管道、分页查询、批量操作、Schema 管理</li>
+<li><strong>云函数</strong> — 调用 <code>.jsc</code> 云函数，自动规范化函数名</li>
+<li><strong>应用元数据</strong> — 获取和检查应用版本及配置信息</li>
+<li><strong>安全机制</strong> — HMAC-SHA256 请求签名，AES-256-GCM 请求/响应加密（安全模式）</li>
+<li><strong>特殊类型</strong> — ObjectID、Date、DateTime、Timestamp、数值类型、结构化类型、空值标记、服务端时间助手</li>
+<li><strong>挂起函数</strong> — Kotlin 协程实现异步，无回调，代码简洁清晰</li>
+<li><strong>Kotlin + Java 兼容</strong> — Kotlin 原生设计，Java 8+ 可直接调用</li>
+</ul>
+<h2 id="环境要求">环境要求</h2>
+<ul>
+<li>Kotlin 2.0+</li>
+<li>Java 8+ / Android API 21+</li>
+<li>OkHttp 4.x（自动引入）</li>
+<li>kotlinx.serialization（自动引入）</li>
+<li>kotlinx.coroutines（自动引入）</li>
+</ul>
+<h2 id="安装">安装</h2>
+<p>在 <code>build.gradle.kts</code> 中添加：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>repositories {
+</span></span><span style="display:flex;"><span>    mavenCentral()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>dependencies {
+</span></span><span style="display:flex;"><span>    implementation(<span style="color:#e6db74">&#34;net.t1y:t1y-sdk:1.0.1&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h2 id="快速开始">快速开始</h2>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">import</span> com.t1y.sdk.T1YClient
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> com.t1y.sdk.Config
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> com.t1y.sdk.special.timeNow
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 1. 创建客户端
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> client = T1YClient(Config(
+</span></span><span style="display:flex;"><span>    appId = <span style="color:#ae81ff">1001</span>, <span style="color:#75715e">// 必填：应用 ID（&gt;= 1001）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    apiKey = <span style="color:#e6db74">&#34;4fd7448cdc684431a62d8a0111dc69&#34;</span>, <span style="color:#75715e">// 必填：32 位 API Key
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    secretKey = <span style="color:#e6db74">&#34;17b784e359c946ffa65eebbf9ce29&#34;</span>, <span style="color:#75715e">// 必填：32 位 Secret Key
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 以下参数可选（均有默认值）：
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// baseUrl = &#34;https://myapp.t1y.net&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// version = 0,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// isSafeMode = false,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// timeFormat = &#34;YYYY-MM-DD HH:mm:ss&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// offset = 0,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 2. 初始化（与服务器同步时间偏移和安全模式）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>client.<span style="color:#66d9ef">init</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 3. 开始使用数据库！
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>client.db.collection(<span style="color:#e6db74">&#34;users&#34;</span>).insertOne(
+</span></span><span style="display:flex;"><span>    mapOf(
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;name&#34;</span> to <span style="color:#e6db74">&#34;张三&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;age&#34;</span> to <span style="color:#ae81ff">25</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;active&#34;</span> to <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;customTimeAt&#34;</span> to timeNow.Now()
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre><h2 id="数据库操作">数据库操作</h2>
+<h3 id="单条操作">单条操作</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">val</span> db = client.db.collection(<span style="color:#e6db74">&#34;users&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 插入一条
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> insertResult = db.insertOne(mapOf(<span style="color:#e6db74">&#34;name&#34;</span> to <span style="color:#e6db74">&#34;张三&#34;</span>, <span style="color:#e6db74">&#34;age&#34;</span> to <span style="color:#ae81ff">25</span>))
+</span></span><span style="display:flex;"><span>println(insertResult.<span style="color:#66d9ef">data</span>.objectId) <span style="color:#75715e">// &#34;507f1f77bcf86cd799439011&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 通过 ObjectID 查询
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> findResult = db.findById(<span style="color:#e6db74">&#34;507f1f77bcf86cd799439011&#34;</span>)
+</span></span><span style="display:flex;"><span>println(findResult.<span style="color:#66d9ef">data</span>.result) <span style="color:#75715e">// { _id: &#34;507f1f77...&#34;, name: &#34;张三&#34;, ... }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 通过 ObjectID 更新
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>db.updateById(<span style="color:#e6db74">&#34;507f1f77bcf86cd799439011&#34;</span>, mapOf(<span style="color:#e6db74">&#34;name&#34;</span> to <span style="color:#e6db74">&#34;张三丰&#34;</span>, <span style="color:#e6db74">&#34;age&#34;</span> to <span style="color:#ae81ff">26</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 通过 ObjectID 删除
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>db.deleteById(<span style="color:#e6db74">&#34;507f1f77bcf86cd799439011&#34;</span>)
+</span></span></code></pre><h3 id="条件操作">条件操作</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e">// 条件查询一条
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> user = db.findOne(mapOf(<span style="color:#e6db74">&#34;name&#34;</span> to <span style="color:#e6db74">&#34;张三&#34;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 条件更新一条
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>db.updateOne(
+</span></span><span style="display:flex;"><span>    filter = mapOf(<span style="color:#e6db74">&#34;name&#34;</span> to <span style="color:#e6db74">&#34;张三&#34;</span>),
+</span></span><span style="display:flex;"><span>    body = mapOf(<span style="color:#e6db74">&#34;age&#34;</span> to <span style="color:#ae81ff">27</span>)
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 条件删除一条
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>db.deleteOne(mapOf(<span style="color:#e6db74">&#34;name&#34;</span> to <span style="color:#e6db74">&#34;张三&#34;</span>))
+</span></span></code></pre><h3 id="批量操作">批量操作</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e">// 插入多条
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> batchResult = db.insertMany(
+</span></span><span style="display:flex;"><span>    listOf(
+</span></span><span style="display:flex;"><span>        mapOf(<span style="color:#e6db74">&#34;name&#34;</span> to <span style="color:#e6db74">&#34;张三&#34;</span>, <span style="color:#e6db74">&#34;age&#34;</span> to <span style="color:#ae81ff">25</span>),
+</span></span><span style="display:flex;"><span>        mapOf(<span style="color:#e6db74">&#34;name&#34;</span> to <span style="color:#e6db74">&#34;李四&#34;</span>, <span style="color:#e6db74">&#34;age&#34;</span> to <span style="color:#ae81ff">30</span>)
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>println(batchResult.<span style="color:#66d9ef">data</span>.insertedCount) <span style="color:#75715e">// 2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 删除多条
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>db.deleteMany(mapOf(<span style="color:#e6db74">&#34;age&#34;</span> to mapOf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\$</span><span style="color:#e6db74">lt&#34;</span> to <span style="color:#ae81ff">18</span>)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 更新多条
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>db.updateMany(
+</span></span><span style="display:flex;"><span>    filter = mapOf(<span style="color:#e6db74">&#34;status&#34;</span> to <span style="color:#e6db74">&#34;inactive&#34;</span>),
+</span></span><span style="display:flex;"><span>    body = mapOf(<span style="color:#e6db74">&#34;status&#34;</span> to <span style="color:#e6db74">&#34;archived&#34;</span>)
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre><h3 id="高级查询">高级查询</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e">// 分页查询
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> pageResult = db.find(
+</span></span><span style="display:flex;"><span>    page = <span style="color:#ae81ff">1</span>,             <span style="color:#75715e">// 页码（从 1 开始）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    size = <span style="color:#ae81ff">20</span>,            <span style="color:#75715e">// 每页条数（最大 100）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    sort = mapOf(<span style="color:#e6db74">&#34;createdAt&#34;</span> to -<span style="color:#ae81ff">1</span>), <span style="color:#75715e">// 按创建时间倒序
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    filter = mapOf(<span style="color:#e6db74">&#34;age&#34;</span> to mapOf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\$</span><span style="color:#e6db74">gte&#34;</span> to <span style="color:#ae81ff">18</span>))
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>println(pageResult.<span style="color:#66d9ef">data</span>.results) <span style="color:#75715e">// 文档数组
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>println(pageResult.<span style="color:#66d9ef">data</span>.pagination) <span style="color:#75715e">// Pagination(totalItems=42, totalPages=3)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 聚合查询
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> aggResult = db.aggregate(
+</span></span><span style="display:flex;"><span>    listOf(
+</span></span><span style="display:flex;"><span>        mapOf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\$</span><span style="color:#e6db74">match&#34;</span> to mapOf(<span style="color:#e6db74">&#34;status&#34;</span> to <span style="color:#e6db74">&#34;completed&#34;</span>)),
+</span></span><span style="display:flex;"><span>        mapOf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\$</span><span style="color:#e6db74">group&#34;</span> to mapOf(<span style="color:#e6db74">&#34;_id&#34;</span> to <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\$</span><span style="color:#e6db74">category&#34;</span>, <span style="color:#e6db74">&#34;total&#34;</span> to mapOf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\$</span><span style="color:#e6db74">sum&#34;</span> to <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\$</span><span style="color:#e6db74">amount&#34;</span>))),
+</span></span><span style="display:flex;"><span>        mapOf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\$</span><span style="color:#e6db74">sort&#34;</span> to mapOf(<span style="color:#e6db74">&#34;total&#34;</span> to -<span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 计数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> countResult = db.count(mapOf(<span style="color:#e6db74">&#34;status&#34;</span> to <span style="color:#e6db74">&#34;active&#34;</span>))
+</span></span><span style="display:flex;"><span>println(countResult.<span style="color:#66d9ef">data</span>.count)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 去重查询
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> cities = db.distinct(<span style="color:#e6db74">&#34;city&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 带条件过滤
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> filteredCities = db.distinct(<span style="color:#e6db74">&#34;city&#34;</span>, mapOf(<span style="color:#e6db74">&#34;country&#34;</span> to <span style="color:#e6db74">&#34;China&#34;</span>))
+</span></span></code></pre><h3 id="表管理">表管理</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e">// 获取所有表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> collections = client.db.getCollections()
+</span></span><span style="display:flex;"><span>println(collections.<span style="color:#66d9ef">data</span>.results) <span style="color:#75715e">// [&#34;users&#34;, &#34;orders&#34;, &#34;products&#34;]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 创建表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>client.db.collection(<span style="color:#e6db74">&#34;posts&#34;</span>).create()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 清空表（保留表结构）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> clearResult = client.db.collection(<span style="color:#e6db74">&#34;posts&#34;</span>).clear()
+</span></span><span style="display:flex;"><span>println(clearResult.<span style="color:#66d9ef">data</span>.deletedCount)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 删除表（删除表结构 + 所有数据）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>client.db.collection(<span style="color:#e6db74">&#34;posts&#34;</span>).drop()
+</span></span></code></pre><h2 id="特殊类型">特殊类型</h2>
+<p>SDK 提供了一系列辅助函数，用于生成服务端可识别的类型标记。这些标记会在服务端被自动转换为对应的 Go 原生类型。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">import</span> com.t1y.sdk.special.*
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>client.db.collection(<span style="color:#e6db74">&#34;users&#34;</span>).insertOne(
+</span></span><span style="display:flex;"><span>    mapOf(
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// ObjectID 引用
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#e6db74">&#34;userId&#34;</span> to ObjectID(<span style="color:#e6db74">&#34;507f1f77bcf86cd799439011&#34;</span>),
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 日期类型
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#e6db74">&#34;birthday&#34;</span> to Date(<span style="color:#e6db74">&#34;2000-01-01T00:00:00Z&#34;</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;eventTime&#34;</span> to DateTime(<span style="color:#e6db74">&#34;2024-06-15T14:30:00Z&#34;</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;loginAt&#34;</span> to Timestamp(<span style="color:#ae81ff">1705312200L</span>),
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 数值类型
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#e6db74">&#34;active&#34;</span> to Boolean(<span style="color:#66d9ef">true</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;quantity&#34;</span> to Integer(<span style="color:#ae81ff">42</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;bigNumber&#34;</span> to Bigint(<span style="color:#ae81ff">9007199254740991L</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;rating&#34;</span> to Float(<span style="color:#ae81ff">4.5</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;preciseValue&#34;</span> to Double(<span style="color:#ae81ff">3.141592653589793</span>),
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 结构化类型
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#e6db74">&#34;tags&#34;</span> to Array(listOf(<span style="color:#e6db74">&#34;kotlin&#34;</span>, <span style="color:#e6db74">&#34;android&#34;</span>)),
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;metadata&#34;</span> to Map(mapOf(<span style="color:#e6db74">&#34;theme&#34;</span> to <span style="color:#e6db74">&#34;dark&#34;</span>, <span style="color:#e6db74">&#34;lang&#34;</span> to <span style="color:#e6db74">&#34;zh&#34;</span>)),
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;history&#34;</span> to MapArray(
+</span></span><span style="display:flex;"><span>            listOf(
+</span></span><span style="display:flex;"><span>                mapOf(<span style="color:#e6db74">&#34;action&#34;</span> to <span style="color:#e6db74">&#34;login&#34;</span>),
+</span></span><span style="display:flex;"><span>                mapOf(<span style="color:#e6db74">&#34;action&#34;</span> to <span style="color:#e6db74">&#34;logout&#34;</span>)
+</span></span><span style="display:flex;"><span>            )
+</span></span><span style="display:flex;"><span>        ),
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 空值（服务端转为 nil）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#e6db74">&#34;deletedAt&#34;</span> to Null,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;middleName&#34;</span> to None,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 服务端时间辅助
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#e6db74">&#34;customTimeAt&#34;</span> to timeNow.Now(),       <span style="color:#75715e">// 服务端的 time.Now()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#e6db74">&#34;unixCreatedAt&#34;</span> to timeNow.NowUnix()   <span style="color:#75715e">// 服务端的 time.Now().Unix()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    )
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre><h2 id="元数据">元数据</h2>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e">// 获取全部元数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> meta = client.getMeta()
+</span></span><span style="display:flex;"><span>println(meta.<span style="color:#66d9ef">data</span>) <span style="color:#75715e">// { version: 1, collections: [...], ... }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 获取指定字段
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> versionData = client.getMeta(<span style="color:#e6db74">&#34;version&#34;</span>)
+</span></span><span style="display:flex;"><span>println(versionData.<span style="color:#66d9ef">data</span>) <span style="color:#75715e">// { result: 1 }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 检查应用更新
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> hasUpdate = client.checkUpdate()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (hasUpdate) {
+</span></span><span style="display:flex;"><span>    println(<span style="color:#e6db74">&#34;有新版本可用！&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h2 id="云函数">云函数</h2>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e">// 调用 .jsc 云函数（扩展名自动规范化）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> result = client.callFunc(<span style="color:#e6db74">&#34;hello&#34;</span>, mapOf(<span style="color:#e6db74">&#34;name&#34;</span> to <span style="color:#e6db74">&#34;World&#34;</span>))
+</span></span><span style="display:flex;"><span>println(result.<span style="color:#66d9ef">data</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 为此调用单独启用安全模式
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> safeResult = client.callFunc(
+</span></span><span style="display:flex;"><span>    name = <span style="color:#e6db74">&#34;secureFunc&#34;</span>,
+</span></span><span style="display:flex;"><span>    params = mapOf(<span style="color:#e6db74">&#34;secret&#34;</span> to <span style="color:#e6db74">&#34;data&#34;</span>),
+</span></span><span style="display:flex;"><span>    enableSafeMode = <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre><h2 id="安全机制">安全机制</h2>
+<h3 id="认证请求头">认证请求头</h3>
+<p>每个请求都会携带以下请求头：</p>
+<ul>
+<li><code>X-T1Y-Application-ID</code> — 应用 ID</li>
+<li><code>X-T1Y-API-Key</code> — 32 位 API Key</li>
+<li><code>X-T1Y-Safe-Timestamp</code> — Unix 时间戳（UTC + <code>init()</code> 获取的时间偏移）</li>
+<li><code>X-T1Y-Safe-Sign</code> — HMAC-SHA256 签名（64 位十六进制字符）</li>
+</ul>
+<h3 id="签名算法">签名算法</h3>
+<pre><code>message = METHOD + &quot;\n&quot; + URL_PATH + &quot;\n&quot; + SHA256(body) + &quot;\n&quot; + appId + &quot;\n&quot; + timestamp
+signature = HMAC-SHA256(secretKey, message)
+</code></pre>
+<h3 id="安全模式-aes-256-gcm">安全模式（AES-256-GCM）</h3>
+<p>当启用安全模式时（通过配置 <code>isSafeMode: true</code> 或 <code>init()</code> 自动检测），请求体将使用 AES-256-GCM 加密（密钥为 SecretKey），服务端响应也会自动解密。</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e">// 全局启用安全模式
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> client = T1YClient(Config(
+</span></span><span style="display:flex;"><span>    appId = <span style="color:#ae81ff">1001</span>,
+</span></span><span style="display:flex;"><span>    apiKey = <span style="color:#e6db74">&#34;...&#34;</span>,
+</span></span><span style="display:flex;"><span>    secretKey = <span style="color:#e6db74">&#34;...&#34;</span>,
+</span></span><span style="display:flex;"><span>    isSafeMode = <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 或针对单个请求启用
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>client.callFunc(<span style="color:#e6db74">&#34;secureFunc&#34;</span>, params, enableSafeMode = <span style="color:#66d9ef">true</span>)
+</span></span></code></pre><h2 id="错误处理">错误处理</h2>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">import</span> com.t1y.sdk.exception.T1YException
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> com.t1y.sdk.exception.ValidationException
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    client.db.collection(<span style="color:#e6db74">&#34;users&#34;</span>).findById(<span style="color:#e6db74">&#34;invalid-id&#34;</span>)
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (e: T1YException) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 服务器 API 错误或网络失败
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    println(<span style="color:#e6db74">&#34;错误 </span><span style="color:#e6db74">${e.code}</span><span style="color:#e6db74">: </span><span style="color:#e6db74">${e.message}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (e: ValidationException) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 客户端参数验证错误
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    println(<span style="color:#e6db74">&#34;参数验证失败: </span><span style="color:#e6db74">${e.message}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h2 id="响应格式">响应格式</h2>
+<p>所有 API 响应均遵循 <code>ApiResponse&lt;T&gt;</code> 格式：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">data</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ApiResponse</span>&lt;T&gt;(
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> code: Int,       <span style="color:#75715e">// 0 = 成功
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> message: String, <span style="color:#75715e">// 可读消息
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> data: T          <span style="color:#75715e">// 响应数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>)
+</span></span></code></pre><p>预定义结果类型：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>使用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InsertResult</code></td>
+<td><code>insertOne</code> — 返回 <code>objectId</code></td>
+</tr>
+<tr>
+<td><code>InsertManyResult</code></td>
+<td><code>insertMany</code> — 返回 <code>objectIds</code>, <code>insertedCount</code></td>
+</tr>
+<tr>
+<td><code>DeleteResult</code></td>
+<td><code>deleteById</code>、<code>deleteOne</code>、<code>clear</code> — 返回 <code>deletedCount</code></td>
+</tr>
+<tr>
+<td><code>DeleteManyResult</code></td>
+<td><code>deleteMany</code> — 返回 <code>deletedCount</code></td>
+</tr>
+<tr>
+<td><code>UpdateResult</code></td>
+<td><code>updateById</code>、<code>updateOne</code> — 返回 <code>modifiedCount</code></td>
+</tr>
+<tr>
+<td><code>UpdateManyResult</code></td>
+<td><code>updateMany</code> — 返回 <code>modifiedCount</code></td>
+</tr>
+<tr>
+<td><code>FindResult</code></td>
+<td><code>findById</code>、<code>findOne</code> — 返回 <code>result</code></td>
+</tr>
+<tr>
+<td><code>PaginationResult</code></td>
+<td><code>find</code> — 返回 <code>results</code>、<code>page</code>、<code>size</code>、<code>pagination</code></td>
+</tr>
+<tr>
+<td><code>AggregateResult</code></td>
+<td><code>aggregate</code> — 返回 <code>results</code></td>
+</tr>
+<tr>
+<td><code>CountResult</code></td>
+<td><code>count</code> — 返回 <code>count</code></td>
+</tr>
+<tr>
+<td><code>CollectionsResult</code></td>
+<td><code>db.getCollections()</code> — 返回 <code>results</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="api-参考">API 参考</h2>
+<h3 id="t1yclient">T1YClient</h3>
+<p>主客户端类（别名：<code>T1YOS</code>）。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>T1YClient(config)</code></td>
+<td>创建客户端（校验 appId、apiKey、secretKey）</td>
+</tr>
+<tr>
+<td><code>init()</code></td>
+<td>与服务端同步时间偏移和安全模式</td>
+</tr>
+<tr>
+<td><code>getMeta(field?)</code></td>
+<td>获取应用元数据</td>
+</tr>
+<tr>
+<td><code>checkUpdate()</code></td>
+<td>检查服务端是否存在新版本</td>
+</tr>
+<tr>
+<td><code>callFunc(name, params?, enableSafeMode?)</code></td>
+<td>调用云函数</td>
+</tr>
+<tr>
+<td><code>request&lt;T&gt;(method, path, params?, encryption?)</code></td>
+<td>类型化认证请求</td>
+</tr>
+<tr>
+<td><code>requestRaw(method, path, params?, encryption?)</code></td>
+<td>原始认证请求（动态响应）</td>
+</tr>
+<tr>
+<td><code>db.collection(name)</code></td>
+<td>获取集合操作实例（链式调用）</td>
+</tr>
+<tr>
+<td><code>db.toObjectID(id)</code></td>
+<td>创建 ObjectID 标记字符串</td>
+</tr>
+<tr>
+<td><code>db.getCollections()</code></td>
+<td>获取所有表</td>
+</tr>
+<tr>
+<td><code>assertObjectID(idStr)</code></td>
+<td>校验 24 位十六进制 ObjectID</td>
+</tr>
+<tr>
+<td><code>hmacSHA256(secret, message)</code></td>
+<td>计算 HMAC-SHA256 十六进制摘要</td>
+</tr>
+<tr>
+<td><code>verifyHmacSHA256(secret, message, sig)</code></td>
+<td>校验 HMAC-SHA256 签名</td>
+</tr>
+</tbody>
+</table>
+<h3 id="t1collection">T1Collection</h3>
+<p>数据库集合，提供链式 CRUD 操作。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>HTTP</th>
+<th>端点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>insertOne(data)</code></td>
+<td>POST</td>
+<td><code>/v5/classes/:name</code></td>
+</tr>
+<tr>
+<td><code>deleteById(objectId)</code></td>
+<td>DELETE</td>
+<td><code>/v5/classes/:name/:objectId</code></td>
+</tr>
+<tr>
+<td><code>updateById(objectId, data)</code></td>
+<td>PUT</td>
+<td><code>/v5/classes/:name/:objectId</code></td>
+</tr>
+<tr>
+<td><code>findById(objectId)</code></td>
+<td>GET</td>
+<td><code>/v5/classes/:name/:objectId</code></td>
+</tr>
+<tr>
+<td><code>deleteOne(filter)</code></td>
+<td>DELETE</td>
+<td><code>/v5/classes/:name/one</code></td>
+</tr>
+<tr>
+<td><code>updateOne(filter, body)</code></td>
+<td>PUT</td>
+<td><code>/v5/classes/:name/one</code></td>
+</tr>
+<tr>
+<td><code>findOne(filter)</code></td>
+<td>POST</td>
+<td><code>/v5/classes/:name/one</code></td>
+</tr>
+<tr>
+<td><code>insertMany(dataList)</code></td>
+<td>POST</td>
+<td><code>/v5/classes/:name/many</code></td>
+</tr>
+<tr>
+<td><code>deleteMany(filter)</code></td>
+<td>DELETE</td>
+<td><code>/v5/classes/:name/many</code></td>
+</tr>
+<tr>
+<td><code>updateMany(filter, body)</code></td>
+<td>PUT</td>
+<td><code>/v5/classes/:name/many</code></td>
+</tr>
+<tr>
+<td><code>find(page, size, sort, filter)</code></td>
+<td>POST</td>
+<td><code>/v5/classes/:name/find</code></td>
+</tr>
+<tr>
+<td><code>aggregate(pipeline)</code></td>
+<td>POST</td>
+<td><code>/v5/classes/:name/aggregate</code></td>
+</tr>
+<tr>
+<td><code>count(filter?)</code></td>
+<td>POST</td>
+<td><code>/v5/classes/:name/count</code></td>
+</tr>
+<tr>
+<td><code>distinct(fieldName, filter?)</code></td>
+<td>POST</td>
+<td><code>/v5/classes/:name/distinct/:field</code></td>
+</tr>
+<tr>
+<td><code>create()</code></td>
+<td>POST</td>
+<td><code>/v5/schemas/:name</code></td>
+</tr>
+<tr>
+<td><code>clear()</code></td>
+<td>PUT</td>
+<td><code>/v5/schemas/:name</code></td>
+</tr>
+<tr>
+<td><code>drop()</code></td>
+<td>DELETE</td>
+<td><code>/v5/schemas/:name</code></td>
+</tr>
+</tbody>
+</table>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    <script src="../../js/tabler.min.js" defer></script>
+  </body>
+</html>

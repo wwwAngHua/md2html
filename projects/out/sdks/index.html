@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>t1yOS SDKs - t1yOS 开发文档</title>
+    <link rel="icon" href="../favicon.svg" />
+    <meta name="description" content="t1yOS 提供齐全的 SDK 帮助用户更便捷的无需编写 API 接口即可操作云数据库以及调用云函数。" />
+    <meta property="og:title" content="t1yOS SDKs - t1yOS 开发文档" />
+    <meta property="og:description" content="t1yOS 提供齐全的 SDK 帮助用户更便捷的无需编写 API 接口即可操作云数据库以及调用云函数。" />
+    <meta property="og:type" content="article" />
+    <link href="../css/tabler.min.css" rel="stylesheet" />
+    <link href="../css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="../css/tabler-socials.min.css" rel="stylesheet" />
+    <link href="../css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="../css/tabler-vendors.min.css" rel="stylesheet" />
+    <link href="../css/tabler-marketing.min.css" rel="stylesheet" />
+    <link href="../css/tabler-themes.min.css" rel="stylesheet" />
+    <style>      @import url("https://rsms.me/inter/inter.css");
+
+      .markdown :not(pre) > code {
+        background-color: #f0f0f0;
+        color: #d63384;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.875em;
+      }
+
+      .markdown pre {
+        border-radius: 8px;
+        padding: 16px;
+        overflow-x: auto;
+        margin: 1rem 0;
+        background-color: #272822;
+      }
+
+      .markdown pre code {
+        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", Consolas, monospace;
+        font-size: 0.875em;
+        line-height: 1.6;
+        background: none !important;
+        padding: 0;
+      }
+
+      .markdown pre[style] {
+        background-color: #272822 !important;
+      }
+
+      .breadcrumb {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .breadcrumb-item {
+        font-size: 0.875rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item + .breadcrumb-item::before {
+        content: "/";
+        margin: 0 0.5rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item a {
+        color: var(--tblr-muted, #656d77);
+        text-decoration: none;
+      }
+      .breadcrumb-item a:hover {
+        color: var(--tblr-primary, #206bc4);
+        text-decoration: underline;
+      }
+      .breadcrumb-item.active {
+        color: var(--tblr-body-color, #1e293b);
+      }
+
+       
+      .sidebar-toggle {
+        display: none;
+      }
+      @media (max-width: 575.98px) {
+        .sidebar-toggle {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+        .sidebar-collapse {
+          margin-bottom: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="page-wrapper">
+        <div class="page-header d-print-none" aria-label="Page header">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <h2 class="page-title">t1yOS SDKs</h2>
+                
+                <ol class="breadcrumb" aria-label="breadcrumb">
+                  
+                  
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item"><a href="index.html">Sdks</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item active" aria-current="page">t1yOS SDKs</li>
+                  
+                  
+                </ol>
+                
+              </div>
+              
+              <div class="col-auto ms-auto d-sm-none">
+                <button class="btn btn-icon sidebar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-expanded="false" aria-controls="sidebar-menu" aria-label="Toggle menu">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="row g-5">
+              
+              <div class="col-sm-2">
+                <div class="collapse d-sm-block sidebar-collapse" id="sidebar-menu">
+                  <div class="sticky-top">
+                    <nav class="nav nav-vertical nav-pills" id="pills">
+                      
+                      <a class="nav-link nav-link-level-1" href="#t1yos-sdks">t1yOS SDKs</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#javascript-typescript-%e5%b0%8f%e7%a8%8b%e5%ba%8f-%e5%bf%ab%e5%ba%94%e7%94%a8">JavaScript/TypeScript/小程序/快应用</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#java-kotlin-adnroid">Java/Kotlin/Adnroid</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#swift-ios-macos-watchos-tvos">Swift/iOS/macOS/watchOS/tvOS</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#dart-flutter">Dart/Flutter</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#c">C#</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#go">Go</a>
+                      
+                    </nav>
+                  </div>
+                </div>
+              </div>
+              
+              <div
+                class="col-sm"
+                data-bs-spy="scroll"
+                data-bs-target="#pills"
+                data-bs-offset="0"
+              >
+                <div class="card card-lg">
+                  <div class="card-body markdown">
+                    <h1 id="t1yos-sdks">t1yOS SDKs</h1>
+<p>t1yOS 提供齐全的 <code>SDK</code> 帮助用户更便捷的无需编写 <code>API</code> 接口即可操作云数据库以及调用云函数。</p>
+<h2 id="javascript-typescript-小程序-快应用">JavaScript/TypeScript/小程序/快应用</h2>
+<p>使用该 SDK 可以在 H5（Web）、HTML、Vue、React、Node.js、React Native、微信小程序、QQ 小程序、头条小程序、抖音小程序、支付宝小程序、快应用等场景下使用，一套 SDK 即可全部搞定！详细使用说明请阅读文档：<a href="./js/index.html">t1y-sdk-js</a></p>
+<h2 id="java-kotlin-adnroid">Java/Kotlin/Adnroid</h2>
+<p>使用该 SDK 可以在 Java、Kotlin、Android 等场景下使用，详细使用说明请阅读文档：<a href="./android/index.html">t1y-sdk-android</a></p>
+<h2 id="swift-ios-macos-watchos-tvos">Swift/iOS/macOS/watchOS/tvOS</h2>
+<p>使用该 SDK 支持 Apple 全平台，例如：iOS、macOS、watchOS、tvOS 等，详细使用说明请阅读文档：<a href="./swift/index.html">t1y-sdk-swift</a></p>
+<h2 id="dart-flutter">Dart/Flutter</h2>
+<p>使用该 SDK 可以在 Dart、Flutter 场景下使用，详细使用说明请阅读文档：<a href="./flutter/index.html">t1y-sdk-flutter</a></p>
+<h2 id="c">C#</h2>
+<p>使用该 SDK 可以在 C# 开发场景中使用，例如：WinForms、WPF、WinUI、MAUI、Avalonia 等 Windows 桌面开发场景以及 Unity、Godot 等游戏开发场景，详细使用说明请阅读文档：<a href="./csharp/index.html">t1y-sdk-csharp</a></p>
+<h2 id="go">Go</h2>
+<p>使用该 SDK 可以在 Go 语言中进行使用，例如：命令行工具、Wails 跨端开发等等，详细使用说明请阅读文档：<a href="./go/index.html">t1y-sdk-go</a></p>
+<hr />
+<p>以上 SDK 已经覆盖几乎所有的开发场景，如果你有什么未满足的需求，欢迎联系我们进行反馈，开发人员会第一时间进行开发的～</p>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    <script src="../js/tabler.min.js" defer></script>
+  </body>
+</html>

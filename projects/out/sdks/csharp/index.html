@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>T1YOS.Sdk - t1yOS 开发文档</title>
+    <link rel="icon" href="../../favicon.svg" />
+    <meta name="description" content="t1yOS 服务端能识别 JSON 请求体中的特殊标记字符串。使用 SpecialTypes 类来创建它们：" />
+    <meta property="og:title" content="T1YOS.Sdk - t1yOS 开发文档" />
+    <meta property="og:description" content="t1yOS 服务端能识别 JSON 请求体中的特殊标记字符串。使用 SpecialTypes 类来创建它们：" />
+    <meta property="og:type" content="article" />
+    <link href="../../css/tabler.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-socials.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-vendors.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-marketing.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-themes.min.css" rel="stylesheet" />
+    <style>      @import url("https://rsms.me/inter/inter.css");
+
+      .markdown :not(pre) > code {
+        background-color: #f0f0f0;
+        color: #d63384;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.875em;
+      }
+
+      .markdown pre {
+        border-radius: 8px;
+        padding: 16px;
+        overflow-x: auto;
+        margin: 1rem 0;
+        background-color: #272822;
+      }
+
+      .markdown pre code {
+        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", Consolas, monospace;
+        font-size: 0.875em;
+        line-height: 1.6;
+        background: none !important;
+        padding: 0;
+      }
+
+      .markdown pre[style] {
+        background-color: #272822 !important;
+      }
+
+      .breadcrumb {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .breadcrumb-item {
+        font-size: 0.875rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item + .breadcrumb-item::before {
+        content: "/";
+        margin: 0 0.5rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item a {
+        color: var(--tblr-muted, #656d77);
+        text-decoration: none;
+      }
+      .breadcrumb-item a:hover {
+        color: var(--tblr-primary, #206bc4);
+        text-decoration: underline;
+      }
+      .breadcrumb-item.active {
+        color: var(--tblr-body-color, #1e293b);
+      }
+
+       
+      .sidebar-toggle {
+        display: none;
+      }
+      @media (max-width: 575.98px) {
+        .sidebar-toggle {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+        .sidebar-collapse {
+          margin-bottom: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="page-wrapper">
+        <div class="page-header d-print-none" aria-label="Page header">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <h2 class="page-title">T1YOS.Sdk</h2>
+                
+                <ol class="breadcrumb" aria-label="breadcrumb">
+                  
+                  
+                  <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item"><a href="../index.html">Sdks</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item"><a href="index.html">Csharp</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item active" aria-current="page">T1YOS.Sdk</li>
+                  
+                  
+                </ol>
+                
+              </div>
+              
+              <div class="col-auto ms-auto d-sm-none">
+                <button class="btn btn-icon sidebar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-expanded="false" aria-controls="sidebar-menu" aria-label="Toggle menu">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="row g-5">
+              
+              <div class="col-sm-2">
+                <div class="collapse d-sm-block sidebar-collapse" id="sidebar-menu">
+                  <div class="sticky-top">
+                    <nav class="nav nav-vertical nav-pills" id="pills">
+                      
+                      <a class="nav-link nav-link-level-1" href="#t1yos-sdk">T1YOS.Sdk</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e7%89%b9%e6%80%a7">特性</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e6%94%af%e6%8c%81%e7%9a%84%e5%b9%b3%e5%8f%b0">支持的平台</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e5%ae%89%e8%a3%85">安装</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#nuget-%e5%8c%85%e7%ae%a1%e7%90%86%e5%99%a8">NuGet 包管理器</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e5%8c%85%e7%ae%a1%e7%90%86%e5%99%a8%e6%8e%a7%e5%88%b6%e5%8f%b0">包管理器控制台</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e5%bf%ab%e9%80%9f%e5%bc%80%e5%a7%8b">快速开始</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e9%85%8d%e7%bd%ae">配置</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e6%95%b0%e6%8d%ae%e5%ba%93%e6%93%8d%e4%bd%9c">数据库操作</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e5%8d%95%e6%96%87%e6%a1%a3%e6%93%8d%e4%bd%9c">单文档操作</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e6%9d%a1%e4%bb%b6%e6%9f%a5%e8%af%a2%e6%93%8d%e4%bd%9c">条件查询操作</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e6%89%b9%e9%87%8f%e6%93%8d%e4%bd%9c">批量操作</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e9%ab%98%e7%ba%a7%e6%9f%a5%e8%af%a2">高级查询</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#schema-%e7%ae%a1%e7%90%86">Schema 管理</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e7%89%b9%e6%ae%8a%e7%b1%bb%e5%9e%8b">特殊类型</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e8%87%aa%e5%8a%a8%e6%97%a5%e6%9c%9f%e8%bd%ac%e6%8d%a2">自动日期转换</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e4%ba%91%e5%87%bd%e6%95%b0">云函数</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e5%85%83%e6%95%b0%e6%8d%ae">元数据</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e5%ae%89%e5%85%a8%e6%80%a7">安全性</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e8%af%b7%e6%b1%82%e7%ad%be%e5%90%8d">请求签名</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e5%ae%89%e5%85%a8%e6%a8%a1%e5%bc%8f-aes-256-gcm-%e5%8a%a0%e5%af%86">安全模式（AES-256-GCM 加密）</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e9%94%99%e8%af%af%e5%a4%84%e7%90%86">错误处理</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#api-%e5%8f%82%e8%80%83">API 参考</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#t1yos-%e5%ae%a2%e6%88%b7%e7%ab%af">T1YOS 客户端</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#t1collection">T1Collection</a>
+                      
+                    </nav>
+                  </div>
+                </div>
+              </div>
+              
+              <div
+                class="col-sm"
+                data-bs-spy="scroll"
+                data-bs-target="#pills"
+                data-bs-offset="0"
+              >
+                <div class="card card-lg">
+                  <div class="card-body markdown">
+                    <h1 id="t1yos-sdk">T1YOS.Sdk</h1>
+<h2 id="特性">特性</h2>
+<ul>
+<li><strong>安全认证</strong> — HMAC-SHA256 请求签名，带时间窗口验证</li>
+<li><strong>云数据库</strong> — 完整的 CRUD 操作，支持 MongoDB 风格的查询（单文档、批量、分页、聚合）</li>
+<li><strong>Schema 管理</strong> — 通过 API 创建、清空和删除集合</li>
+<li><strong>云函数</strong> — 调用服务端 <code>.jsc</code> 函数，自动解析扩展名</li>
+<li><strong>安全模式</strong> — AES-256-GCM 负载加密，端到端安全保障</li>
+<li><strong>特殊类型</strong> — ObjectID、Date、Timestamp、类型化数值等标记字符串</li>
+<li><strong>时间同步</strong> — 通过服务端时间同步自动校正时钟偏差</li>
+<li><strong>元数据</strong> — 获取服务端元数据（版本、状态、集合列表）</li>
+<li><strong>多目标框架</strong> — 支持 .NET Framework 4.8、.NET Core 2.0+、.NET 5–8+、Unity 和 Xamarin</li>
+</ul>
+<h2 id="支持的平台">支持的平台</h2>
+<table>
+<thead>
+<tr>
+<th>目标框架</th>
+<th>平台</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>netstandard2.0</code></td>
+<td>.NET Core 2.0+、.NET 5+、Mono、Xamarin、Unity</td>
+</tr>
+<tr>
+<td><code>net48</code></td>
+<td>.NET Framework 4.8</td>
+</tr>
+<tr>
+<td><code>net8.0</code></td>
+<td>.NET 8+（最佳性能）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="安装">安装</h2>
+<h3 id="nuget-包管理器">NuGet 包管理器</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>dotnet add package T1YOS.Sdk
+</span></span></code></pre><h3 id="包管理器控制台">包管理器控制台</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>Install-Package T1YOS.Sdk
+</span></span></code></pre><h2 id="快速开始">快速开始</h2>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">using</span> T1YOS.Sdk;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> T1YOS.Sdk.Client;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> T1YOS.Sdk.SpecialTypes;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 1. 创建客户端</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> client = <span style="color:#66d9ef">new</span> T1YOS(<span style="color:#66d9ef">new</span> T1YOSConfig
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    AppId = <span style="color:#ae81ff">1001</span>,                                    <span style="color:#75715e">// 您的应用 ID</span>
+</span></span><span style="display:flex;"><span>    ApiKey = <span style="color:#e6db74">&#34;your-32-character-api-key-here&#34;</span>,       <span style="color:#75715e">// 您的 API 密钥</span>
+</span></span><span style="display:flex;"><span>    SecretKey = <span style="color:#e6db74">&#34;your-32-character-secret-key-here&#34;</span>, <span style="color:#75715e">// 您的密钥</span>
+</span></span><span style="display:flex;"><span>    BaseUrl = <span style="color:#e6db74">&#34;https://myapp.t1y.net&#34;</span>                <span style="color:#75715e">// 可选（默认值）</span>
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 2. 初始化（同步服务器时间和安全模式）</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">await</span> client.InitAsync();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 3. 开始使用数据库</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> users = client.Db.Collection(<span style="color:#e6db74">&#34;users&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 插入文档</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> insertResult = <span style="color:#66d9ef">await</span> users.InsertOneAsync(<span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    { <span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;张三&#34;</span> },
+</span></span><span style="display:flex;"><span>    { <span style="color:#e6db74">&#34;age&#34;</span>, <span style="color:#ae81ff">30</span> },
+</span></span><span style="display:flex;"><span>    { <span style="color:#e6db74">&#34;email&#34;</span>, <span style="color:#e6db74">&#34;zhangsan@example.com&#34;</span> },
+</span></span><span style="display:flex;"><span>    { <span style="color:#e6db74">&#34;createdAt&#34;</span>, SpecialTypes.TimeNow }  <span style="color:#75715e">// 服务端时间戳</span>
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>Console.WriteLine(<span style="color:#e6db74">$&#34;已插入: {insertResult.Data?.ObjectId}&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 通过 ID 查找</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> findResult = <span style="color:#66d9ef">await</span> users.FindByIdAsync(insertResult.Data!.ObjectId!);
+</span></span><span style="display:flex;"><span>Console.WriteLine(<span style="color:#e6db74">$&#34;已找到: {findResult.Data?.Result?[&#34;</span>name<span style="color:#e6db74">&#34;]}&#34;</span>);
+</span></span></code></pre><h2 id="配置">配置</h2>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AppId</code></td>
+<td><code>int</code></td>
+<td>✅</td>
+<td>—</td>
+<td>应用 ID（必须 ≥ 1001）</td>
+</tr>
+<tr>
+<td><code>ApiKey</code></td>
+<td><code>string</code></td>
+<td>✅</td>
+<td>—</td>
+<td>API 密钥（必须恰好 32 个字符）</td>
+</tr>
+<tr>
+<td><code>SecretKey</code></td>
+<td><code>string</code></td>
+<td>✅</td>
+<td>—</td>
+<td>请求签名密钥（必须恰好 32 个字符）</td>
+</tr>
+<tr>
+<td><code>BaseUrl</code></td>
+<td><code>string?</code></td>
+<td>❌</td>
+<td><code>https://myapp.t1y.net</code></td>
+<td>服务器基础 URL（必须以 <code>http://</code> 或 <code>https://</code> 开头）</td>
+</tr>
+<tr>
+<td><code>Version</code></td>
+<td><code>int?</code></td>
+<td>❌</td>
+<td><code>0</code></td>
+<td>API 版本</td>
+</tr>
+<tr>
+<td><code>IsSafeMode</code></td>
+<td><code>bool?</code></td>
+<td>❌</td>
+<td><code>false</code></td>
+<td>启用 AES-256-GCM 负载加密</td>
+</tr>
+<tr>
+<td><code>TimeFormat</code></td>
+<td><code>string?</code></td>
+<td>❌</td>
+<td><code>YYYY-MM-DD HH:mm:ss</code></td>
+<td>本地时间戳显示格式</td>
+</tr>
+<tr>
+<td><code>Offset</code></td>
+<td><code>int?</code></td>
+<td>❌</td>
+<td><code>0</code></td>
+<td>时间偏移量（秒，由 <code>InitAsync()</code> 自动设置）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="数据库操作">数据库操作</h2>
+<h3 id="单文档操作">单文档操作</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e">// 插入</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> result = <span style="color:#66d9ef">await</span> users.InsertOneAsync(<span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    { <span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;李四&#34;</span> },
+</span></span><span style="display:flex;"><span>    { <span style="color:#e6db74">&#34;score&#34;</span>, <span style="color:#ae81ff">95</span> }
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 通过 ObjectID 查找</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> doc = <span style="color:#66d9ef">await</span> users.FindByIdAsync(<span style="color:#e6db74">&#34;507f1f77bcf86cd799439011&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 通过 ObjectID 更新</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">await</span> users.UpdateByIdAsync(<span style="color:#e6db74">&#34;507f1f77bcf86cd799439011&#34;</span>, <span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    { <span style="color:#e6db74">&#34;$set&#34;</span>, <span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt; { { <span style="color:#e6db74">&#34;score&#34;</span>, <span style="color:#ae81ff">100</span> } } }
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 通过 ObjectID 删除</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">await</span> users.DeleteByIdAsync(<span style="color:#e6db74">&#34;507f1f77bcf86cd799439011&#34;</span>);
+</span></span></code></pre><h3 id="条件查询操作">条件查询操作</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e">// 条件查找</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> doc = <span style="color:#66d9ef">await</span> users.FindOneAsync(<span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    { <span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;张三&#34;</span> }
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 条件更新</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">await</span> users.UpdateOneAsync(
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt; { { <span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;李四&#34;</span> } },
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt;
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        { <span style="color:#e6db74">&#34;$inc&#34;</span>, <span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt; { { <span style="color:#e6db74">&#34;score&#34;</span>, <span style="color:#ae81ff">5</span> } } }
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 条件删除</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">await</span> users.DeleteOneAsync(<span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    { <span style="color:#e6db74">&#34;status&#34;</span>, <span style="color:#e6db74">&#34;inactive&#34;</span> }
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre><h3 id="批量操作">批量操作</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e">// 批量插入</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> result = <span style="color:#66d9ef">await</span> users.InsertManyAsync(<span style="color:#66d9ef">new</span>[]
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt; { { <span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;张三&#34;</span> } },
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt; { { <span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;李四&#34;</span> } },
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt; { { <span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;王五&#34;</span> } }
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>Console.WriteLine(<span style="color:#e6db74">$&#34;已插入 {result.Data?.InsertedCount} 条文档&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 批量更新</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">await</span> users.UpdateManyAsync(
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt; { { <span style="color:#e6db74">&#34;status&#34;</span>, <span style="color:#e6db74">&#34;pending&#34;</span> } },
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt;
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        { <span style="color:#e6db74">&#34;$set&#34;</span>, <span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt; { { <span style="color:#e6db74">&#34;status&#34;</span>, <span style="color:#e6db74">&#34;active&#34;</span> } } }
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 批量删除</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">await</span> users.DeleteManyAsync(<span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    { <span style="color:#e6db74">&#34;archived&#34;</span>, <span style="color:#66d9ef">true</span> }
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre><h3 id="高级查询">高级查询</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e">// 分页查询</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> page = <span style="color:#66d9ef">await</span> users.FindAsync(
+</span></span><span style="display:flex;"><span>    page: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    size: <span style="color:#ae81ff">20</span>,
+</span></span><span style="display:flex;"><span>    sort: <span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt; { { <span style="color:#e6db74">&#34;createdAt&#34;</span>, -<span style="color:#ae81ff">1</span> } },
+</span></span><span style="display:flex;"><span>    filter: <span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt;
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        { <span style="color:#e6db74">&#34;age&#34;</span>, <span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt; { { <span style="color:#e6db74">&#34;$gte&#34;</span>, <span style="color:#ae81ff">18</span> } } }
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>Console.WriteLine(<span style="color:#e6db74">$&#34;第 {page.Data?.Page} 页，共 {page.Data?.Pagination?.TotalPages} 页&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 聚合管道</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> aggregateResult = <span style="color:#66d9ef">await</span> users.AggregateAsync(<span style="color:#66d9ef">new</span>[]
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt; { { <span style="color:#e6db74">&#34;$match&#34;</span>, <span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt; { { <span style="color:#e6db74">&#34;score&#34;</span>, <span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt; { { <span style="color:#e6db74">&#34;$gt&#34;</span>, <span style="color:#ae81ff">60</span> } } } } } },
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt; { { <span style="color:#e6db74">&#34;$group&#34;</span>, <span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt; { { <span style="color:#e6db74">&#34;_id&#34;</span>, <span style="color:#e6db74">&#34;$name&#34;</span> }, { <span style="color:#e6db74">&#34;total&#34;</span>, <span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt; { { <span style="color:#e6db74">&#34;$sum&#34;</span>, <span style="color:#e6db74">&#34;$score&#34;</span> } } } } } }
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 统计文档数</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> countResult = <span style="color:#66d9ef">await</span> users.CountAsync(<span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    { <span style="color:#e6db74">&#34;status&#34;</span>, <span style="color:#e6db74">&#34;active&#34;</span> }
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 去重值</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> distinctResult = <span style="color:#66d9ef">await</span> users.DistinctAsync(<span style="color:#e6db74">&#34;category&#34;</span>);
+</span></span></code></pre><h3 id="schema-管理">Schema 管理</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e">// 创建集合</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">await</span> users.CreateAsync();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 清空集合（保留 Schema）</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">await</span> users.ClearAsync();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 删除集合（同时删除 Schema 和所有文档）</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">await</span> users.DropAsync();
+</span></span></code></pre><h2 id="特殊类型">特殊类型</h2>
+<p>t1yOS 服务端能识别 JSON 请求体中的特殊标记字符串。使用 <code>SpecialTypes</code> 类来创建它们：</p>
+<table>
+<thead>
+<tr>
+<th>方法 / 常量</th>
+<th>输出</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SpecialTypes.ObjectID(&quot;507f...&quot;)</code></td>
+<td><code>ObjectID('507f...')</code></td>
+<td>MongoDB ObjectID 标记</td>
+</tr>
+<tr>
+<td><code>SpecialTypes.Date_(&quot;2024-01-15T10:30:00Z&quot;)</code></td>
+<td><code>Date('2024-01-15T10:30:00Z')</code></td>
+<td>日期标记</td>
+</tr>
+<tr>
+<td><code>SpecialTypes.DateTime_(&quot;2024-01-15T10:30:00Z&quot;)</code></td>
+<td><code>DateTime('2024-01-15T10:30:00Z')</code></td>
+<td>日期时间标记</td>
+</tr>
+<tr>
+<td><code>SpecialTypes.Timestamp(&quot;1705312200&quot;)</code></td>
+<td><code>Timestamp('1705312200')</code></td>
+<td>Unix 时间戳标记</td>
+</tr>
+<tr>
+<td><code>SpecialTypes.Boolean_(true)</code></td>
+<td><code>Boolean(true)</code></td>
+<td>布尔值标记</td>
+</tr>
+<tr>
+<td><code>SpecialTypes.Integer(42)</code></td>
+<td><code>Integer(42)</code></td>
+<td>整型标记</td>
+</tr>
+<tr>
+<td><code>SpecialTypes.Bigint(9007199254740991)</code></td>
+<td><code>Bigint(9007199254740991)</code></td>
+<td>大整数标记</td>
+</tr>
+<tr>
+<td><code>SpecialTypes.Float(3.14)</code></td>
+<td><code>Float(3.14)</code></td>
+<td>浮点数标记</td>
+</tr>
+<tr>
+<td><code>SpecialTypes.Double_(3.14159265)</code></td>
+<td><code>Double(3.14159265)</code></td>
+<td>双精度浮点数标记</td>
+</tr>
+<tr>
+<td><code>SpecialTypes.Array_(new object[] {1,2,3})</code></td>
+<td><code>Array([1,2,3])</code></td>
+<td>数组标记</td>
+</tr>
+<tr>
+<td><code>SpecialTypes.Map_(dict)</code></td>
+<td><code>Map({&quot;key&quot;:&quot;value&quot;})</code></td>
+<td>映射标记</td>
+</tr>
+<tr>
+<td><code>SpecialTypes.MapArray(dicts)</code></td>
+<td><code>Map[]([...])</code></td>
+<td>映射数组标记</td>
+</tr>
+<tr>
+<td><code>SpecialTypes.Null</code></td>
+<td><code>Null</code></td>
+<td>Null 标记常量</td>
+</tr>
+<tr>
+<td><code>SpecialTypes.None</code></td>
+<td><code>None</code></td>
+<td>None 标记常量</td>
+</tr>
+<tr>
+<td><code>SpecialTypes.Nil</code></td>
+<td><code>Nil</code></td>
+<td>Nil 标记常量</td>
+</tr>
+<tr>
+<td><code>SpecialTypes.Empty</code></td>
+<td><code>&quot;&quot;</code></td>
+<td>空字符串标记</td>
+</tr>
+<tr>
+<td><code>SpecialTypes.UNDEFINED</code></td>
+<td><code>UNDEFINED</code></td>
+<td>Undefined 标记</td>
+</tr>
+<tr>
+<td><code>SpecialTypes.TimeNow</code></td>
+<td><code>time.Now()</code></td>
+<td>服务端当前时间</td>
+</tr>
+<tr>
+<td><code>SpecialTypes.TimeNowUnix</code></td>
+<td><code>time.Now().Unix()</code></td>
+<td>服务端 Unix 时间戳</td>
+</tr>
+<tr>
+<td><code>SpecialTypes.TimeNowUnixNano</code></td>
+<td><code>time.Now().UnixNano()</code></td>
+<td>服务端纳秒时间戳</td>
+</tr>
+<tr>
+<td><code>SpecialTypes.TimeNowWeekday</code></td>
+<td><code>time.Now().Weekday()</code></td>
+<td>服务端星期几（数字）</td>
+</tr>
+<tr>
+<td><code>SpecialTypes.TimeNowWeekdayChinese</code></td>
+<td><code>time.Now().Weekday().Chinese()</code></td>
+<td>服务端星期几（中文）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意：</strong> 以 <code>_</code> 结尾的方法（<code>Date_</code>、<code>Boolean_</code>、<code>Double_</code>、<code>Array_</code>、<code>Map_</code>、<code>DateTime_</code>）添加了下划线后缀，以避免与 C# 内置类型冲突。</p>
+<h3 id="自动日期转换">自动日期转换</h3>
+<p>SDK 会自动将请求体中的 C# <code>DateTime</code> 对象转换为 <code>Date('...')</code> 标记，将 10 位及以上的数字转换为 <code>Timestamp('...')</code> 标记。例如：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">await</span> users.InsertOneAsync(<span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">object?</span>&gt;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    { <span style="color:#e6db74">&#34;scheduledAt&#34;</span>, DateTime.UtcNow },       <span style="color:#75715e">// → Date(&#39;2024-01-15T...&#39;)</span>
+</span></span><span style="display:flex;"><span>    { <span style="color:#e6db74">&#34;version&#34;</span>, <span style="color:#ae81ff">1705312200L</span> }                 <span style="color:#75715e">// → Timestamp(&#39;1705312200&#39;)</span>
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre><h2 id="云函数">云函数</h2>
+<p>调用服务端 JavaScript（<code>.jsc</code>）函数：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e">// 使用参数调用 &#34;hello.jsc&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> result = <span style="color:#66d9ef">await</span> client.CallFuncAsync(<span style="color:#e6db74">&#34;hello&#34;</span>, <span style="color:#66d9ef">new</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    name = <span style="color:#e6db74">&#34;World&#34;</span>,
+</span></span><span style="display:flex;"><span>    greeting = <span style="color:#e6db74">&#34;你好&#34;</span>
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 扩展名规则：</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// &#34;hello&#34;     → &#34;hello.jsc&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// &#34;dir/&#34;      → &#34;dir/index.jsc&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// &#34;script.js&#34; → &#34;script.jsc&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// &#34;func.jsc&#34;  → &#34;func.jsc&#34;（无变化）</span>
+</span></span></code></pre><h2 id="元数据">元数据</h2>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e">// 获取所有元数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> meta = <span style="color:#66d9ef">await</span> client.GetMetaAsync();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 获取特定字段</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> versionInfo = <span style="color:#66d9ef">await</span> client.GetMetaAsync(<span style="color:#e6db74">&#34;version&#34;</span>);
+</span></span></code></pre><h2 id="安全性">安全性</h2>
+<h3 id="请求签名">请求签名</h3>
+<p>每个 API 请求都使用 HMAC-SHA256 进行签名：</p>
+<pre><code>签名    = HMAC-SHA256(secretKey, message)
+message = METHOD + &quot;\n&quot; + PATH_AND_QUERY + &quot;\n&quot; + SHA256(body) + &quot;\n&quot; + appId + &quot;\n&quot; + timestamp
+</code></pre>
+<p>签名通过 <code>X-T1Y-Safe-Sign</code> 请求头发送，同时发送的还有：</p>
+<ul>
+<li><code>X-T1Y-Application-ID</code> — 您的应用 ID</li>
+<li><code>X-T1Y-API-Key</code> — 您的 API 密钥</li>
+<li><code>X-T1Y-Safe-Timestamp</code> — Unix 时间戳（已根据服务端偏移量调整）</li>
+</ul>
+<h3 id="安全模式-aes-256-gcm-加密">安全模式（AES-256-GCM 加密）</h3>
+<p>当启用安全模式时（通过 <code>IsSafeMode: true</code> 或在 <code>InitAsync()</code> 期间自动检测），请求和响应体将使用 AES-256-GCM 进行加密：</p>
+<ul>
+<li><strong>密钥</strong>：您的 32 字符密钥（UTF-8 编码 → 32 字节）</li>
+<li><strong>Nonce</strong>：12 个随机字节（每条消息独立）</li>
+<li><strong>Tag</strong>：128 位认证标签</li>
+<li><strong>负载格式</strong>：<code>{&quot;n&quot;: &quot;&lt;base64 nonce&gt;&quot;, &quot;j&quot;: &quot;&lt;base64 ciphertext&gt;&quot;, &quot;t&quot;: &quot;&lt;base64 tag&gt;&quot;}</code></li>
+</ul>
+<p>这确保了敏感数据的端到端机密性和完整性。</p>
+<h2 id="错误处理">错误处理</h2>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">try</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> result = <span style="color:#66d9ef">await</span> users.InsertOneAsync(data);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">catch</span> (T1YError ex)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Console.WriteLine(<span style="color:#e6db74">$&#34;API 错误 [{ex.Code}]: {ex.Message}&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ex.ErrorData 可能包含额外信息</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">catch</span> (ValidationError ex)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Console.WriteLine(<span style="color:#e6db74">$&#34;验证错误: {ex.Message}&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h2 id="api-参考">API 参考</h2>
+<h3 id="t1yos-客户端">T1YOS 客户端</h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InitAsync()</code></td>
+<td>同步服务器时间和安全模式设置</td>
+</tr>
+<tr>
+<td><code>RequestAsync&lt;T&gt;(method, path, body?, encryption?)</code></td>
+<td>核心请求方法</td>
+</tr>
+<tr>
+<td><code>GetMetaAsync(field?)</code></td>
+<td>获取服务端元数据</td>
+</tr>
+<tr>
+<td><code>CallFuncAsync(name, parameters?, enableSafeMode?)</code></td>
+<td>调用云函数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="t1collection">T1Collection</h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InsertOneAsync(data)</code></td>
+<td>插入单条文档</td>
+</tr>
+<tr>
+<td><code>FindByIdAsync(objectId)</code></td>
+<td>通过 ObjectID 查找文档</td>
+</tr>
+<tr>
+<td><code>UpdateByIdAsync(objectId, data)</code></td>
+<td>通过 ObjectID 更新文档</td>
+</tr>
+<tr>
+<td><code>DeleteByIdAsync(objectId)</code></td>
+<td>通过 ObjectID 删除文档</td>
+</tr>
+<tr>
+<td><code>FindOneAsync(filter)</code></td>
+<td>通过条件查找一条文档</td>
+</tr>
+<tr>
+<td><code>UpdateOneAsync(filter, body)</code></td>
+<td>通过条件更新一条文档</td>
+</tr>
+<tr>
+<td><code>DeleteOneAsync(filter)</code></td>
+<td>通过条件删除一条文档</td>
+</tr>
+<tr>
+<td><code>InsertManyAsync(dataList)</code></td>
+<td>批量插入文档</td>
+</tr>
+<tr>
+<td><code>UpdateManyAsync(filter, body)</code></td>
+<td>批量更新文档</td>
+</tr>
+<tr>
+<td><code>DeleteManyAsync(filter)</code></td>
+<td>批量删除文档</td>
+</tr>
+<tr>
+<td><code>FindAsync(page, size, sort?, filter?)</code></td>
+<td>分页查询</td>
+</tr>
+<tr>
+<td><code>AggregateAsync(pipeline)</code></td>
+<td>执行聚合管道</td>
+</tr>
+<tr>
+<td><code>CountAsync(filter?)</code></td>
+<td>统计文档数量</td>
+</tr>
+<tr>
+<td><code>DistinctAsync(fieldName, filter?)</code></td>
+<td>获取字段去重值</td>
+</tr>
+<tr>
+<td><code>CreateAsync()</code></td>
+<td>创建集合 Schema</td>
+</tr>
+<tr>
+<td><code>ClearAsync()</code></td>
+<td>清空所有文档</td>
+</tr>
+<tr>
+<td><code>DropAsync()</code></td>
+<td>删除整个集合</td>
+</tr>
+</tbody>
+</table>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    <script src="../../js/tabler.min.js" defer></script>
+  </body>
+</html>

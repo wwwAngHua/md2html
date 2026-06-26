@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>t1yOS SDK for JavaScript/TypeScript - t1yOS 开发文档</title>
+    <link rel="icon" href="../../favicon.svg" />
+    <meta name="description" content="微信 / QQ / 头条 / 抖音小程序：" />
+    <meta property="og:title" content="t1yOS SDK for JavaScript/TypeScript - t1yOS 开发文档" />
+    <meta property="og:description" content="微信 / QQ / 头条 / 抖音小程序：" />
+    <meta property="og:type" content="article" />
+    <link href="../../css/tabler.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-socials.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-vendors.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-marketing.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-themes.min.css" rel="stylesheet" />
+    <style>      @import url("https://rsms.me/inter/inter.css");
+
+      .markdown :not(pre) > code {
+        background-color: #f0f0f0;
+        color: #d63384;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.875em;
+      }
+
+      .markdown pre {
+        border-radius: 8px;
+        padding: 16px;
+        overflow-x: auto;
+        margin: 1rem 0;
+        background-color: #272822;
+      }
+
+      .markdown pre code {
+        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", Consolas, monospace;
+        font-size: 0.875em;
+        line-height: 1.6;
+        background: none !important;
+        padding: 0;
+      }
+
+      .markdown pre[style] {
+        background-color: #272822 !important;
+      }
+
+      .breadcrumb {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .breadcrumb-item {
+        font-size: 0.875rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item + .breadcrumb-item::before {
+        content: "/";
+        margin: 0 0.5rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item a {
+        color: var(--tblr-muted, #656d77);
+        text-decoration: none;
+      }
+      .breadcrumb-item a:hover {
+        color: var(--tblr-primary, #206bc4);
+        text-decoration: underline;
+      }
+      .breadcrumb-item.active {
+        color: var(--tblr-body-color, #1e293b);
+      }
+
+       
+      .sidebar-toggle {
+        display: none;
+      }
+      @media (max-width: 575.98px) {
+        .sidebar-toggle {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+        .sidebar-collapse {
+          margin-bottom: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="page-wrapper">
+        <div class="page-header d-print-none" aria-label="Page header">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <h2 class="page-title">t1yOS SDK for JavaScript/TypeScript</h2>
+                
+                <ol class="breadcrumb" aria-label="breadcrumb">
+                  
+                  
+                  <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item"><a href="../index.html">Sdks</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item"><a href="index.html">Js</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item active" aria-current="page">t1yOS SDK for JavaScript/TypeScript</li>
+                  
+                  
+                </ol>
+                
+              </div>
+              
+              <div class="col-auto ms-auto d-sm-none">
+                <button class="btn btn-icon sidebar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-expanded="false" aria-controls="sidebar-menu" aria-label="Toggle menu">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="row g-5">
+              
+              <div class="col-sm-2">
+                <div class="collapse d-sm-block sidebar-collapse" id="sidebar-menu">
+                  <div class="sticky-top">
+                    <nav class="nav nav-vertical nav-pills" id="pills">
+                      
+                      <a class="nav-link nav-link-level-1" href="#t1yos-sdk-for-javascript-typescript">t1yOS SDK for JavaScript/TypeScript</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e5%b9%b3%e5%8f%b0%e6%94%af%e6%8c%81">平台支持</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e5%ae%89%e8%a3%85">安装</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#npm-pnpm-yarn">npm / pnpm / yarn</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#script-%e6%a0%87%e7%ad%be-%e6%b5%8f%e8%a7%88%e5%99%a8">Script 标签（浏览器）</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e5%b0%8f%e7%a8%8b%e5%ba%8f">小程序</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e5%bf%ab%e5%ba%94%e7%94%a8">快应用</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e5%bf%ab%e9%80%9f%e5%bc%80%e5%a7%8b">快速开始</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e6%95%b0%e6%8d%ae%e5%ba%93%e6%93%8d%e4%bd%9c">数据库操作</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e5%8d%95%e6%9d%a1%e6%93%8d%e4%bd%9c">单条操作</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e6%9d%a1%e4%bb%b6%e6%93%8d%e4%bd%9c">条件操作</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e6%89%b9%e9%87%8f%e6%93%8d%e4%bd%9c">批量操作</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e9%ab%98%e7%ba%a7%e6%9f%a5%e8%af%a2">高级查询</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e8%a1%a8%e7%ae%a1%e7%90%86">表管理</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e7%89%b9%e6%ae%8a%e7%b1%bb%e5%9e%8b">特殊类型</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e5%85%83%e6%95%b0%e6%8d%ae">元数据</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e4%ba%91%e5%87%bd%e6%95%b0">云函数</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e5%ae%89%e5%85%a8%e6%9c%ba%e5%88%b6">安全机制</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e8%ae%a4%e8%af%81%e8%af%b7%e6%b1%82%e5%a4%b4">认证请求头</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e7%ad%be%e5%90%8d%e7%ae%97%e6%b3%95">签名算法</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e5%ae%89%e5%85%a8%e6%a8%a1%e5%bc%8f-aes-256-gcm">安全模式（AES-256-GCM）</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e5%b9%b3%e5%8f%b0%e6%a3%80%e6%b5%8b">平台检测</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e5%8a%a0%e5%af%86%e5%8f%af%e7%94%a8%e6%80%a7%e6%a3%80%e6%b5%8b">加密可用性检测</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#api-%e5%8f%82%e8%80%83">API 参考</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#t1yos">T1YOS</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#t1collection">T1Collection</a>
+                      
+                    </nav>
+                  </div>
+                </div>
+              </div>
+              
+              <div
+                class="col-sm"
+                data-bs-spy="scroll"
+                data-bs-target="#pills"
+                data-bs-offset="0"
+              >
+                <div class="card card-lg">
+                  <div class="card-body markdown">
+                    <h1 id="t1yos-sdk-for-javascript-typescript">t1yOS SDK for JavaScript/TypeScript</h1>
+<h2 id="平台支持">平台支持</h2>
+<table>
+<thead>
+<tr>
+<th>平台</th>
+<th>支持</th>
+<th>传输 API</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Web / Vue / React / HTML</td>
+<td>✅</td>
+<td><code>fetch</code></td>
+<td>现代浏览器</td>
+</tr>
+<tr>
+<td>Node.js</td>
+<td>✅</td>
+<td><code>fetch</code> (18+)</td>
+<td>使用原生 <code>fetch</code> API</td>
+</tr>
+<tr>
+<td>React Native</td>
+<td>✅</td>
+<td><code>fetch</code></td>
+<td>使用原生 <code>fetch</code> API</td>
+</tr>
+<tr>
+<td>微信小程序</td>
+<td>✅</td>
+<td><code>wx.request</code></td>
+<td>自动检测</td>
+</tr>
+<tr>
+<td>QQ 小程序</td>
+<td>✅</td>
+<td><code>qq.request</code></td>
+<td>自动检测（微信小程序系列）</td>
+</tr>
+<tr>
+<td>头条小程序</td>
+<td>✅</td>
+<td><code>tt.request</code></td>
+<td>自动检测（微信小程序系列）</td>
+</tr>
+<tr>
+<td>抖音小程序</td>
+<td>✅</td>
+<td><code>tt.request</code></td>
+<td>自动检测（微信小程序系列）</td>
+</tr>
+<tr>
+<td>支付宝小程序</td>
+<td>✅</td>
+<td><code>my.request</code></td>
+<td>自动检测</td>
+</tr>
+<tr>
+<td>快应用</td>
+<td>✅</td>
+<td><code>@system.fetch</code></td>
+<td>构建时模块解析</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意：</strong> SDK 会自动检测运行环境并使用对应的请求 API，无需手动配置——同一套代码在所有平台都能运行。</p>
+</blockquote>
+<h2 id="安装">安装</h2>
+<h3 id="npm-pnpm-yarn">npm / pnpm / yarn</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>npm install t1y-sdk-js
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 或</span>
+</span></span><span style="display:flex;"><span>pnpm add t1y-sdk-js
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 或</span>
+</span></span><span style="display:flex;"><span>yarn add t1y-sdk-js
+</span></span></code></pre><h3 id="script-标签-浏览器">Script 标签（浏览器）</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://unpkg.com/t1y-sdk-js/dist/umd/t1y.min.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">client</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">T1Y</span>.<span style="color:#a6e22e">T1YOS</span>({ <span style="color:#a6e22e">appId</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1001</span>, <span style="color:#a6e22e">apiKey</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;...&#39;</span>, <span style="color:#a6e22e">secretKey</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;...&#39;</span> })
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span></code></pre><h3 id="小程序">小程序</h3>
+<p><strong>微信 / QQ / 头条 / 抖音小程序：</strong></p>
+<ol>
+<li>
+<p>在小程序项目中通过 npm 安装：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>npm install t1y-sdk-js
+</span></span></code></pre></li>
+<li>
+<p>在开发者工具中构建 npm：</p>
+<ul>
+<li>微信：<code>工具 → 构建 npm</code></li>
+<li>QQ / 头条 / 抖音：在各自开发者工具中类似操作</li>
+</ul>
+</li>
+<li>
+<p>引入并使用：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">T1YOS</span>, <span style="color:#a6e22e">timeNow</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;t1y-sdk-js&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">client</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">T1YOS</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">appId</span>: <span style="color:#66d9ef">1001</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">apiKey</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;32位API-Key&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">secretKey</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;32位Secret-Key&#39;</span>,
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">init</span>()
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// ... 使用数据库操作
+</span></span></span></code></pre></li>
+</ol>
+<blockquote>
+<p><strong>注意：</strong> 小程序需要将 <code>baseUrl</code> 配置到<strong>服务器域名白名单</strong>中。前往小程序管理后台 → 开发 → 服务器域名，添加你的 t1yOS 域名（例如 <code>https://myapp.t1y.net</code>）。</p>
+</blockquote>
+<p><strong>支付宝小程序：</strong></p>
+<p>操作同上——SDK 会自动检测支付宝环境并使用 <code>my.request</code> 代替 <code>wx.request</code>。在支付宝开发者控制台中配置域名白名单即可。</p>
+<h3 id="快应用">快应用</h3>
+<ol>
+<li>
+<p>通过 npm 安装：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>npm install t1y-sdk-js
+</span></span></code></pre></li>
+<li>
+<p>在快应用项目中引入并使用：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">T1YOS</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;t1y-sdk-js&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">client</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">T1YOS</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">appId</span>: <span style="color:#66d9ef">1001</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">apiKey</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;32位API-Key&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">secretKey</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;32位Secret-Key&#39;</span>,
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">init</span>()
+</span></span></code></pre></li>
+</ol>
+<blockquote>
+<p><strong>注意：</strong> 快应用的 hap-toolkit 会在构建时自动解析 <code>@system.fetch</code> 模块依赖，无需额外配置。</p>
+</blockquote>
+<h2 id="快速开始">快速开始</h2>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">T1YOS</span>, <span style="color:#a6e22e">timeNow</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;t1y-sdk-js&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 1. 创建客户端
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">client</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">T1YOS</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">appId</span>: <span style="color:#66d9ef">1001</span>, <span style="color:#75715e">// 必填：应用 ID（&gt;= 1001）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">apiKey</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;4fd7448cdc684431a62d8a0111dc69&#39;</span>, <span style="color:#75715e">// 必填：32 位 API Key
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">secretKey</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;17b784e359c946ffa65eebbf9ce29&#39;</span>, <span style="color:#75715e">// 必填：32 位 Secret Key
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// 以下参数可选（均有默认值）：
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// baseUrl: &#39;https://myapp.t1y.net&#39;,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// version: 0,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// isSafeMode: false,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// timeFormat: &#39;YYYY-MM-DD HH:mm:ss&#39;,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// offset: 0,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 2. 初始化（与服务器同步时间偏移和安全模式）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">init</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 3. 开始使用数据库！
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">collection</span>(<span style="color:#e6db74">&#39;users&#39;</span>).<span style="color:#a6e22e">insertOne</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;张三&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">age</span>: <span style="color:#66d9ef">25</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">active</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">customTimeAt</span>: <span style="color:#66d9ef">timeNow.Now</span>(),
+</span></span><span style="display:flex;"><span>})
+</span></span></code></pre><h2 id="数据库操作">数据库操作</h2>
+<h3 id="单条操作">单条操作</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">db</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">collection</span>(<span style="color:#e6db74">&#39;users&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 插入一条
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">data</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">insertOne</span>({ <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;张三&#39;</span>, <span style="color:#a6e22e">age</span>: <span style="color:#66d9ef">25</span> })
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">objectId</span>) <span style="color:#75715e">// &#39;507f1f77bcf86cd799439011&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 通过 ObjectID 查询
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">data</span>: <span style="color:#66d9ef">findResult</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">findById</span>(<span style="color:#e6db74">&#39;507f1f77bcf86cd799439011&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">findResult</span>.<span style="color:#a6e22e">result</span>) <span style="color:#75715e">// { _id: &#39;507f1f77...&#39;, name: &#39;张三&#39;, ... }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 通过 ObjectID 更新
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">updateById</span>(<span style="color:#e6db74">&#39;507f1f77bcf86cd799439011&#39;</span>, { <span style="color:#a6e22e">$set</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">age</span>: <span style="color:#66d9ef">26</span> } })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 通过 ObjectID 删除
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">deleteById</span>(<span style="color:#e6db74">&#39;507f1f77bcf86cd799439011&#39;</span>)
+</span></span></code></pre><h3 id="条件操作">条件操作</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e">// 条件查询一条
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">data</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">findOne</span>({ <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;张三&#39;</span> })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 条件更新一条
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">updateOne</span>(
+</span></span><span style="display:flex;"><span>  { <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;张三&#39;</span> }, <span style="color:#75715e">// 查询条件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  { <span style="color:#a6e22e">$set</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">age</span>: <span style="color:#66d9ef">27</span> } } <span style="color:#75715e">// 更新内容
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 条件删除一条
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">deleteOne</span>({ <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;张三&#39;</span> })
+</span></span></code></pre><h3 id="批量操作">批量操作</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e">// 插入多条
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">data</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">insertMany</span>([
+</span></span><span style="display:flex;"><span>  { <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;张三&#39;</span>, <span style="color:#a6e22e">age</span>: <span style="color:#66d9ef">25</span> },
+</span></span><span style="display:flex;"><span>  { <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;李四&#39;</span>, <span style="color:#a6e22e">age</span>: <span style="color:#66d9ef">30</span> },
+</span></span><span style="display:flex;"><span>])
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">insertedCount</span>) <span style="color:#75715e">// 2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 删除多条
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">deleteMany</span>({ <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">$lt</span>: <span style="color:#66d9ef">18</span> } })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 更新多条
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">updateMany</span>({ <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;inactive&#39;</span> }, { <span style="color:#a6e22e">$set</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;archived&#39;</span> } })
+</span></span></code></pre><h3 id="高级查询">高级查询</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e">// 分页查询
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">data</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">find</span>(
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">1</span>, <span style="color:#75715e">// 页码（从 1 开始）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#ae81ff">20</span>, <span style="color:#75715e">// 每页条数（最大 100）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  { <span style="color:#a6e22e">createdAt</span><span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> }, <span style="color:#75715e">// 排序（按创建时间倒序）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  { <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">$gte</span>: <span style="color:#66d9ef">18</span> } } <span style="color:#75715e">// 查询条件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">results</span>) <span style="color:#75715e">// 文档数组
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">pagination</span>) <span style="color:#75715e">// { totalItems: 42, totalPages: 3 }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 聚合查询
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">data</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">aggregate</span>([
+</span></span><span style="display:flex;"><span>  { <span style="color:#a6e22e">$match</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;completed&#39;</span> } },
+</span></span><span style="display:flex;"><span>  { <span style="color:#a6e22e">$group</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">_id</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;$category&#39;</span>, <span style="color:#a6e22e">total</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">$sum</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;$amount&#39;</span> } } },
+</span></span><span style="display:flex;"><span>  { <span style="color:#a6e22e">$sort</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">total</span><span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> } },
+</span></span><span style="display:flex;"><span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 计数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">data</span>: <span style="color:#66d9ef">countData</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">collection</span>(<span style="color:#e6db74">&#39;users&#39;</span>).<span style="color:#a6e22e">count</span>({ <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;active&#39;</span> })
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">countData</span>.<span style="color:#a6e22e">count</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 去重查询
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">data</span>: <span style="color:#66d9ef">distinctData</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">collection</span>(<span style="color:#e6db74">&#39;users&#39;</span>).<span style="color:#a6e22e">distinct</span>(<span style="color:#e6db74">&#39;city&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 带条件过滤
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">data</span>: <span style="color:#66d9ef">filteredDistinct</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">db</span>
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">collection</span>(<span style="color:#e6db74">&#39;users&#39;</span>)
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">distinct</span>(<span style="color:#e6db74">&#39;city&#39;</span>, { <span style="color:#a6e22e">country</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;China&#39;</span> })
+</span></span></code></pre><h3 id="表管理">表管理</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e">// 获取所有表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">data</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">getCollections</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">results</span>) <span style="color:#75715e">// [&#39;users&#39;, &#39;orders&#39;, &#39;products&#39;]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 创建表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">collection</span>(<span style="color:#e6db74">&#39;posts&#39;</span>).<span style="color:#a6e22e">create</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 清空表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">data</span>: <span style="color:#66d9ef">clearResult</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">collection</span>(<span style="color:#e6db74">&#39;posts&#39;</span>).<span style="color:#a6e22e">clear</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">clearResult</span>.<span style="color:#a6e22e">deletedCount</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 删除表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">collection</span>(<span style="color:#e6db74">&#39;posts&#39;</span>).<span style="color:#a6e22e">drop</span>()
+</span></span></code></pre><h2 id="特殊类型">特殊类型</h2>
+<p>SDK 提供了一系列辅助函数，用于生成服务端可识别的类型标记：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">import</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ObjectID</span>,
+</span></span><span style="display:flex;"><span>  Date,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">DateTime</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Timestamp</span>,
+</span></span><span style="display:flex;"><span>  Boolean,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Integer</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Bigint</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Float</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Double</span>,
+</span></span><span style="display:flex;"><span>  Array,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Map</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">MapArray</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Null</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">None</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Nil</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">timeNow</span>,
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;t1y-sdk-js&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">insertOne</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// ObjectID 引用
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">userId</span>: <span style="color:#66d9ef">ObjectID</span>(<span style="color:#e6db74">&#39;507f1f77bcf86cd799439011&#39;</span>),
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 日期类型
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">birthday</span>: <span style="color:#66d9ef">Date</span>(<span style="color:#e6db74">&#39;2000-01-01T00:00:00Z&#39;</span>),
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">eventTime</span>: <span style="color:#66d9ef">DateTime</span>(<span style="color:#e6db74">&#39;2024-06-15T14:30:00Z&#39;</span>),
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">loginAt</span>: <span style="color:#66d9ef">Timestamp</span>(<span style="color:#ae81ff">1705312200</span>),
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 数值类型
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">active</span>: <span style="color:#66d9ef">Boolean</span>(<span style="color:#66d9ef">true</span>),
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">quantity</span>: <span style="color:#66d9ef">Integer</span>(<span style="color:#ae81ff">42</span>),
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">bigNumber</span>: <span style="color:#66d9ef">Bigint</span>(<span style="color:#ae81ff">9007199254740991</span>),
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">rating</span>: <span style="color:#66d9ef">Float</span>(<span style="color:#ae81ff">4.5</span>),
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">preciseValue</span>: <span style="color:#66d9ef">Double</span>(<span style="color:#ae81ff">3.141592653589793</span>),
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 结构化类型
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">tags</span>: <span style="color:#66d9ef">Array</span>([<span style="color:#e6db74">&#39;javascript&#39;</span>, <span style="color:#e6db74">&#39;typescript&#39;</span>]),
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">metadata</span>: <span style="color:#66d9ef">Map</span>({ <span style="color:#a6e22e">theme</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;dark&#39;</span>, <span style="color:#a6e22e">lang</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;zh&#39;</span> }),
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">history</span>: <span style="color:#66d9ef">MapArray</span>([{ <span style="color:#a6e22e">action</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;login&#39;</span> }, { <span style="color:#a6e22e">action</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;logout&#39;</span> }]),
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 空值
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">deletedAt</span>: <span style="color:#66d9ef">Null</span>, <span style="color:#75715e">// 服务端转为 nil
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">middleName</span>: <span style="color:#66d9ef">None</span>, <span style="color:#75715e">// 服务端转为 nil
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 服务端时间辅助
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">customTimeAt</span>: <span style="color:#66d9ef">timeNow.Now</span>(), <span style="color:#75715e">// 服务端的 time.Now()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">unixCreatedAt</span>: <span style="color:#66d9ef">timeNow.NowUnix</span>(), <span style="color:#75715e">// 服务端的 time.Now().Unix()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>})
+</span></span></code></pre><h2 id="元数据">元数据</h2>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e">// 获取全部元数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">data</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">getMeta</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">results</span>) <span style="color:#75715e">// { version: 1, collections: [...], ... }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 获取指定字段
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">data</span>: <span style="color:#66d9ef">versionData</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">getMeta</span>(<span style="color:#e6db74">&#39;version&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">versionData</span>.<span style="color:#a6e22e">result</span>) <span style="color:#75715e">// 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 检查更新
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">hasUpdate</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">checkUpdate</span>()
+</span></span></code></pre><h2 id="云函数">云函数</h2>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e">// 调用 .jsc 云函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">data</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">callFunc</span>(<span style="color:#e6db74">&#39;hello&#39;</span>, { <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;World&#39;</span> })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 为此调用单独启用安全模式
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">data</span>: <span style="color:#66d9ef">safeData</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">callFunc</span>(<span style="color:#e6db74">&#39;secureFunc&#39;</span>, <span style="color:#a6e22e">params</span>, <span style="color:#66d9ef">true</span>)
+</span></span></code></pre><h2 id="安全机制">安全机制</h2>
+<h3 id="认证请求头">认证请求头</h3>
+<p>每个请求都会携带以下请求头：</p>
+<ul>
+<li><code>X-T1Y-Application-ID</code> — 应用 ID</li>
+<li><code>X-T1Y-API-Key</code> — 32 位 API Key</li>
+<li><code>X-T1Y-Safe-Timestamp</code> — Unix 时间戳（UTC + 初始化时获取的时间偏移）</li>
+<li><code>X-T1Y-Safe-Sign</code> — HMAC-SHA256 签名（64 位十六进制）</li>
+</ul>
+<h3 id="签名算法">签名算法</h3>
+<pre><code>message = METHOD + &quot;\n&quot; + URL_PATH + &quot;\n&quot; + SHA256(body) + &quot;\n&quot; + appId + &quot;\n&quot; + timestamp
+signature = HMAC-SHA256(secretKey, message)
+</code></pre>
+<h3 id="安全模式-aes-256-gcm">安全模式（AES-256-GCM）</h3>
+<p>当启用安全模式时（通过 <code>isSafeMode: true</code> 或初始化时自动检测），请求体将使用 AES-256-GCM 加密，密钥为应用的 SecretKey，服务端响应也会自动解密。</p>
+<h2 id="平台检测">平台检测</h2>
+<p>SDK 暴露了检测当前运行环境的工具函数：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">getPlatformType</span>, <span style="color:#a6e22e">getMiniProgramSubType</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;t1y-sdk-js&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 返回 &#39;h5&#39; | &#39;wx&#39; | &#39;my&#39; | &#39;hap&#39; | &#39;nodejs&#39; | &#39;unknown&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">platform</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">getPlatformType</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 在 &#39;wx&#39; 系列中，返回 &#39;wechat&#39; | &#39;qq&#39; | &#39;toutiao&#39; | &#39;unknown&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">subType</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">getMiniProgramSubType</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">platform</span>) <span style="color:#75715e">// 例如在微信小程序中输出 &#39;wx&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">subType</span>) <span style="color:#75715e">// 例如在头条小程序中输出 &#39;toutiao&#39;
+</span></span></span></code></pre><h3 id="加密可用性检测">加密可用性检测</h3>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">isAESGCMAvailable</span>, <span style="color:#a6e22e">isWebCryptoAvailable</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;t1y-sdk-js&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 始终返回 true——纯 JS AES-256-GCM 降级方案始终可用
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">isAESGCMAvailable</span>()) <span style="color:#75715e">// true
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 检测是否有更快的原生 Web Crypto API（硬件加速）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">isWebCryptoAvailable</span>()) <span style="color:#75715e">// 浏览器/Node.js 中为 true，小程序中为 false
+</span></span></span></code></pre><p>SDK 优先使用 <strong>Web Crypto API</strong>（在浏览器/Node.js 中更快、硬件加速），在没有 Web Crypto 的环境（小程序、快应用）中自动降级为<strong>纯 JavaScript AES-256-GCM</strong> 实现。这确保安全模式加密在所有平台上都能正常工作。</p>
+<h2 id="api-参考">API 参考</h2>
+<h3 id="t1yos">T1YOS</h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>new T1YOS(config)</code></td>
+<td>创建客户端（校验 appId、apiKey、secretKey）</td>
+</tr>
+<tr>
+<td><code>init()</code></td>
+<td>与服务端同步时间偏移和安全模式</td>
+</tr>
+<tr>
+<td><code>db.collection(name)</code></td>
+<td>获取集合操作实例（链式调用）</td>
+</tr>
+<tr>
+<td><code>db.toObjectID(id)</code></td>
+<td>创建 ObjectID 标记字符串</td>
+</tr>
+<tr>
+<td><code>db.getCollections()</code></td>
+<td>获取所有表</td>
+</tr>
+<tr>
+<td><code>getMeta(field?)</code></td>
+<td>获取应用元数据</td>
+</tr>
+<tr>
+<td><code>checkUpdate()</code></td>
+<td>检查是否存在新版本</td>
+</tr>
+<tr>
+<td><code>callFunc(name, params?, safeMode?)</code></td>
+<td>调用云函数</td>
+</tr>
+<tr>
+<td><code>request(method, path, params?, encryption?)</code></td>
+<td>原始认证请求</td>
+</tr>
+</tbody>
+</table>
+<h3 id="t1collection">T1Collection</h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>HTTP</th>
+<th>端点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>insertOne(data)</code></td>
+<td>POST</td>
+<td><code>/v5/classes/:name</code></td>
+</tr>
+<tr>
+<td><code>deleteById(objectId)</code></td>
+<td>DELETE</td>
+<td><code>/v5/classes/:name/:objectId</code></td>
+</tr>
+<tr>
+<td><code>updateById(objectId, data)</code></td>
+<td>PUT</td>
+<td><code>/v5/classes/:name/:objectId</code></td>
+</tr>
+<tr>
+<td><code>findById(objectId)</code></td>
+<td>GET</td>
+<td><code>/v5/classes/:name/:objectId</code></td>
+</tr>
+<tr>
+<td><code>deleteOne(filter)</code></td>
+<td>DELETE</td>
+<td><code>/v5/classes/:name/one</code></td>
+</tr>
+<tr>
+<td><code>updateOne(filter, body)</code></td>
+<td>PUT</td>
+<td><code>/v5/classes/:name/one</code></td>
+</tr>
+<tr>
+<td><code>findOne(filter)</code></td>
+<td>POST</td>
+<td><code>/v5/classes/:name/one</code></td>
+</tr>
+<tr>
+<td><code>insertMany(dataList)</code></td>
+<td>POST</td>
+<td><code>/v5/classes/:name/many</code></td>
+</tr>
+<tr>
+<td><code>deleteMany(filter)</code></td>
+<td>DELETE</td>
+<td><code>/v5/classes/:name/many</code></td>
+</tr>
+<tr>
+<td><code>updateMany(filter, body)</code></td>
+<td>PUT</td>
+<td><code>/v5/classes/:name/many</code></td>
+</tr>
+<tr>
+<td><code>find(page, size, sort, filter)</code></td>
+<td>POST</td>
+<td><code>/v5/classes/:name/find</code></td>
+</tr>
+<tr>
+<td><code>aggregate(pipeline)</code></td>
+<td>POST</td>
+<td><code>/v5/classes/:name/aggregate</code></td>
+</tr>
+<tr>
+<td><code>count(filter?)</code></td>
+<td>POST</td>
+<td><code>/v5/classes/:name/count</code></td>
+</tr>
+<tr>
+<td><code>distinct(fieldName, filter?)</code></td>
+<td>POST</td>
+<td><code>/v5/classes/:name/distinct/:field</code></td>
+</tr>
+<tr>
+<td><code>create()</code></td>
+<td>POST</td>
+<td><code>/v5/schemas/:name</code></td>
+</tr>
+<tr>
+<td><code>clear()</code></td>
+<td>PUT</td>
+<td><code>/v5/schemas/:name</code></td>
+</tr>
+<tr>
+<td><code>drop()</code></td>
+<td>DELETE</td>
+<td><code>/v5/schemas/:name</code></td>
+</tr>
+</tbody>
+</table>
+<p>T1YOS <code>db</code> 对象还提供：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>HTTP</th>
+<th>端点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>db.getCollections()</code></td>
+<td>GET</td>
+<td><code>/v5/schemas</code></td>
+</tr>
+</tbody>
+</table>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    <script src="../../js/tabler.min.js" defer></script>
+  </body>
+</html>

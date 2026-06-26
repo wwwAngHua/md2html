@@ -82,6 +82,25 @@ t1yOS 云数据库具有以下能力：
 
 如需参阅云数据库相关文档，请前往：[云数据库文档](./database/index.html)
 
+# SDKs
+
+t1yOS 提供齐全的 `SDK` 帮助用户更便捷的无需编写 `API` 接口即可操作云数据库以及调用云函数。目前 SDK 已覆盖以下场景：
+
+- JavaScript、TypeScript
+- HTML、Vue、React
+- Node.js
+- Java、Kotlin、Android
+- Swift、iOS、macOS、watchOS、tvOS
+- Dart、Flutter
+- React Native
+- 微信小程序、QQ 小程序、头条小程序、抖音小程序、支付宝小程序、快应用
+- C#（Windows、Unity、Godot 等场景均可使用）
+- Go
+
+如需使用 SDK，请阅读 SDK 相关文档：[SDK 文档](./sdks/index.html)
+
+以上 SDK 已经覆盖几乎所有的开发场景，如果你有什么未满足的需求，欢迎联系我们进行反馈，开发人员会第一时间进行开发的～
+
 # MCP Server
 
 使用 `t1yOS MCP Server` 可以让 `AI` 大模型接管 `t1yOS` 平台 `90+` 功能，彻底解放双手，如：帮助你管理云数据库、管理文件系统文件、管理定时任务、管理环境变量等等。
