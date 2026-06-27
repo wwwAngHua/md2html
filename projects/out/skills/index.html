@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>t1yOS Skills 使用指南 - t1yOS 开发文档</title>
+    <link rel="icon" href="../favicon.svg" />
+    <meta name="description" content="t1yOS Skills 是一个专为 AI 编程助手（如 Claude Code、Cursor、Windsurf 等）设计的技能包，为 AI 提供 t1yOS 平台的完整知识，帮助开发者更高效地使用 AI 进行平台资源管理和云函数开发。" />
+    <meta property="og:title" content="t1yOS Skills 使用指南 - t1yOS 开发文档" />
+    <meta property="og:description" content="t1yOS Skills 是一个专为 AI 编程助手（如 Claude Code、Cursor、Windsurf 等）设计的技能包，为 AI 提供 t1yOS 平台的完整知识，帮助开发者更高效地使用 AI 进行平台资源管理和云函数开发。" />
+    <meta property="og:type" content="article" />
+    <link href="../css/tabler.min.css" rel="stylesheet" />
+    <link href="../css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="../css/tabler-socials.min.css" rel="stylesheet" />
+    <link href="../css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="../css/tabler-vendors.min.css" rel="stylesheet" />
+    <link href="../css/tabler-marketing.min.css" rel="stylesheet" />
+    <link href="../css/tabler-themes.min.css" rel="stylesheet" />
+    <style>      @import url("https://rsms.me/inter/inter.css");
+
+      .markdown :not(pre) > code {
+        background-color: #f0f0f0;
+        color: #d63384;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.875em;
+      }
+
+      .markdown pre {
+        border-radius: 8px;
+        padding: 16px;
+        overflow-x: auto;
+        margin: 1rem 0;
+        background-color: #272822;
+      }
+
+      .markdown pre code {
+        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", Consolas, monospace;
+        font-size: 0.875em;
+        line-height: 1.6;
+        background: none !important;
+        padding: 0;
+      }
+
+      .markdown pre[style] {
+        background-color: #272822 !important;
+      }
+
+      .breadcrumb {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .breadcrumb-item {
+        font-size: 0.875rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item + .breadcrumb-item::before {
+        content: "/";
+        margin: 0 0.5rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item a {
+        color: var(--tblr-muted, #656d77);
+        text-decoration: none;
+      }
+      .breadcrumb-item a:hover {
+        color: var(--tblr-primary, #206bc4);
+        text-decoration: underline;
+      }
+      .breadcrumb-item.active {
+        color: var(--tblr-body-color, #1e293b);
+      }
+
+       
+      .sidebar-toggle {
+        display: none;
+      }
+      @media (max-width: 575.98px) {
+        .sidebar-toggle {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+        .sidebar-collapse {
+          margin-bottom: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="page-wrapper">
+        <div class="page-header d-print-none" aria-label="Page header">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <h2 class="page-title">t1yOS Skills 使用指南</h2>
+                
+                <ol class="breadcrumb" aria-label="breadcrumb">
+                  
+                  
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item"><a href="index.html">Skills</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item active" aria-current="page">t1yOS Skills 使用指南</li>
+                  
+                  
+                </ol>
+                
+              </div>
+              
+              <div class="col-auto ms-auto d-sm-none">
+                <button class="btn btn-icon sidebar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-expanded="false" aria-controls="sidebar-menu" aria-label="Toggle menu">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="row g-5">
+              
+              <div class="col-sm-2">
+                <div class="collapse d-sm-block sidebar-collapse" id="sidebar-menu">
+                  <div class="sticky-top">
+                    <nav class="nav nav-vertical nav-pills" id="pills">
+                      
+                      <a class="nav-link nav-link-level-1" href="#t1yos-skills-%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97">t1yOS Skills 使用指南</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e4%bb%80%e4%b9%88%e6%98%af-skills">什么是 Skills？</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e8%8e%b7%e5%8f%96">获取</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e5%ae%89%e8%a3%85%e6%96%b9%e5%bc%8f">安装方式</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e8%a7%a6%e5%8f%91%e6%96%b9%e5%bc%8f">触发方式</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e6%8a%80%e8%83%bd%e8%a6%86%e7%9b%96%e8%8c%83%e5%9b%b4">技能覆盖范围</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#1-%e4%ba%91%e5%87%bd%e6%95%b0%e5%bc%80%e5%8f%91">1. 云函数开发</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#2-%e4%ba%91%e6%95%b0%e6%8d%ae%e5%ba%93">2. 云数据库</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#3-%e5%ae%89%e5%85%a8%e6%9c%ba%e5%88%b6">3. 安全机制</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#4-mcp-server">4. MCP Server</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#5-%e5%ae%a2%e6%88%b7%e7%ab%af-sdk">5. 客户端 SDK</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e6%9c%80%e4%bd%b3%e5%ae%9e%e8%b7%b5">最佳实践</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e4%b8%8e-mcp-server-%e9%85%8d%e5%90%88%e4%bd%bf%e7%94%a8">与 MCP Server 配合使用</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e5%bc%80%e5%8f%91%e5%b7%a5%e4%bd%9c%e6%b5%81%e5%bb%ba%e8%ae%ae">开发工作流建议</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e6%8a%80%e8%83%bd%e6%96%87%e4%bb%b6%e7%bb%93%e6%9e%84">技能文件结构</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e5%b8%b8%e8%a7%81%e9%97%ae%e9%a2%98">常见问题</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#q-skills-%e5%92%8c-mcp-server-%e6%9c%89%e4%bb%80%e4%b9%88%e5%8c%ba%e5%88%ab">Q: Skills 和 MCP Server 有什么区别？</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#q-%e6%8a%80%e8%83%bd%e6%98%af%e5%90%a6%e4%bc%9a%e6%b6%88%e8%80%97%e6%9b%b4%e5%a4%9a-token">Q: 技能是否会消耗更多 Token？</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#q-%e5%a6%82%e4%bd%95%e6%9b%b4%e6%96%b0%e6%8a%80%e8%83%bd">Q: 如何更新技能？</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#q-%e6%94%af%e6%8c%81%e5%93%aa%e4%ba%9b-ai-%e5%b7%a5%e5%85%b7">Q: 支持哪些 AI 工具？</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e8%8e%b7%e5%8f%96%e6%96%b9%e5%bc%8f">获取方式</a>
+                      
+                    </nav>
+                  </div>
+                </div>
+              </div>
+              
+              <div
+                class="col-sm"
+                data-bs-spy="scroll"
+                data-bs-target="#pills"
+                data-bs-offset="0"
+              >
+                <div class="card card-lg">
+                  <div class="card-body markdown">
+                    <h1 id="t1yos-skills-使用指南">t1yOS Skills 使用指南</h1>
+<p>t1yOS Skills 是一个专为 AI 编程助手（如 Claude Code、Cursor、Windsurf 等）设计的技能包，为 AI 提供 t1yOS 平台的完整知识，帮助开发者更高效地使用 AI 进行平台资源管理和云函数开发。</p>
+<h2 id="什么是-skills">什么是 Skills？</h2>
+<p>Skills 是一种为 AI 助手注入专业领域知识的机制。通过加载 t1yOS Skills，AI 能够：</p>
+<ul>
+<li>准确理解 t1yOS 平台的特性和约束</li>
+<li>编写符合平台规范的云函数代码</li>
+<li>正确使用数据库、加密、JWT 等内置模块</li>
+<li>规避常见的平台开发陷阱</li>
+</ul>
+<p><strong>没有 Skills 时</strong>，AI 可能基于通用的 Node.js 或 Serverless 经验给出不符合 t1yOS 平台规则的建议（如使用 <code>module.exports</code>、<code>import</code> 语法、npm 包等）。</p>
+<p><strong>使用 Skills 后</strong>，AI 将严格遵循 t1yOS 的平台规范，生成的代码可直接部署运行。</p>
+<h2 id="获取">获取</h2>
+<table>
+<thead>
+<tr>
+<th>区域</th>
+<th>仓库地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>国际</td>
+<td><a href="https://github.com/t1yOS/t1y-skills">github.com/t1yOS/t1y-skills</a></td>
+</tr>
+<tr>
+<td>国内</td>
+<td><a href="https://gitee.com/t1yOS/t1y-skills">gitee.com/t1yOS/t1y-skills</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="安装方式">安装方式</h2>
+<ol>
+<li>从 <a href="https://github.com/t1yOS/t1y-skills">GitHub</a>（国内用户从 <a href="https://gitee.com/t1yOS/t1y-skills">Gitee</a>）下载 ZIP 包并解压</li>
+<li>将解压后的 <code>t1y-skills</code> 目录放置到对应位置：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>AI 工具</th>
+<th>安装路径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Claude Code</strong></td>
+<td><code>~/.claude/skills/t1yOS/</code></td>
+</tr>
+<tr>
+<td><strong>Cursor</strong></td>
+<td>项目根目录 <code>.claude/skills/</code> 或 <code>.cursor/skills/</code></td>
+</tr>
+<tr>
+<td><strong>Windsurf</strong></td>
+<td>项目根目录 <code>.claude/skills/</code></td>
+</tr>
+<tr>
+<td><strong>VS Code (Copilot)</strong></td>
+<td>项目根目录 <code>.claude/skills/</code></td>
+</tr>
+</tbody>
+</table>
+<p>放置后 AI 将自动识别并加载技能，无需额外配置。</p>
+<h2 id="触发方式">触发方式</h2>
+<p>安装后，当你向 AI 提出与 t1yOS 平台相关的问题时，AI 将自动激活此技能。以下是一些典型的触发场景：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>示例提问</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>编写云函数</td>
+<td>&quot;帮我写一个用户登录的云函数&quot;</td>
+</tr>
+<tr>
+<td>数据库操作</td>
+<td>&quot;如何在 t1yOS 中分页查询用户列表&quot;</td>
+</tr>
+<tr>
+<td>安全加密</td>
+<td>&quot;给这个云函数加上签名验证&quot;</td>
+</tr>
+<tr>
+<td>SDK 集成</td>
+<td>&quot;帮我在 React 项目中集成 t1yOS SDK&quot;</td>
+</tr>
+<tr>
+<td>MCP 管理</td>
+<td>&quot;帮我通过 MCP 创建一个云函数&quot;</td>
+</tr>
+<tr>
+<td>问题排查</td>
+<td>&quot;为什么我的云函数部署后无法访问&quot;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="技能覆盖范围">技能覆盖范围</h2>
+<p>t1yOS Skills 包含以下领域知识：</p>
+<h3 id="1-云函数开发">1. 云函数开发</h3>
+<ul>
+<li><code>.jsc</code> 文件编写规范</li>
+<li><code>onRequest(ctx)</code> 入口函数</li>
+<li>内置模块使用：<code>context</code>、<code>http</code>、<code>mongo</code>、<code>crypto</code>、<code>os</code>、<code>jwt</code></li>
+<li>本地/远程 require 模块加载</li>
+<li>Go 模板渲染语法</li>
+<li>文件上传、Cookie 处理、重定向</li>
+</ul>
+<h3 id="2-云数据库">2. 云数据库</h3>
+<ul>
+<li>NoSQL 风格 CRUD 操作</li>
+<li>SQL-to-BSON 转换查询</li>
+<li>聚合管道、分页、排序</li>
+<li>查询操作符（<code>$gt</code>、<code>$in</code>、<code>$regex</code> 等）</li>
+<li>ObjectID 类型处理</li>
+</ul>
+<h3 id="3-安全机制">3. 安全机制</h3>
+<ul>
+<li>HMAC-SHA256 请求签名（<code>ctx.sign()</code>）</li>
+<li>AES-256-GCM 端到端加密（安全模式）</li>
+<li>Argon2id / bcrypt 密码哈希</li>
+<li>JWT 令牌签发与验证</li>
+</ul>
+<h3 id="4-mcp-server">4. MCP Server</h3>
+<ul>
+<li>配置方法（支持 Claude Code、Cursor、Windsurf、VS Code 等）</li>
+<li>完整工具目录：数据库管理、环境变量、文件管理、云函数管理、应用设置、定时任务</li>
+<li>权限模型说明</li>
+</ul>
+<h3 id="5-客户端-sdk">5. 客户端 SDK</h3>
+<ul>
+<li>JavaScript/TypeScript（Web、Node.js、React Native、小程序）</li>
+<li>Android（Kotlin）</li>
+<li>Swift（iOS/macOS）</li>
+<li>Flutter（Dart）</li>
+<li>C#（.NET / Unity）</li>
+<li>Go</li>
+<li>特殊类型标记（ObjectID、Date、Boolean 等）</li>
+</ul>
+<h2 id="最佳实践">最佳实践</h2>
+<h3 id="与-mcp-server-配合使用">与 MCP Server 配合使用</h3>
+<p>t1yOS 同时提供 <strong>Skills</strong> 和 <strong>MCP Server</strong> 两种 AI 辅助方式：</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>Skills</th>
+<th>MCP Server</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用途</td>
+<td>知识注入，指导 AI 编写正确代码</td>
+<td>工具调用，让 AI 直接操作平台资源</td>
+</tr>
+<tr>
+<td>工作方式</td>
+<td>AI 参考技能知识生成代码</td>
+<td>AI 通过 MCP 协议调用平台 API</td>
+</tr>
+<tr>
+<td>典型场景</td>
+<td>编写云函数、集成 SDK</td>
+<td>管理数据库、部署函数、查看日志</td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐做法</strong>：同时安装 Skills 和配置 MCP Server。Skills 确保 AI 生成的代码正确，MCP Server 让 AI 能直接帮你管理平台资源。</p>
+<h3 id="开发工作流建议">开发工作流建议</h3>
+<ol>
+<li><strong>编写云函数时</strong>：让 AI 参考 Skills 知识生成 <code>.jsc</code> 代码 → 通过 MCP <code>function_create</code> 或 WebIDE 部署</li>
+<li><strong>调试问题时</strong>：通过 MCP <code>function_get_log</code> 查看日志 → 让 AI 分析日志并修复代码</li>
+<li><strong>管理数据时</strong>：通过 MCP 数据库工具直接操作 → 如需批量处理，让 AI 编写云函数脚本</li>
+</ol>
+<h2 id="技能文件结构">技能文件结构</h2>
+<pre><code>t1y-os-skills/
+├── SKILL.md                    # 主技能文件（核心知识和规范）
+└── references/                 # 参考文档（按需加载）
+    ├── cloud-function.md       # 云函数 API 完整参考
+    ├── database.md             # 数据库 API 完整参考
+    ├── crypto.md               # 加密模块 API 完整参考
+    ├── mcp.md                  # MCP Server 工具参考
+    ├── sdks.md                 # 多平台 SDK 集成指南
+    ├── security.md             # 安全机制详解
+    └── constants.md            # HTTP 常量和状态码
+</code></pre>
+<h2 id="常见问题">常见问题</h2>
+<h3 id="q-skills-和-mcp-server-有什么区别">Q: Skills 和 MCP Server 有什么区别？</h3>
+<p>Skills 是&quot;教 AI 知识&quot;，让 AI 理解 t1yOS 的特性和规则；MCP Server 是&quot;给 AI 工具&quot;，让 AI 能直接操作平台。两者互补，建议同时使用。</p>
+<h3 id="q-技能是否会消耗更多-token">Q: 技能是否会消耗更多 Token？</h3>
+<p>技能加载会消耗一定的上下文 Token（约 3,000-5,000 词的基础知识 + 按需加载的参考文档），但能大幅减少 AI 因不了解平台而反复试错产生的 Token 消耗。基准测试显示，使用技能后代码通过率从 93% 提升到 100%，综合效率更优。</p>
+<h3 id="q-如何更新技能">Q: 如何更新技能？</h3>
+<p>当 t1yOS 平台发布新功能或 API 变更时，Skills 项目会同步更新。重新下载最新版本的 Skills 文件替换即可。</p>
+<h3 id="q-支持哪些-ai-工具">Q: 支持哪些 AI 工具？</h3>
+<p>目前支持所有兼容 Skills 机制的 AI 编程工具，包括 Claude Code、Cursor、Windsurf、VS Code with GitHub Copilot 等。</p>
+<h2 id="获取方式">获取方式</h2>
+<ul>
+<li><strong>GitHub</strong>：<a href="https://github.com/t1yOS/t1y-skills">github.com/t1yOS/t1y-skills</a></li>
+<li><strong>Gitee（国内镜像）</strong>：<a href="https://gitee.com/t1yOS/t1y-skills">gitee.com/t1yOS/t1y-skills</a></li>
+<li><strong>反馈渠道</strong>：如有问题或建议，请通过平台客服或 QQ 群反馈</li>
+</ul>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    <script src="../js/tabler.min.js" defer></script>
+  </body>
+</html>

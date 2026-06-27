@@ -144,6 +144,30 @@ function onRequest() {
 }
 ```
 
+**导入远程 JavaScript 文件和 JSON 文件**
+
+云函数支持导入普通的纯 `JavaScript` 文件，可以使用例如：`CryptoJS` 等现有库或自己封装，更好的辅助用户开发。同时也支持导入本地的 `JavaScript` 文件或 `JSON` 文件。
+
+- 本地导入时需要完整文件路径
+- 远程导入时首次加载会稍慢（后续缓存访问变快）
+- 注意：无论本地导入还是远程导入都会缓存，如导入文件存在变更，请使用 `clearCache` 函数清除缓存
+
+```js
+// const CryptoJS = require('/.librarys/crypto-js.min.js') // 本地导入
+// const PackageJSON = require('/.librarys/package.json') // 本地导入
+
+// 远程导入 JavaScript 和 JSON：
+const CryptoJS = require('https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js')
+const PackageJSON = require('https://unpkg.com/vue/package.json')
+
+function onRequest() {
+  clearCache() // 如果导入的 JavaScript 或者 JSON 文件发生变化可手动清理缓存（需按需调用，文件没有变化的情况下不需要清理，存在缓存访问加载速度会更快）
+  return { name: PackageJSON.name, md5: CryptoJS.MD5('Hello, World!').toString() }
+}
+```
+
+导入模块时，只有普通的 `.js` 文件或 `.json` 文件会被缓存，云函数内置模块以及 `.jsc` 云函数文件都是预编译的，不会被缓存，修改后会立即生效，推荐使用 `.jsc` 云函数文件进行封装，预编译，这样执行效率会更快一些。
+
 # 获取身份标识
 
 使用 `ctx.userAgent` 函数，你可以获取客户端的身份标识信息，如设备类型等。

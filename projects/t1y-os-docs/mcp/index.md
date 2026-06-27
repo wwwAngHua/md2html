@@ -1,6 +1,6 @@
 # MCP Server
 
-使用 `t1yOS MCP Server` 可以将你在 `t1yOS` 平台上创建的应用功能全部暴露给 `Claude Code`、`Codex`、`Cursor`、`Windsurf`、`VS Code（GitHub Copilot）`、`Zed` 等主流 `AI` 编程工具。
+使用 `t1yOS MCP Server` 可以将你在 `t1yOS` 平台上创建的应用功能全部暴露给 `Claude Code`、`Codex`、`Cursor`、`Windsurf`、`VS Code（GitHub Copilot）`、`Zed` 等主流 `AI` 编程工具。如需查看完整 `MCP Tools` 列表请阅读：[MCP Tools 列表文档](./tools/index.html)
 
 ## 准备工作
 

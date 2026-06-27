@@ -1,0 +1,770 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>t1yOS MCP Tools 列表 - t1yOS 开发文档</title>
+    <link rel="icon" href="../../favicon.svg" />
+    <meta name="description" content="本文档列出 t1yOS 平台当前版本所有可用的 MCP 工具，按功能模块分组，说明每个工具的名称、功能、参数及读写属性。" />
+    <meta property="og:title" content="t1yOS MCP Tools 列表 - t1yOS 开发文档" />
+    <meta property="og:description" content="本文档列出 t1yOS 平台当前版本所有可用的 MCP 工具，按功能模块分组，说明每个工具的名称、功能、参数及读写属性。" />
+    <meta property="og:type" content="article" />
+    <link href="../../css/tabler.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-socials.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-vendors.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-marketing.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-themes.min.css" rel="stylesheet" />
+    <style>      @import url("https://rsms.me/inter/inter.css");
+
+      .markdown :not(pre) > code {
+        background-color: #f0f0f0;
+        color: #d63384;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.875em;
+      }
+
+      .markdown pre {
+        border-radius: 8px;
+        padding: 16px;
+        overflow-x: auto;
+        margin: 1rem 0;
+        background-color: #272822;
+      }
+
+      .markdown pre code {
+        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", Consolas, monospace;
+        font-size: 0.875em;
+        line-height: 1.6;
+        background: none !important;
+        padding: 0;
+      }
+
+      .markdown pre[style] {
+        background-color: #272822 !important;
+      }
+
+      .breadcrumb {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .breadcrumb-item {
+        font-size: 0.875rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item + .breadcrumb-item::before {
+        content: "/";
+        margin: 0 0.5rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item a {
+        color: var(--tblr-muted, #656d77);
+        text-decoration: none;
+      }
+      .breadcrumb-item a:hover {
+        color: var(--tblr-primary, #206bc4);
+        text-decoration: underline;
+      }
+      .breadcrumb-item.active {
+        color: var(--tblr-body-color, #1e293b);
+      }
+
+       
+      .sidebar-toggle {
+        display: none;
+      }
+      @media (max-width: 575.98px) {
+        .sidebar-toggle {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+        .sidebar-collapse {
+          margin-bottom: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="page-wrapper">
+        <div class="page-header d-print-none" aria-label="Page header">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <h2 class="page-title">t1yOS MCP Tools 列表</h2>
+                
+                <ol class="breadcrumb" aria-label="breadcrumb">
+                  
+                  
+                  <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item"><a href="../index.html">Mcp</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item"><a href="index.html">Tools</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item active" aria-current="page">t1yOS MCP Tools 列表</li>
+                  
+                  
+                </ol>
+                
+              </div>
+              
+              <div class="col-auto ms-auto d-sm-none">
+                <button class="btn btn-icon sidebar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-expanded="false" aria-controls="sidebar-menu" aria-label="Toggle menu">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="row g-5">
+              
+              <div class="col-sm-2">
+                <div class="collapse d-sm-block sidebar-collapse" id="sidebar-menu">
+                  <div class="sticky-top">
+                    <nav class="nav nav-vertical nav-pills" id="pills">
+                      
+                      <a class="nav-link nav-link-level-1" href="#t1yos-mcp-tools-%e5%88%97%e8%a1%a8">t1yOS MCP Tools 列表</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e6%95%b0%e6%8d%ae%e5%ba%93%e6%93%8d%e4%bd%9c">数据库操作</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e9%9b%86%e5%90%88%e7%ae%a1%e7%90%86">集合管理</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e6%96%87%e6%a1%a3%e6%8f%92%e5%85%a5">文档插入</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e6%96%87%e6%a1%a3%e5%88%a0%e9%99%a4">文档删除</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e6%96%87%e6%a1%a3%e6%9b%b4%e6%96%b0">文档更新</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e6%96%87%e6%a1%a3%e6%9f%a5%e8%af%a2">文档查询</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e8%81%9a%e5%90%88">聚合</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e7%b4%a2%e5%bc%95%e7%ae%a1%e7%90%86">索引管理</a>
+                      
+                      <a class="nav-link nav-link-level-3" href="#%e6%9d%83%e9%99%90%e7%ae%a1%e7%90%86">权限管理</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f">环境变量</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e6%96%87%e4%bb%b6%e7%ae%a1%e7%90%86">文件管理</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e4%ba%91%e5%87%bd%e6%95%b0">云函数</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e5%ba%94%e7%94%a8%e8%ae%be%e7%bd%ae">应用设置</a>
+                      
+                      <a class="nav-link nav-link-level-2" href="#%e5%ae%9a%e6%97%b6%e4%bb%bb%e5%8a%a1">定时任务</a>
+                      
+                    </nav>
+                  </div>
+                </div>
+              </div>
+              
+              <div
+                class="col-sm"
+                data-bs-spy="scroll"
+                data-bs-target="#pills"
+                data-bs-offset="0"
+              >
+                <div class="card card-lg">
+                  <div class="card-body markdown">
+                    <h1 id="t1yos-mcp-tools-列表">t1yOS MCP Tools 列表</h1>
+<p>本文档列出 <code>t1yOS</code> 平台当前版本所有可用的 <code>MCP</code> 工具，按功能模块分组，说明每个工具的名称、功能、参数及读写属性。</p>
+<hr />
+<h2 id="数据库操作">数据库操作</h2>
+<h3 id="集合管理">集合管理</h3>
+<table>
+<thead>
+<tr>
+<th>工具名</th>
+<th>描述</th>
+<th>参数</th>
+<th>只读/破坏</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>db_list_collections</code></td>
+<td>列出当前应用下所有云数据库中的集合名称</td>
+<td>无</td>
+<td>只读</td>
+</tr>
+<tr>
+<td><code>db_create_collection</code></td>
+<td>新建集合（插入文档时若集合不存在则自动创建）</td>
+<td><code>collection</code> (string, 必填) – 要创建的集合名称</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>db_copy_collection</code></td>
+<td>通过 <code>$out</code> 聚合复制集合到新集合</td>
+<td><code>sourceCollection</code> (string, 必填) – 源集合名称<!-- raw HTML omitted --><code>targetCollection</code> (string, 必填) – 目标集合名称</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>db_clear_collection</code></td>
+<td>清空指定集合中的全部文档（保留集合本身）</td>
+<td><code>collection</code> (string, 必填) – 要清空的集合名称</td>
+<td>破坏性</td>
+</tr>
+<tr>
+<td><code>db_drop_collection</code></td>
+<td>彻底删除整个集合（含所有文档和索引），不可恢复</td>
+<td><code>collection</code> (string, 必填) – 要删除的集合名称</td>
+<td>破坏性</td>
+</tr>
+</tbody>
+</table>
+<h3 id="文档插入">文档插入</h3>
+<table>
+<thead>
+<tr>
+<th>工具名</th>
+<th>描述</th>
+<th>参数</th>
+<th>只读/破坏</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>db_insert_one</code></td>
+<td>向指定集合插入一条文档，自动写入 <code>createdAt</code> / <code>updatedAt</code></td>
+<td><code>collection</code> (string, 必填) – 目标集合名称<!-- raw HTML omitted --><code>document</code> (object, 必填) – 要插入的 JSON 文档</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>db_insert_many</code></td>
+<td>向指定集合批量插入多条文档，自动写入时间戳</td>
+<td><code>collection</code> (string, 必填) – 目标集合名称<!-- raw HTML omitted --><code>documents</code> (array of objects, 必填) – 文档数组</td>
+<td>非破坏</td>
+</tr>
+</tbody>
+</table>
+<h3 id="文档删除">文档删除</h3>
+<table>
+<thead>
+<tr>
+<th>工具名</th>
+<th>描述</th>
+<th>参数</th>
+<th>只读/破坏</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>db_delete_one_by_objectId</code></td>
+<td>通过 ObjectId 删除单条文档</td>
+<td><code>collection</code> (string, 必填) – 集合名称<!-- raw HTML omitted --><code>object_id</code> (string, 必填) – 24 位十六进制 ObjectId</td>
+<td>破坏性</td>
+</tr>
+<tr>
+<td><code>db_delete_one</code></td>
+<td>按 filter 条件删除第一条匹配的文档</td>
+<td><code>collection</code> (string, 必填) – 集合名称<!-- raw HTML omitted --><code>filter</code> (object, 必填) – 匹配条件</td>
+<td>破坏性</td>
+</tr>
+<tr>
+<td><code>db_delete_many</code></td>
+<td>按 filter 条件批量删除所有匹配的文档</td>
+<td><code>collection</code> (string, 必填) – 集合名称<!-- raw HTML omitted --><code>filter</code> (object, 必填) – 匹配条件（<code>{}</code> 表示删除全部，极高危）</td>
+<td>破坏性</td>
+</tr>
+</tbody>
+</table>
+<h3 id="文档更新">文档更新</h3>
+<table>
+<thead>
+<tr>
+<th>工具名</th>
+<th>描述</th>
+<th>参数</th>
+<th>只读/破坏</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>db_update_one_by_objectId</code></td>
+<td>通过 ObjectId 更新单条文档，自动更新 <code>updatedAt</code></td>
+<td><code>collection</code> (string, 必填) – 集合名称<!-- raw HTML omitted --><code>object_id</code> (string, 必填) – 24 位 ObjectId<!-- raw HTML omitted --><code>update</code> (object, 必填) – 更新内容（如 <code>{&quot;$set&quot;:{...}}</code>）</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>db_update_one</code></td>
+<td>按 filter 条件更新第一条匹配的文档</td>
+<td><code>collection</code> (string, 必填) – 集合名称<!-- raw HTML omitted --><code>filter</code> (object, 必填) – 匹配条件<!-- raw HTML omitted --><code>update</code> (object, 必填) – 更新操作符</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>db_update_many</code></td>
+<td>按 filter 条件批量更新所有匹配的文档</td>
+<td><code>collection</code> (string, 必填) – 集合名称<!-- raw HTML omitted --><code>filter</code> (object, 必填) – 匹配条件（<code>{}</code> 高危）<!-- raw HTML omitted --><code>update</code> (object, 必填) – 更新操作符</td>
+<td>破坏性</td>
+</tr>
+</tbody>
+</table>
+<h3 id="文档查询">文档查询</h3>
+<table>
+<thead>
+<tr>
+<th>工具名</th>
+<th>描述</th>
+<th>参数</th>
+<th>只读/破坏</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>db_find_one_by_objectId</code></td>
+<td>通过 ObjectId 查询单条文档</td>
+<td><code>collection</code> (string, 必填) – 集合名称<!-- raw HTML omitted --><code>object_id</code> (string, 必填) – 24 位 ObjectId</td>
+<td>只读</td>
+</tr>
+<tr>
+<td><code>db_find_one</code></td>
+<td>按 filter 条件查询第一条匹配的文档</td>
+<td><code>collection</code> (string, 必填) – 集合名称<!-- raw HTML omitted --><code>filter</code> (object, 可选，默认 <code>{}</code>) – 查询条件</td>
+<td>只读</td>
+</tr>
+<tr>
+<td><code>db_find</code></td>
+<td>分页查询集合文档，支持过滤和排序</td>
+<td><code>collection</code> (string, 必填) – 集合名称<!-- raw HTML omitted --><code>filter</code> (object, 可选，默认 <code>{}</code>) – 查询条件<!-- raw HTML omitted --><code>sort</code> (object, 可选，默认 <code>{&quot;createdAt&quot;:-1}</code>) – 排序规则<!-- raw HTML omitted --><code>page</code> (int64, 可选，默认 1) – 页码<!-- raw HTML omitted --><code>size</code> (int64, 可选，默认 10，范围 1-100) – 每页数量</td>
+<td>只读</td>
+</tr>
+<tr>
+<td><code>db_count</code></td>
+<td>统计符合 filter 条件的文档数量</td>
+<td><code>collection</code> (string, 必填) – 集合名称<!-- raw HTML omitted --><code>filter</code> (object, 可选，默认 <code>{}</code>) – 查询条件</td>
+<td>只读</td>
+</tr>
+<tr>
+<td><code>db_distinct</code></td>
+<td>获取指定字段的去重值列表</td>
+<td><code>collection</code> (string, 必填) – 集合名称<!-- raw HTML omitted --><code>field</code> (string, 必填) – 要去重的字段名<!-- raw HTML omitted --><code>filter</code> (object, 可选，默认 <code>{}</code>) – 查询条件</td>
+<td>只读</td>
+</tr>
+<tr>
+<td><code>db_search</code></td>
+<td>按关键词跨字段全文搜索（ObjectId 精确匹配 + 正则模糊匹配），分页返回</td>
+<td><code>collection</code> (string, 必填) – 集合名称<!-- raw HTML omitted --><code>keyword</code> (string, 必填) – 搜索关键词<!-- raw HTML omitted --><code>searchFields</code> (array of strings, 必填) – 要搜索的字段列表<!-- raw HTML omitted --><code>page</code> (int64, 可选，默认 1) – 页码<!-- raw HTML omitted --><code>size</code> (int64, 可选，默认 10，范围 1-100) – 每页数量</td>
+<td>只读</td>
+</tr>
+</tbody>
+</table>
+<h3 id="聚合">聚合</h3>
+<table>
+<thead>
+<tr>
+<th>工具名</th>
+<th>描述</th>
+<th>参数</th>
+<th>只读/破坏</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>db_aggregate</code></td>
+<td>执行 MongoDB 聚合管道（支持 <code>$match</code>/<code>$group</code>/<code>$sort</code>/<code>$lookup</code>/<code>$project</code> 等所有阶段）</td>
+<td><code>collection</code> (string, 必填) – 集合名称<!-- raw HTML omitted --><code>pipeline</code> (array of objects, 必填) – 聚合管道阶段数组</td>
+<td>只读</td>
+</tr>
+</tbody>
+</table>
+<h3 id="索引管理">索引管理</h3>
+<blockquote>
+<p>索引功能需升级至专业版。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>工具名</th>
+<th>描述</th>
+<th>参数</th>
+<th>只读/破坏</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>db_list_indexes</code></td>
+<td>列出指定集合的所有索引（不含 <code>_id_</code>）</td>
+<td><code>collection</code> (string, 必填) – 集合名称</td>
+<td>只读</td>
+</tr>
+<tr>
+<td><code>db_create_index</code></td>
+<td>为集合创建索引（支持普通、唯一、稀疏、TTL）</td>
+<td><code>collection</code> (string, 必填) – 集合名称<!-- raw HTML omitted --><code>fields</code> (array of {key:string, value:int}, 必填) – 索引字段<!-- raw HTML omitted --><code>unique</code> (bool, 可选，默认 false) – 是否唯一<!-- raw HTML omitted --><code>sparse</code> (bool, 可选，默认 false) – 是否稀疏<!-- raw HTML omitted --><code>name</code> (string, 可选) – 索引名称<!-- raw HTML omitted --><code>ttl</code> (bool, 可选，默认 false) – 是否 TTL 索引<!-- raw HTML omitted --><code>expireAfterSeconds</code> (int32, 可选) – TTL 过期秒数</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>db_drop_index</code></td>
+<td>删除指定集合的某个索引</td>
+<td><code>collection</code> (string, 必填) – 集合名称<!-- raw HTML omitted --><code>indexName</code> (string, 必填) – 要删除的索引名称</td>
+<td>破坏性</td>
+</tr>
+</tbody>
+</table>
+<h3 id="权限管理">权限管理</h3>
+<blockquote>
+<p>权限仅对 RESTful API 生效，云函数与 MCP 工具可直接操作。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>工具名</th>
+<th>描述</th>
+<th>参数</th>
+<th>只读/破坏</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>db_get_permission</code></td>
+<td>获取指定集合的 CRUD 权限设置</td>
+<td><code>collection</code> (string, 必填) – 集合名称</td>
+<td>只读</td>
+</tr>
+<tr>
+<td><code>db_create_permission</code></td>
+<td>创建/更新集合的 CRUD 权限（Upsert）</td>
+<td><code>collection</code> (string, 必填) – 集合名称<!-- raw HTML omitted --><code>permission</code> (object {c,r,u,d: bool}, 必填) – 权限对象</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>db_update_permission</code></td>
+<td>更新指定集合的 CRUD 权限</td>
+<td>同上</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>db_delete_permission</code></td>
+<td>删除集合的 CRUD 权限（恢复默认全禁止）</td>
+<td><code>collection</code> (string, 必填) – 集合名称</td>
+<td>破坏性</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="环境变量">环境变量</h2>
+<table>
+<thead>
+<tr>
+<th>工具名</th>
+<th>描述</th>
+<th>参数</th>
+<th>只读/破坏</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>env_list</code></td>
+<td>列出当前应用的所有环境变量</td>
+<td>无</td>
+<td>只读</td>
+</tr>
+<tr>
+<td><code>env_get</code></td>
+<td>获取指定 Key 的环境变量值</td>
+<td><code>key</code> (string, 必填) – 环境变量名称</td>
+<td>只读</td>
+</tr>
+<tr>
+<td><code>env_create</code></td>
+<td>添加新的环境变量</td>
+<td><code>key</code> (string, 必填，长度 1-255) – 变量名<!-- raw HTML omitted --><code>value</code> (string, 必填，长度 1-3072) – 变量值</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>env_update</code></td>
+<td>编辑环境变量的值</td>
+<td><code>key</code> (string, 必填，长度 1-255) – 变量名<!-- raw HTML omitted --><code>value</code> (string, 必填，长度 1-3072) – 新值</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>env_delete</code></td>
+<td>删除指定 Key 的环境变量</td>
+<td><code>key</code> (string, 必填，长度 1-255) – 变量名</td>
+<td>破坏性</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="文件管理">文件管理</h2>
+<table>
+<thead>
+<tr>
+<th>工具名</th>
+<th>描述</th>
+<th>参数</th>
+<th>只读/破坏</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file_list</code></td>
+<td>列出指定目录下的文件和子目录</td>
+<td><code>path</code> (string, 可选，默认 <code>/</code>) – 目录路径</td>
+<td>只读</td>
+</tr>
+<tr>
+<td><code>file_mkdir</code></td>
+<td>创建文件夹（自动创建父级目录）</td>
+<td><code>path</code> (string, 必填) – 以 <code>/</code> 开头的目录路径</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>file_create</code></td>
+<td>创建空文件（如已存在则失败）</td>
+<td><code>path</code> (string, 必填) – 文件路径</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>file_rename</code></td>
+<td>重命名或移动文件/文件夹</td>
+<td><code>oldPath</code> (string, 必填) – 源路径<!-- raw HTML omitted --><code>newPath</code> (string, 必填) – 目标路径</td>
+<td>破坏性</td>
+</tr>
+<tr>
+<td><code>file_delete</code></td>
+<td>删除文件或文件夹（不可恢复）</td>
+<td><code>path</code> (string, 必填) – 要删除的路径</td>
+<td>破坏性</td>
+</tr>
+<tr>
+<td><code>file_write</code></td>
+<td>写入（覆盖）文件内容，文件不存在时自动创建</td>
+<td><code>path</code> (string, 必填) – 文件路径<!-- raw HTML omitted --><code>content</code> (string, 必填) – 要写入的文本内容</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>file_read</code></td>
+<td>读取文件内容，支持 UTF-8 / GBK / GB18030 编码</td>
+<td><code>path</code> (string, 必填) – 文件路径<!-- raw HTML omitted --><code>encoding</code> (string, 可选，默认 <code>utf-8</code>) – 文件编码</td>
+<td>只读</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>文件重命名、删除、写入涉及 <code>.functions</code> 目录时会触发云函数重新编译。</p>
+</blockquote>
+<hr />
+<h2 id="云函数">云函数</h2>
+<table>
+<thead>
+<tr>
+<th>工具名</th>
+<th>描述</th>
+<th>参数</th>
+<th>只读/破坏</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>function_list</code></td>
+<td>列出当前应用所有云函数的状态（会先执行全量重编译）</td>
+<td>无</td>
+<td>可写（会触发编译）</td>
+</tr>
+<tr>
+<td><code>function_get_code</code></td>
+<td>获取指定云函数的源代码</td>
+<td><code>name</code> (string, 必填) – 函数名（不带 <code>.jsc</code> 后缀）</td>
+<td>只读</td>
+</tr>
+<tr>
+<td><code>function_create_from_example</code></td>
+<td>使用内置示例代码创建云函数</td>
+<td><code>name</code> (string, 必填) – 新函数名</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>function_create</code></td>
+<td>通过代码创建云函数（建议先读取运行时规范）</td>
+<td><code>name</code> (string, 必填) – 函数名<!-- raw HTML omitted --><code>code</code> (string, 必填) – 完整的函数代码</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>function_delete</code></td>
+<td>删除云函数（会同时清理关联的定时任务）</td>
+<td><code>name</code> (string, 必填) – 函数名</td>
+<td>破坏性</td>
+</tr>
+<tr>
+<td><code>function_update</code></td>
+<td>更新云函数代码</td>
+<td><code>name</code> (string, 必填) – 函数名<!-- raw HTML omitted --><code>code</code> (string, 必填) – 新代码内容</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>function_run</code></td>
+<td>执行云函数并获取结果（内部 GET 请求）</td>
+<td><code>path</code> (string, 必填) – 云函数路径，如 <code>/index.jsc</code></td>
+<td>可写（执行）</td>
+</tr>
+<tr>
+<td><code>function_rebuild_all</code></td>
+<td>重新编译当前应用的全部云函数</td>
+<td>无</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>function_get_log</code></td>
+<td>获取云函数运行日志（末尾约 20KB）</td>
+<td>无</td>
+<td>只读</td>
+</tr>
+<tr>
+<td><code>function_clear_log</code></td>
+<td>清空当前应用的全部云函数运行日志</td>
+<td>无</td>
+<td>破坏性</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="应用设置">应用设置</h2>
+<table>
+<thead>
+<tr>
+<th>工具名</th>
+<th>描述</th>
+<th>参数</th>
+<th>只读/破坏</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app_info</code></td>
+<td>获取当前应用的详细信息（AppID、密钥、域名、计划等）</td>
+<td>无</td>
+<td>只读</td>
+</tr>
+<tr>
+<td><code>app_bind_domain</code></td>
+<td>绑定自定义域名（需 CNAME 至 <code>myapp.t1y.net</code>，专业版功能）</td>
+<td><code>domain</code> (string, 必填，长度 1-255) – 域名</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>app_enable_safe_mode</code></td>
+<td>开启安全模式（请求/响应动态加密）</td>
+<td>无</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>app_disable_safe_mode</code></td>
+<td>关闭安全模式</td>
+<td>无</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>app_enable_auto_renew</code></td>
+<td>开启自动续费</td>
+<td>无</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>app_disable_auto_renew</code></td>
+<td>关闭自动续费</td>
+<td>无</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>app_renew</code></td>
+<td>续费当前应用（按月从余额扣款）</td>
+<td><code>duration</code> (int, 必填，1-120) – 续费月数</td>
+<td>破坏性（扣款）</td>
+</tr>
+<tr>
+<td><code>app_set_meta</code></td>
+<td>设置应用的自定义 Meta 元数据（最大 1MB，须为有效 JSON）</td>
+<td><code>meta</code> (string, 必填，最大 1MB) – JSON 字符串</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>app_get_meta</code></td>
+<td>获取当前应用的自定义 Meta 元数据</td>
+<td>无</td>
+<td>只读</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="定时任务">定时任务</h2>
+<blockquote>
+<p>定时任务功能需升级至专业版。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>工具名</th>
+<th>描述</th>
+<th>参数</th>
+<th>只读/破坏</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>task_list</code></td>
+<td>列出当前应用的所有定时任务</td>
+<td>无</td>
+<td>只读</td>
+</tr>
+<tr>
+<td><code>task_create</code></td>
+<td>创建新的定时任务</td>
+<td><code>name</code> (string, 必填，长度 1-64) – 任务名称<!-- raw HTML omitted --><code>program</code> (string, 必填) – 云函数名（以 <code>/</code> 开头，不带后缀）<!-- raw HTML omitted --><code>cron</code> (string, 必填，长度 1-32) – Cron 表达式</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>task_delete</code></td>
+<td>删除指定定时任务</td>
+<td><code>taskId</code> (uint, 必填) – 任务 ID</td>
+<td>破坏性</td>
+</tr>
+<tr>
+<td><code>task_start</code></td>
+<td>启动已停止的定时任务</td>
+<td><code>taskId</code> (uint, 必填) – 任务 ID</td>
+<td>非破坏</td>
+</tr>
+<tr>
+<td><code>task_stop</code></td>
+<td>停止运行中的定时任务</td>
+<td><code>taskId</code> (uint, 必填) – 任务 ID</td>
+<td>非破坏</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<blockquote>
+<p>说明：所有数据库操作的“权限仅对 RESTful API 生效”意味着 MCP 工具与云函数均不受集合级 CRUD 权限限制；对云函数文件的写入、删除等操作会自动触发重编译。</p>
+</blockquote>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    <script src="../../js/tabler.min.js" defer></script>
+  </body>
+</html>

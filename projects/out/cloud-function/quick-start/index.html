@@ -311,7 +311,26 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">name</span>
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre><h1 id="获取身份标识">获取身份标识</h1>
+</span></span></code></pre><p><strong>导入远程 JavaScript 文件和 JSON 文件</strong></p>
+<p>云函数支持导入普通的纯 <code>JavaScript</code> 文件，可以使用例如：<code>CryptoJS</code> 等现有库或自己封装，更好的辅助用户开发。同时也支持导入本地的 <code>JavaScript</code> 文件或 <code>JSON</code> 文件。</p>
+<ul>
+<li>本地导入时需要完整文件路径</li>
+<li>远程导入时首次加载会稍慢（后续缓存访问变快）</li>
+<li>注意：无论本地导入还是远程导入都会缓存，如导入文件存在变更，请使用 <code>clearCache</code> 函数清除缓存</li>
+</ul>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#75715e">// const CryptoJS = require(&#39;/.librarys/crypto-js.min.js&#39;) // 本地导入
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// const PackageJSON = require(&#39;/.librarys/package.json&#39;) // 本地导入
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 远程导入 JavaScript 和 JSON：
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">CryptoJS</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">PackageJSON</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;https://unpkg.com/vue/package.json&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">clearCache</span>() <span style="color:#75715e">// 如果导入的 JavaScript 或者 JSON 文件发生变化可手动清理缓存（需按需调用，文件没有变化的情况下不需要清理，存在缓存访问加载速度会更快）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> { <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PackageJSON</span>.<span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">md5</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">CryptoJS</span>.<span style="color:#a6e22e">MD5</span>(<span style="color:#e6db74">&#39;Hello, World!&#39;</span>).<span style="color:#a6e22e">toString</span>() }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p>导入模块时，只有普通的 <code>.js</code> 文件或 <code>.json</code> 文件会被缓存，云函数内置模块以及 <code>.jsc</code> 云函数文件都是预编译的，不会被缓存，修改后会立即生效，推荐使用 <code>.jsc</code> 云函数文件进行封装，预编译，这样执行效率会更快一些。</p>
+<h1 id="获取身份标识">获取身份标识</h1>
 <p>使用 <code>ctx.userAgent</code> 函数，你可以获取客户端的身份标识信息，如设备类型等。</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
 </span></span><span style="display:flex;"><span>
