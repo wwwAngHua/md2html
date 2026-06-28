@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>使用云函数构建 MCP Server - t1yOS 开发文档</title>
+    <link rel="icon" href="../../favicon.svg" />
+    <meta name="description" content="本文将介绍如何使用 t1yOS 云函数构建属于自己的 MCP Server，以下是一个最基本的示例：" />
+    <meta property="og:title" content="使用云函数构建 MCP Server - t1yOS 开发文档" />
+    <meta property="og:description" content="本文将介绍如何使用 t1yOS 云函数构建属于自己的 MCP Server，以下是一个最基本的示例：" />
+    <meta property="og:type" content="article" />
+    <link href="../../css/tabler.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-socials.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-vendors.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-marketing.min.css" rel="stylesheet" />
+    <link href="../../css/tabler-themes.min.css" rel="stylesheet" />
+    <style>      @import url("https://rsms.me/inter/inter.css");
+
+      .markdown :not(pre) > code {
+        background-color: #f0f0f0;
+        color: #d63384;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.875em;
+      }
+
+      .markdown pre {
+        border-radius: 8px;
+        padding: 16px;
+        overflow-x: auto;
+        margin: 1rem 0;
+        background-color: #272822;
+      }
+
+      .markdown pre code {
+        font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", Consolas, monospace;
+        font-size: 0.875em;
+        line-height: 1.6;
+        background: none !important;
+        padding: 0;
+      }
+
+      .markdown pre[style] {
+        background-color: #272822 !important;
+      }
+
+      .breadcrumb {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .breadcrumb-item {
+        font-size: 0.875rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item + .breadcrumb-item::before {
+        content: "/";
+        margin: 0 0.5rem;
+        color: var(--tblr-muted, #656d77);
+      }
+      .breadcrumb-item a {
+        color: var(--tblr-muted, #656d77);
+        text-decoration: none;
+      }
+      .breadcrumb-item a:hover {
+        color: var(--tblr-primary, #206bc4);
+        text-decoration: underline;
+      }
+      .breadcrumb-item.active {
+        color: var(--tblr-body-color, #1e293b);
+      }
+
+       
+      .sidebar-toggle {
+        display: none;
+      }
+      @media (max-width: 575.98px) {
+        .sidebar-toggle {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+        .sidebar-collapse {
+          margin-bottom: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="page-wrapper">
+        <div class="page-header d-print-none" aria-label="Page header">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <h2 class="page-title">使用云函数构建 MCP Server</h2>
+                
+                <ol class="breadcrumb" aria-label="breadcrumb">
+                  
+                  
+                  <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item"><a href="../index.html">Cloud Function</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item"><a href="index.html">Mcp</a></li>
+                  
+                  
+                  
+                  <li class="breadcrumb-item active" aria-current="page">使用云函数构建 MCP Server</li>
+                  
+                  
+                </ol>
+                
+              </div>
+              
+              <div class="col-auto ms-auto d-sm-none">
+                <button class="btn btn-icon sidebar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-expanded="false" aria-controls="sidebar-menu" aria-label="Toggle menu">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="row g-5">
+              
+              <div class="col-sm-2">
+                <div class="collapse d-sm-block sidebar-collapse" id="sidebar-menu">
+                  <div class="sticky-top">
+                    <nav class="nav nav-vertical nav-pills" id="pills">
+                      
+                      <a class="nav-link nav-link-level-1" href="#%e4%bd%bf%e7%94%a8%e4%ba%91%e5%87%bd%e6%95%b0%e6%9e%84%e5%bb%ba-mcp-server">使用云函数构建 MCP Server</a>
+                      
+                    </nav>
+                  </div>
+                </div>
+              </div>
+              
+              <div
+                class="col-sm"
+                data-bs-spy="scroll"
+                data-bs-target="#pills"
+                data-bs-offset="0"
+              >
+                <div class="card card-lg">
+                  <div class="card-body markdown">
+                    <h1 id="使用云函数构建-mcp-server">使用云函数构建 MCP Server</h1>
+<p>本文将介绍如何使用 t1yOS 云函数构建属于自己的 MCP Server，以下是一个最基本的示例：</p>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;context&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">mongo</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;mongo&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">mcp_name</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;t1y_cloud_function_MCP&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">mcp_version</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;1.0.0&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">jsonrpc_version</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;2.0&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onRequest</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">method</span>() <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;POST&#39;</span>) <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">body</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">switch</span> (<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">method</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;initialize&#39;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">jsonrpc</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">jsonrpc_version</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">id</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">result</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">protocolVersion</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;2025-11-25&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">capabilities</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">tools</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">listChanged</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>              },
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">serverInfo</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">mcp_name</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">version</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">mcp_version</span>,
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;notifications/initialized&#39;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 可以做一些初始化后的动作（可选）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;MCP initialized&#39;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;tools/list&#39;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">jsonrpc</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">jsonrpc_version</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">id</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">result</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">tools</span><span style="color:#f92672">:</span> [
+</span></span><span style="display:flex;"><span>              {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;get_user&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">description</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;获取用户信息&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">inputSchema</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>                  <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;object&#39;</span>,
+</span></span><span style="display:flex;"><span>                  <span style="color:#a6e22e">properties</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;string&#39;</span> },
+</span></span><span style="display:flex;"><span>                  },
+</span></span><span style="display:flex;"><span>                  <span style="color:#a6e22e">required</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;id&#39;</span>],
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>              },
+</span></span><span style="display:flex;"><span>              <span style="color:#75715e">// 更多 MCP Tools...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            ],
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;tools/call&#39;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">arguments</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">args</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">params</span> <span style="color:#f92672">||</span> {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">name</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;get_user&#39;</span>) {
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getUserResult</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">mongo</span>
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">collection</span>(<span style="color:#e6db74">&#39;users&#39;</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">findOne</span>({ <span style="color:#a6e22e">_id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">mongo</span>.<span style="color:#a6e22e">toObjectID</span>(<span style="color:#a6e22e">args</span>.<span style="color:#a6e22e">id</span>) })
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">jsonrpc</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">jsonrpc_version</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">id</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">result</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">content</span><span style="color:#f92672">:</span> [
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                  <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;text&#39;</span>,
+</span></span><span style="display:flex;"><span>                  <span style="color:#a6e22e">text</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">getUserResult</span>),
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>              ],
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 更多 MCP Tools 调用...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">jsonrpc</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">jsonrpc_version</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">id</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">code</span><span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">32601</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Tool not found&#39;</span>,
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;ping&#39;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">jsonrpc</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">jsonrpc_version</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">id</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">result</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;pong&#39;</span>,
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">jsonrpc</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">jsonrpc_version</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">id</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">code</span><span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">32601</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Method not found&#39;</span>,
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">err</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">jsonrpc</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">jsonrpc_version</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">id</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">code</span><span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">32603</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">message</span>,
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p>以上只是一个最基础的 MCP Server 示例，包含一个 <code>get_user</code> MCP 工具，可以从云数据库中查询指定用户信息，如需更复杂的 MCP Server，可以将代码进行封装获得更好的体验。</p>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    <script src="../../js/tabler.min.js" defer></script>
+  </body>
+</html>

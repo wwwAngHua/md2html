@@ -113,6 +113,8 @@ t1yOS `Skills` 是一个专为 AI 编程助手（如 Claude Code、Cursor、Wind
 
 如需参阅 `MCP Server` 相关文档，请前往：[MCP Server](./mcp/index.html)
 
+以上是平台级 MCP Server，如果你也对 MCP Server 感兴趣，想实现属于自己的 MCP Server，可以阅读文档：[使用云函数构建 MCP Server](./cloud-function/mcp/index.html)
+
 # 联系我们
 
 - 客服（技术）QQ：422584084
